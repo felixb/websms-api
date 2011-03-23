@@ -1,48 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!--
-		Copyright (C) 2009-2010 Felix Bechstein
-	-->
-	<!--
-		This file is part of WebSMS. This program is free software; you can
-		redistribute it and/or modify it under the terms of the GNU General
-		Public License as published by the Free Software Foundation; either
-		version 3 of the License, or (at your option) any later version.
-	-->
-	<!--
-		This program is distributed in the hope that it will be useful, but
-		WITHOUT ANY WARRANTY; without even the implied warranty of
-		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-		General Public License for more details. You should have received a
-		copy of the GNU General Public License along with this program; If
-		not, see <http://www.gnu.org/licenses/>.
-	-->
+       <!--
+               Copyright (C) 2009-2011 Felix Bechstein
+       -->
+       <!--
+               This file is part of WebSMS API. This program is free software; you can
+               redistribute it and/or modify it under the terms of the GNU General
+               Public License as published by the Free Software Foundation; either
+               version 3 of the License, or (at your option) any later version.
+       -->
+       <!--
+               This program is distributed in the hope that it will be useful, but
+               WITHOUT ANY WARRANTY; without even the implied warranty of
+               MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+               General Public License for more details. You should have received a
+               copy of the GNU General Public License along with this program; If
+               not, see <http://www.gnu.org/licenses/>.
+       -->
+      <!--
+               This file is generated automatically by ub0rlib/php.
+               Visit http://ub0r.de/translate/websms-api/edit.php?lang=ru&file=strings.xml to edit the file.
+       -->
 <resources>
-	<string name="info_text">This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.</string>
-	<string name="stat_notify_sms_pending">WebSMS: Отправка</string>
-	<string name="stat_notify_sending">Отправка:</string>
-	<string name="error">ОШИБКА</string>
-	<string name="error_http">ОШИБКА: HTTP</string>
-	<string name="error_mail">Неправильные e-mail адрес или пароль!</string>
-	<string name="error_pw">Неправильные имя пользователя или пароль!</string>
-	<string name="error_sender">Неверный номер отправителя! введите в международном формате напр. +79261234567.</string>
-	<string name="error_sender_unregistered">Данные отправителя должны быть зарегистрированы у Вашего провайдера.</string>
-	<string name="error_server">ОШИБКА: Сервер не отвечает:</string>
-	<string name="error_service">Сервис не доступен! Попробуйте позже.</string>
-	<string name="error_wrongcaptcha">Неправильные данные капчи. Попробуйте снова.</string>
-	<string name="error_input">Ошибка ввода!</string>
-	<string name="error_http_header_missing">Заголовок: неправильная длина!</string>
-	<string name="error_sendlater_quater">Превышен временной лимит отправки выбранного Connector\'а!</string>
-	<string name="username_">Имя пользователя</string>
-	<string name="password_">Пароль</string>
-	<string name="create_account_">Создать аккаунт</string>
-	<string name="use_derfault_sender_">Использовать отправителя по умолчанию</string>
-	<string name="use_derfault_sender_hint">Использовать данные отправителя по умолчанию изнастроек WebSMS.</string>
-	<string name="custom_sender_">Задать отправителя</string>
-	<string name="sender_hint">Номер телефона, напр. +79261234567</string>
-	<string name="send_logs_">Отослать лог</string>
-	<string name="send_logs_hint">Отсылает лог с Вашего устройства разработчику. \nСделайте это только если Вас попросили.</string>
-	<string name="sendlog_run_">Запустить SendLog</string>
-	<string name="sendlog_run">SendLog получит лог с Вашего девайса и отправит разработчику.\nУ Вас будет возможность просмотреть и изменить отсылаемые данные.</string>
-	<string name="sendlog_install_">Установить SendLog</string>
-	<string name="sendlog_install">Установите SendLog для получения лога с Вашего устройства и отправки разработчику.</string>
+  <string name="info_text" formatted="false">This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.</string>
+  <string name="stat_notify_sms_pending" formatted="false">WebSMS: Отправка</string>
+  <string name="stat_notify_sending" formatted="false">Отправка:</string>
+  <string name="error" formatted="false">ОШИБКА</string>
+  <string name="error_http" formatted="false">ОШИБКА: HTTP</string>
+  <string name="error_mail" formatted="false">Неправильные e-mail адрес или пароль!</string>
+  <string name="error_pw" formatted="false">Неправильные имя пользователя или пароль!</string>
+  <string name="error_sender" formatted="false">Неверный номер отправителя! введите в международном формате напр. +79261234567.</string>
+  <string name="error_sender_unregistered" formatted="false">Данные отправителя должны быть зарегистрированы у Вашего провайдера.</string>
+  <string name="error_server" formatted="false">ОШИБКА: Сервер не отвечает:</string>
+  <string name="error_service" formatted="false">Сервис не доступен! Попробуйте позже.</string>
+  <string name="error_wrongcaptcha" formatted="false">Неправильные данные капчи. Попробуйте снова.</string>
+  <string name="error_input" formatted="false">Ошибка ввода!</string>
+  <string name="error_http_header_missing" formatted="false">Заголовок: неправильная длина!</string>
+  <string name="error_sendlater_quater" formatted="false">Превышен временной лимит отправки выбранного Connector\'а!</string>
+  <string name="username_" formatted="false">Имя пользователя</string>
+  <string name="password_" formatted="false">Пароль</string>
+  <string name="create_account_" formatted="false">Создать аккаунт</string>
+  <string name="use_derfault_sender_" formatted="false">Использовать отправителя по умолчанию</string>
+  <string name="use_derfault_sender_hint" formatted="false">Использовать данные отправителя по умолчанию изнастроек WebSMS.</string>
+  <string name="custom_sender_" formatted="false">Задать отправителя</string>
+  <string name="sender_hint" formatted="false">Номер телефона, напр. +79261234567</string>
+  <string name="send_logs_" formatted="false">Отослать лог</string>
+  <string name="send_logs_hint" formatted="false">Отсылает лог с Вашего устройства разработчику. \nСделайте это только если Вас попросили.</string>
+  <string name="sendlog_run_" formatted="false">Запустить SendLog</string>
+  <string name="sendlog_run" formatted="false">SendLog получит лог с Вашего девайса и отправит разработчику.\nУ Вас будет возможность просмотреть и изменить отсылаемые данные.</string>
+  <string name="sendlog_install_" formatted="false">Установить SendLog</string>
+  <string name="sendlog_install" formatted="false">Установите SendLog для получения лога с Вашего устройства и отправки разработчику.</string>
 </resources>
