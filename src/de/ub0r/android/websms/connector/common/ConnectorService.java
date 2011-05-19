@@ -109,6 +109,8 @@ public final class ConnectorService extends IntentService {
 	/**
 	 * Build IO {@link Notification}.
 	 * 
+	 * @param context
+	 *            {@link Context}
 	 * @param command
 	 *            {@link ConnectorCommand}
 	 * @return {@link Notification}
@@ -123,8 +125,10 @@ public final class ConnectorService extends IntentService {
 		final Notification notification = new Notification(
 				R.drawable.stat_notify_sms_pending, t, System
 						.currentTimeMillis());
+		final Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setClassName("de.ub0r.android.websms", "WebSMS");
 		final PendingIntent contentIntent = PendingIntent.getActivity(context,
-				0, null, 0);
+				0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 		notification.setLatestEventInfo(context, te, tt, contentIntent);
 		notification.defaults |= Notification.FLAG_NO_CLEAR
 				| Notification.FLAG_ONGOING_EVENT;
