@@ -23,8 +23,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -1054,5 +1057,37 @@ public final class Utils {
 			Log.e(TAG, null, e);
 		}
 		return "";
+	}
+
+	/**
+	 * Get HTTP GET parameters
+	 * 
+	 * @param url
+	 *            base URL
+	 * @param params
+	 *            parameters as {@link NameValuePair}
+	 * @param encoding
+	 *            encoding
+	 * @return URL with parameters added
+	 * @throws UnsupportedEncodingException
+	 *             UnsupportedEncodingException
+	 */
+	public static String httpGetParams(final String url,
+			final List<BasicNameValuePair> params, final String encoding)
+			throws UnsupportedEncodingException {
+		Log.d(TAG, "httpGetParams(" + url + "," + params + ")");
+		final StringBuilder u = new StringBuilder(url);
+		u.append("?");
+		final int l = params.size();
+		for (int i = 0; i < l; i++) {
+			final BasicNameValuePair nv = params.get(i);
+			u.append(nv.getName());
+			u.append("=");
+			u.append(URLEncoder.encode(nv.getValue(), encoding));
+			u.append("&");
+		}
+		final String ret = u.toString();
+		Log.d(TAG, "new url: " + ret);
+		return ret;
 	}
 }

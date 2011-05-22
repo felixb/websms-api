@@ -20,7 +20,6 @@ package de.ub0r.android.websms.connector.common;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
@@ -364,18 +363,7 @@ public abstract class BasicConnector extends Connector {
 
 		final String encoding = this.getEncoding();
 		if (!this.usePost()) {
-			StringBuilder u = new StringBuilder(url);
-			u.append("?");
-			final int l = d.size();
-			for (int i = 0; i < l; i++) {
-				BasicNameValuePair nv = d.get(i);
-				u.append(nv.getName());
-				u.append("=");
-				u.append(URLEncoder.encode(nv.getValue(), encoding));
-				u.append("&");
-			}
-			url = u.toString();
-			d = null;
+			url = Utils.httpGetParams(url, d, encoding);
 		}
 		Log.d(TAG, "HTTP REQUEST: " + url);
 		final boolean trustAll = this.trustAllSLLCerts();
