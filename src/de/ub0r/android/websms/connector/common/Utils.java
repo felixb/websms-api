@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Felix Bechstein
+ * Copyright (C) 2010-2011 Felix Bechstein
  * 
  * This file is part of WebSMS.
  * 
@@ -40,10 +40,7 @@ import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpResponseInterceptor;
-import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -80,22 +77,6 @@ public final class Utils {
 	/** Standard buffer size. */
 	public static final int BUFSIZE = 32768;
 
-	/** HTTP Response 200. */
-	@Deprecated
-	public static final int HTTP_SERVICE_OK = HttpStatus.SC_OK;
-	/** HTTP Response 401. */
-	@Deprecated
-	public static final int HTTP_SERVICE_UNAUTHORIZED = // .
-	HttpStatus.SC_UNAUTHORIZED;
-	/** HTTP Response 500. */
-	@Deprecated
-	public static final int HTTP_SERVICE_500 = // .
-	HttpStatus.SC_INTERNAL_SERVER_ERROR;
-	/** HTTP Response 503. */
-	@Deprecated
-	public static final int HTTP_SERVICE_UNAVAILABLE = // .
-	HttpStatus.SC_SERVICE_UNAVAILABLE;
-
 	/** Gzip. */
 	private static final String GZIP = "gzip";
 	/** Accept-Encoding. */
@@ -114,7 +95,7 @@ public final class Utils {
 	/** Resturn only matching line in stream2str(). */
 	public static final int ONLY_MATCHING_LINE = -2;
 
-	/** Common {@link HttpClient}. */
+	/** Common {@link DefaultHttpClient}. */
 	private static DefaultHttpClient httpClient = null;
 
 	/**
@@ -713,7 +694,7 @@ public final class Utils {
 	 * @throws IOException
 	 *             IOException
 	 */
-	private static HttpResponse getHttpClient(final String url,
+	public static HttpResponse getHttpClient(final String url,
 			final ArrayList<Cookie> cookies,
 			final ArrayList<BasicNameValuePair> postData,
 			final String userAgent, final String referer,
@@ -1060,12 +1041,12 @@ public final class Utils {
 	}
 
 	/**
-	 * Get HTTP GET parameters
+	 * Get HTTP GET parameters.
 	 * 
 	 * @param url
 	 *            base URL
 	 * @param params
-	 *            parameters as {@link NameValuePair}
+	 *            parameters as {@link BasicNameValuePair}
 	 * @param encoding
 	 *            encoding
 	 * @return URL with parameters added
