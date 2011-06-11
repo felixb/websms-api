@@ -64,8 +64,8 @@ public final class InfoActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		final Builder builder = new Builder(this);
-		builder.setTitle(this.getTitle());
+		final Builder b = new Builder(this);
+		b.setTitle(this.getTitle());
 		final String pkg = this.getPackageName();
 		final int info = this.getResources().getIdentifier("info_text",
 				"string", pkg);
@@ -74,14 +74,14 @@ public final class InfoActivity extends Activity {
 		Log.d(TAG, "resID.icon=" + icon);
 		Log.d(TAG, "resID.info=" + info);
 		if (icon > 0) {
-			builder.setIcon(icon);
+			b.setIcon(icon);
 		}
 		if (info > 0) {
-			builder.setMessage(info);
+			b.setMessage(info);
 		} else {
-			builder.setMessage(INFO_TEXT);
+			b.setMessage(INFO_TEXT);
 		}
-		builder.setPositiveButton(android.R.string.ok,
+		b.setPositiveButton(android.R.string.ok,
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(final DialogInterface dialog,
@@ -92,7 +92,7 @@ public final class InfoActivity extends Activity {
 		final List<ResolveInfo> ri = this.getPackageManager()
 				.queryBroadcastReceivers(new Intent(Connector.ACTION_INFO), 0);
 		if (ri.size() == 0) {
-			builder.setNeutralButton(BTN_MARKET_WEBSMS,
+			b.setNeutralButton(BTN_MARKET_WEBSMS,
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(final DialogInterface dialog,
@@ -107,7 +107,7 @@ public final class InfoActivity extends Activity {
 						}
 					});
 		}
-		builder.setNegativeButton(BTN_MARKET_CONNECTORS,
+		b.setNegativeButton(BTN_MARKET_CONNECTORS,
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(final DialogInterface dialog,
@@ -121,7 +121,13 @@ public final class InfoActivity extends Activity {
 						InfoActivity.this.finish();
 					}
 				});
-		builder.setCancelable(true);
-		builder.create().show();
+		b.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			@Override
+			public void onCancel(final DialogInterface dialog) {
+				InfoActivity.this.finish();
+			}
+		});
+		b.setCancelable(true);
+		b.show();
 	}
 }
