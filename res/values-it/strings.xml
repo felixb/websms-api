@@ -22,20 +22,20 @@
        -->
 <resources>
   <string name="info_text" formatted="false" username="carloraudino@fedoraproject.org" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">Questo è un Connector per WebSMS&#13;
-L'unico modo per usarlo è lanciarlo con WebSMS.</string>
+L\'unico modo per usarlo è lanciarlo con WebSMS.</string>
   <string name="stat_notify_sms_pending" formatted="false" username="carloraudino@fedoraproject.org" orig="WebSMS: sending">WebSMS: invio</string>
   <string name="stat_notify_sending" formatted="false" username="carloraudino@fedoraproject.org" orig="Sending:">Invio:</string>
   <string name="error" formatted="false" username="carloraudino@fedoraproject.org" orig="ERROR">ERRORE</string>
-  <string name="error_connection" formatted="false" username="carloraudino@fedoraproject.org" orig="Connection terminated/timed out. If your connection is working, it\'s most likely a downtime of the target service. Check the app\'s website issues and twitter for status.">Connessione terminata/scaduta. Se la connessione funziona, probabilmente si tratta di un guasto del servizio. Vedere il sito dell'app per problemi e twitter per lo stato.</string>
+  <string name="error_connection" formatted="false" username="carloraudino@fedoraproject.org" orig="Connection terminated/timed out. If your connection is working, it\'s most likely a downtime of the target service. Check the app\'s website issues and twitter for status.">Connessione terminata/scaduta. Se la connessione funziona, probabilmente si tratta di un guasto del servizio. Vedere il sito dell\'app per problemi e twitter per lo stato.</string>
   <string name="error_http" formatted="false" username="carloraudino@fedoraproject.org" orig="FAILURE: HTTP">Errore: HTTP</string>
   <string name="error_mail" formatted="false" username="carloraudino@fedoraproject.org" orig="Wrong mail address or password given!">Indirizzo o password errata!</string>
   <string name="error_pw" formatted="false" username="carloraudino@fedoraproject.org" orig="Wrong username or password given!">Nome utente o password errata!</string>
   <string name="error_sender" formatted="false" username="carloraudino@fedoraproject.org" orig="Wrong sender! Set it in international form like +4917012345678.">Mittente errato! Impostare nel formato internazionale. Es. +393201234567.</string>
   <string name="error_sender_unregistered" formatted="false" username="carloraudino@fedoraproject.org" orig="Sender must be registered and confirmed your provider.">Il mittente deve essere registrato e confermato dal provider.</string>
   <string name="error_server" formatted="false" username="carloraudino@fedoraproject.org" orig="FAILURE: Serverresponse:">ERRORE: Risposta server:</string>
-  <string name="error_service" formatted="false" username="carloraudino@fedoraproject.org" orig="Webservice is down! This is most likely not a problem of the connector. Please try again later. Check the app\'s website\'s issues and twitter for status.">Il servizio web è down! Probabilmente non è un problema del Connector. Si prega di ritentare più tardi. Vedere il sito dell'app per problemi e twitter per lo stato.</string>
+  <string name="error_service" formatted="false" username="carloraudino@fedoraproject.org" orig="Webservice is down! This is most likely not a problem of the connector. Please try again later. Check the app\'s website\'s issues and twitter for status.">Il servizio web è down! Probabilmente non è un problema del Connector. Si prega di ritentare più tardi. Vedere il sito dell\'app per problemi e twitter per lo stato.</string>
   <string name="error_wrongcaptcha" formatted="false" username="carloraudino@fedoraproject.org" orig="Captcha was wrong. Please try again.">Captcha errato. Ritenta.</string>
-  <string name="error_input" formatted="false" username="carloraudino@fedoraproject.org" orig="Error in user input!">Errore nell'immissione utente!</string>
+  <string name="error_input" formatted="false" username="carloraudino@fedoraproject.org" orig="Error in user input!">Errore nell\'immissione utente!</string>
   <string name="error_http_header_missing" formatted="false" username="carloraudino@fedoraproject.org" orig="Header: Content-Length is missing!">Header: Content-Length mancante!</string>
   <string name="error_sendlater_quater" formatted="false" username="carloraudino@fedoraproject.org" orig="Only full 15minutes are supported by your connector!">Solo 15 minuti sono supportati dal connector!</string>
   <string name="ignore_withsender_" formatted="false" username="carloraudino@fedoraproject.org" orig="Hide &quot;with sender&quot; SubConnector">Nascondi SubConnector "con mittente"</string>
@@ -58,5 +58,5 @@ Da fare solo se richiesto.</string>
   <string name="sendlog_run" formatted="false" username="carloraudino@fedoraproject.org" orig="SendLog will collect the device log and send it to the developer.\nYou will have an opportunity to review and modify the data being sent.">SendLog raccoglierà i log del dispositivo e li invierà allo sviluppatore.&#13;
 Si avrà la possibilità di controllare e modificare i dati da inviare.</string>
   <string name="sendlog_install_" formatted="false" username="carloraudino@fedoraproject.org" orig="Install SendLog">Installa SendLog</string>
-  <string name="sendlog_install" formatted="false" username="carloraudino@fedoraproject.org" orig="Install the free SendLog application to collect the device log and send it to the developer.">Installa l'applicazione gratuita SendLog per raccogliere i log del dispositivo ed inviarli allo sviluppatore.</string>
+  <string name="sendlog_install" formatted="false" username="carloraudino@fedoraproject.org" orig="Install the free SendLog application to collect the device log and send it to the developer.">Installa l\'applicazione gratuita SendLog per raccogliere i log del dispositivo ed inviarli allo sviluppatore.</string>
 </resources>
