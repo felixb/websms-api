@@ -27,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Build;
 
 /**
  * This is the default Activity launched from android market after install of
@@ -64,7 +65,13 @@ public final class InfoActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		final Builder b = new Builder(this);
+		Builder b;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			b = BuilderWrapper11.getBuilder(this,
+					android.R.style.Theme_Holo_Light_Dialog);
+		} else {
+			b = new Builder(this);
+		}
 		b.setTitle(this.getTitle());
 		final String pkg = this.getPackageName();
 		final int info = this.getResources().getIdentifier("info_text",

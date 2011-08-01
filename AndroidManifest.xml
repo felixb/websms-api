@@ -19,7 +19,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="de.ub0r.android.websms.connector.common" android:versionCode="1"
 	android:versionName="1.0">
-	<application android:icon="@drawable/icon" android:label="ConnectorAPI">
+	<application android:icon="@drawable/icon" android:label="ConnectorAPI"
+		android:hardwareAccelerated="true">
 		<activity android:name=".InfoActivity" android:icon="@drawable/icon"
 			android:theme="@android:style/Theme.Translucent.NoTitleBar">
 			<intent-filter>
@@ -28,5 +29,5 @@
 			</intent-filter>
 		</activity>
 	</application>
-	<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="7" />
+	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="13" />
 </manifest>
