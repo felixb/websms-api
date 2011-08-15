@@ -43,6 +43,8 @@
   <string name="ignore_nosender_hint" formatted="false">Verstecke "ohne Absender" SubConnector in der Auswahl.</string>
   <string name="ignore_free_" formatted="false">Verstecke "free" SubConnector</string>
   <string name="ignore_free_hint" formatted="false">Verstecke "free" SubConnector in der Auswahl.</string>
+	<string name="ignore_ssl_error_" formatted="false">Ignoriere SSL Handshake Fehler</string>
+	<string name="ignore_ssl_error_hint" formatted="false">Ignoriere Fehler beim SSL Handshake. Einige Telefone haben nicht die benötigten Zertifikate installiert. Das Aktivieren führ zu Unsicherheiten.</string>
   <string name="username_" formatted="false">Benutzername</string>
   <string name="password_" formatted="false">Passwort</string>
   <string name="create_account_" formatted="false">Account anlegen</string>

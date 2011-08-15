@@ -41,6 +41,8 @@
 	<string name="ignore_nosender_hint">Hide "without sender" SubConnector from selection.</string>
 	<string name="ignore_free_">Hide "free" SubConnector</string>
 	<string name="ignore_free_hint">Hide "free" SubConnector from selection.</string>
+	<string name="ignore_ssl_error_">Ignore SSL handshake errors</string>
+	<string name="ignore_ssl_error_hint">Ignore errors during SSL handshake. Some phones do not have the needed certificates installed. Using this leads to insecurity.</string>
 
 	<string name="username_">Username</string>
 	<string name="password_">Password</string>
