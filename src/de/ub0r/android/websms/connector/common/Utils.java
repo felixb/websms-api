@@ -61,8 +61,13 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 
 /**
@@ -1070,5 +1075,29 @@ public final class Utils {
 		final String ret = u.toString();
 		Log.d(TAG, "new url: " + ret);
 		return ret;
+	}
+
+	/**
+	 * Show update notification.
+	 * 
+	 * @param context
+	 *            {@link Context}
+	 * @param pkg
+	 *            package
+	 */
+	public static void showUpdateNotification(final Context context,
+			final String pkg) {
+		Notification n = new Notification(android.R.drawable.stat_sys_warning,
+				context.getString(R.string.update_title), 0);
+		n.flags = Notification.FLAG_AUTO_CANCEL;
+		PendingIntent pi = PendingIntent.getActivity(context, 0, new Intent(
+				Intent.ACTION_VIEW, Uri.parse("market://details?id=" + pkg)),
+				PendingIntent.FLAG_UPDATE_CURRENT);
+		n.setLatestEventInfo(context, context.getString(R.string.update_title),
+				context.getString(R.string.update_message), pi);
+
+		NotificationManager nm = (NotificationManager) context
+				.getSystemService(Context.NOTIFICATION_SERVICE);
+		nm.notify(0, n);
 	}
 }

@@ -58,4 +58,7 @@
 	<string name="sendlog_run">SendLog will collect the device log and send it to the developer.\nYou will have an opportunity to review and modify the data being sent.</string>
 	<string name="sendlog_install_">Install SendLog</string>
 	<string name="sendlog_install">Install the free SendLog application to collect the device log and send it to the developer.</string>
+	
+	<string name="update_title">Connector update available</string>
+	<string name="update_message">The ownership of this Connector has changed.\nPlease click here, to get the new App installed.</string>
 </resources>
