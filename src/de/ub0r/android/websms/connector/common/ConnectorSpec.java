@@ -98,6 +98,8 @@ public final class ConnectorSpec implements Serializable {
 	private static final String ERRORMESSAGE = "connector_errormessage";
 	/** Connector: Valid characters. */
 	private static final String VALID_CHARACTERS = "connector_valid_characters";
+	/** Connector: SMSLengthCalculator. */
+	private static final String SMS_LENGTH_CALCULATOR = "connector_sms_length_calc";
 	/** Connector: Ad unit id for google's admob. */
 	private static final String AD_UNITID = "ad_unitid";
 
@@ -759,6 +761,29 @@ public final class ConnectorSpec implements Serializable {
 	 */
 	public void setLimitLength(final int length) {
 		this.bundle.putInt(LENGTH, length);
+	}
+
+	/**
+	 * Get limit of message length.
+	 * 
+	 * @return limit of message length
+	 */
+	public SMSLengthCalculator getSMSLengthCalculator() {
+		if (this.bundle == null) {
+			return null;
+		}
+		return this.bundle
+				.<SMSLengthCalculator> getParcelable(SMS_LENGTH_CALCULATOR);
+	}
+
+	/**
+	 * Set limit of message length.
+	 * 
+	 * @param length
+	 *            length
+	 */
+	public void setSMSLengthCalculator(final SMSLengthCalculator calc) {
+		this.bundle.putParcelable(SMS_LENGTH_CALCULATOR, calc);
 	}
 
 	/**
