@@ -81,11 +81,14 @@ public final class ConnectorSpec implements Serializable {
 	public static final short CAPABILITIES_SEND = 4;
 	/** Feature: preferences. */
 	public static final short CAPABILITIES_PREFS = 8;
-	/** Feature: limit lenth of messages using 7bit chars. */
+	/** Feature: limit length of messages using 7bit chars. */
+	@Deprecated
 	public static final short CAPABILITIES_LIMITLENGTH_7BIT = 8;
-	/** Feature: limit lenth of messages using 8bit chars. */
+	/** Feature: limit length of messages using 8bit chars. */
+	@Deprecated
 	public static final short CAPABILITIES_LIMITLENGTH_8BIT = 16;
-	/** Feature: limit lenth of messages using 16bit chars. */
+	/** Feature: limit length of messages using 16bit chars. */
+	@Deprecated
 	public static final short CAPABILITIES_LIMITLENGTH_16BIT = 32;
 	/** Feature: limit to specified characters. */
 	public static final short CAPABILITIES_CHARACTER_CHECK = 64;
@@ -99,7 +102,8 @@ public final class ConnectorSpec implements Serializable {
 	/** Connector: Valid characters. */
 	private static final String VALID_CHARACTERS = "connector_valid_characters";
 	/** Connector: SMSLengthCalculator. */
-	private static final String SMS_LENGTH_CALCULATOR = "connector_sms_length_calc";
+	private static final String SMS_LENGTH_CALCULATOR = // .
+	"connector_sms_length_calc";
 	/** Connector: Ad unit id for google's admob. */
 	private static final String AD_UNITID = "ad_unitid";
 
@@ -777,10 +781,10 @@ public final class ConnectorSpec implements Serializable {
 	}
 
 	/**
-	 * Set limit of message length.
+	 * Set SMSLengthCalculator.
 	 * 
-	 * @param length
-	 *            length
+	 * @param calc
+	 *            {@link SMSLengthCalculator}
 	 */
 	public void setSMSLengthCalculator(final SMSLengthCalculator calc) {
 		this.bundle.putParcelable(SMS_LENGTH_CALCULATOR, calc);
@@ -992,7 +996,7 @@ public final class ConnectorSpec implements Serializable {
 		if (this.getSubConnectorCount() == 1) {
 			return new SubConnectorSpec(this.bundle.getBundle(SUB_PREFIX + 0));
 		}
-		if (id == null || this.bundle == null) {
+		if (id == null) {
 			return null;
 		}
 		final int c = this.bundle.getInt(SUB_COUNT, 0);
