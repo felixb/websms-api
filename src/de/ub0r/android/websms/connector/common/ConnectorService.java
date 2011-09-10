@@ -233,6 +233,8 @@ public final class ConnectorService extends IntentService {
 				cs.setErrorMessage("error while IO");
 				in = cs.setToIntent(null);
 				cc.setToIntent(in);
+				in.setFlags(in.getFlags()
+						| Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
 				this.sendBroadcast(in);
 				in = null;
 			} else {
@@ -345,6 +347,7 @@ public final class ConnectorService extends IntentService {
 		connector.update(receiver.getSpec(this));
 		final Intent i = connector.setToIntent(null);
 		command.setToIntent(i);
+		i.setFlags(i.getFlags() | Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
 		Log.d(TAG, connector.getPackage() + ": send broadcast info");
 		this.sendBroadcast(i);
 		// this.unregister(i);
