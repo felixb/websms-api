@@ -176,6 +176,15 @@ public abstract class Connector extends BroadcastReceiver {
 	}
 
 	/**
+	 * Flush everything known about the connector.
+	 */
+	public static final void flushSpec() {
+		synchronized (SYNC_UPDATE) {
+			connector = null;
+		}
+	}
+
+	/**
 	 * Send INFO Broadcast back to WebSMS. Call this method after updating your
 	 * status, changing balance and after processing a command.
 	 * 

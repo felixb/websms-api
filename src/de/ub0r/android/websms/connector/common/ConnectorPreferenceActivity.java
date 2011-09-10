@@ -55,4 +55,13 @@ public abstract class ConnectorPreferenceActivity extends PreferenceActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Connector.flushSpec();
+	}
 }

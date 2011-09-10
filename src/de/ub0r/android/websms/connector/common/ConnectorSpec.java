@@ -36,6 +36,8 @@ import android.text.TextUtils;
  * @author flx
  */
 public final class ConnectorSpec implements Serializable {
+	/** Tag for output. */
+	public static final String TAG = "cs";
 	/** Serial version UID. */
 	private static final long serialVersionUID = -1040204065670497635L;
 
@@ -393,9 +395,19 @@ public final class ConnectorSpec implements Serializable {
 	 *            {@link ConnectorSpec}
 	 */
 	public void update(final ConnectorSpec connector) {
+		Log.d(TAG, "update(" + connector + ")");
 		final boolean error = this.hasStatus(STATUS_ERROR);
 		this.oldBalance = this.getBalance();
-		this.bundle.putAll(connector.getBundle());
+		Log.d(TAG, "current bundle: " + this.bundle);
+		this.bundle.remove(CAPABILITIES);
+		this.bundle.remove(LENGTH);
+		this.bundle.remove(VALID_CHARACTERS);
+		this.bundle.remove(AD_UNITID);
+		Log.d(TAG, "current bundle: " + this.bundle);
+		Bundle b = connector.getBundle();
+		Log.d(TAG, "put new bundle: " + b);
+		this.bundle.putAll(b);
+		Log.d(TAG, "new bundle: " + this.bundle);
 		if (error) {
 			this.addStatus(STATUS_ERROR);
 		}
