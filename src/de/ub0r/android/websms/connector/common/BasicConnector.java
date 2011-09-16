@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -36,6 +37,9 @@ import android.content.Intent;
 public abstract class BasicConnector extends Connector {
 	/** Tag for output. */
 	private static final String TAG = "bcon";
+	/** User Agent. */
+	private static final String USERAGENT = // .
+	"curl/7.21.3 (x86_64-pc-linux-gnu) libcurl/7.21.3 OpenSSL/0.9.8o zlib/1.2.3.4 libidn/1.18";
 
 	/**
 	 * Get the URL used for sending messages.
@@ -271,8 +275,43 @@ public abstract class BasicConnector extends Connector {
 	 * @param resp
 	 *            HTTP response code
 	 */
+	@Deprecated
 	protected void parseResponseCode(final Context context, final int resp) {
 		if (resp != HttpURLConnection.HTTP_OK) {
+			throw new WebSMSException(context, R.string.error_http, String
+					.valueOf(resp));
+		}
+	}
+
+	/**
+	 * Parse HTTP response code. Default implementation throws
+	 * {@link WebSMSException} if response != HTTP_OK.
+	 * 
+	 * @param context
+	 *            {@link Context}
+	 * @param response
+	 *            {@link HttpResponse}
+	 */
+	protected void parseResponseCode(final Context context,
+			final HttpResponse response) {
+		final int resp = response.getStatusLine().getStatusCode();
+		if (resp != HttpURLConnection.HTTP_OK) {
+			Log.e(TAG, "HTTP Status Line: "
+					+ response.getStatusLine().toString());
+			Log.e(TAG, "HTTP Headers:");
+			for (Header h : response.getAllHeaders()) {
+				Log.e(TAG, h.getName() + ": " + h.getValue());
+			}
+			try {
+				final String htmlText = Utils.stream2str(
+						response.getEntity().getContent()).trim();
+				Log.e(TAG, "HTTP Body:");
+				for (String l : htmlText.split("\n")) {
+					Log.e(TAG, l);
+				}
+			} catch (Exception e) {
+				Log.w(TAG, "error getting content", e);
+			}
 			throw new WebSMSException(context, R.string.error_http, String
 					.valueOf(resp));
 		}
@@ -364,20 +403,20 @@ public abstract class BasicConnector extends Connector {
 		final String encoding = this.getEncoding();
 		if (!this.usePost()) {
 			url = Utils.httpGetParams(url, d, encoding);
+			d = null;
 		}
 		Log.d(TAG, "HTTP REQUEST: " + url);
 		final boolean trustAll = this.trustAllSLLCerts();
 		final String[] trustedCerts = this.trustedSSLCerts();
 		HttpResponse response;
 		if (trustedCerts != null) {
-			response = Utils.getHttpClient(url, null, d, null, null, encoding,
-					trustedCerts);
+			response = Utils.getHttpClient(url, null, d, USERAGENT, null,
+					encoding, trustedCerts);
 		} else {
-			response = Utils.getHttpClient(url, null, d, null, null, encoding,
-					trustAll);
+			response = Utils.getHttpClient(url, null, d, USERAGENT, null,
+					encoding, trustAll);
 		}
-		int resp = response.getStatusLine().getStatusCode();
-		this.parseResponseCode(context, resp);
+		this.parseResponseCode(context, response);
 		final String htmlText = Utils.stream2str(
 				response.getEntity().getContent()).trim();
 		Log.d(TAG, "HTTP RESPONSE: " + htmlText);

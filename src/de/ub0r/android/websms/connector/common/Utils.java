@@ -26,6 +26,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -770,19 +771,23 @@ public final class Utils {
 			} else {
 				pr.setEntity(new UrlEncodedFormEntity(postData, "ISO-8859-15"));
 			}
-			// Log.d(TAG, "HTTPClient POST: " + postData);
+			Log.d(TAG, "HTTPClient POST: " + postData);
 			request = pr;
 		}
+		request.addHeader("Host", new URL(url).getHost());
+		request.addHeader("Accept", "*/*");
 		request.addHeader(ACCEPT_ENCODING, GZIP);
 		if (referer != null) {
 			request.setHeader("Referer", referer);
-			// Log.d(TAG, "HTTPClient REF: " + referer);
+			Log.d(TAG, "HTTPClient REF: " + referer);
 		}
 		if (userAgent != null) {
 			request.setHeader("User-Agent", userAgent);
-			// Log.d(TAG, "HTTPClient AGENT: " + userAgent);
+			Log.d(TAG, "HTTPClient AGENT: " + userAgent);
 		}
-		// Log.d(TAG, getHeaders(request));
+		Log.d(TAG, "HTTP Method: " + request.getMethod());
+		Log.d(TAG, "HTTP URI: " + request.getURI());
+		Log.d(TAG, getHeaders(request));
 		return httpClient.execute(request);
 	}
 
