@@ -300,7 +300,7 @@ public final class Utils {
 		final StringBuilder buf = new StringBuilder();
 		if (oldFormat) {
 			buf.append(international2oldformat(// .
-					getRecipientsNumber(recipients[0])));
+			getRecipientsNumber(recipients[0])));
 		} else {
 			buf.append(getRecipientsNumber(recipients[0]));
 		}
@@ -308,7 +308,7 @@ public final class Utils {
 			buf.append(separator);
 			if (oldFormat) {
 				buf.append(international2oldformat(// .
-						getRecipientsNumber(recipients[i])));
+				getRecipientsNumber(recipients[i])));
 			} else {
 				buf.append(getRecipientsNumber(recipients[i]));
 			}
@@ -674,7 +674,7 @@ public final class Utils {
 				cs.addCookie(cookies.get(i));
 			}
 		}
-		Log.d(TAG, getCookies(httpClient));
+		// . Log.d(TAG, getCookies(httpClient));
 
 		HttpRequestBase request;
 		if (postData == null) {
@@ -686,10 +686,9 @@ public final class Utils {
 			} else {
 				pr.setEntity(new UrlEncodedFormEntity(postData, "ISO-8859-15"));
 			}
-			Log.d(TAG, "HTTPClient POST: " + postData);
+			// . Log.d(TAG, "HTTPClient POST: " + postData);
 			request = pr;
 		}
-		request.addHeader("Host", new URL(url).getHost());
 		request.addHeader("Accept", "*/*");
 		request.addHeader(ACCEPT_ENCODING, GZIP);
 		if (referer != null) {
@@ -702,7 +701,7 @@ public final class Utils {
 		}
 		Log.d(TAG, "HTTP Method: " + request.getMethod());
 		Log.d(TAG, "HTTP URI: " + request.getURI());
-		Log.d(TAG, getHeaders(request));
+		// . Log.d(TAG, getHeaders(request));
 		return httpClient.execute(request);
 	}
 
