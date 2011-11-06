@@ -300,7 +300,7 @@ public final class Utils {
 		final StringBuilder buf = new StringBuilder();
 		if (oldFormat) {
 			buf.append(international2oldformat(// .
-					getRecipientsNumber(recipients[0])));
+			getRecipientsNumber(recipients[0])));
 		} else {
 			buf.append(getRecipientsNumber(recipients[0]));
 		}
@@ -308,7 +308,7 @@ public final class Utils {
 			buf.append(separator);
 			if (oldFormat) {
 				buf.append(international2oldformat(// .
-						getRecipientsNumber(recipients[i])));
+				getRecipientsNumber(recipients[i])));
 			} else {
 				buf.append(getRecipientsNumber(recipients[i]));
 			}
@@ -440,32 +440,6 @@ public final class Utils {
 	}
 
 	/**
-	 * Get a fresh HTTP-Connection. Please use getHttpClient(url, cookies,
-	 * postData, userAgent, referer, false).
-	 * 
-	 * @param url
-	 *            URL to open
-	 * @param cookies
-	 *            cookies to transmit
-	 * @param postData
-	 *            post data
-	 * @param userAgent
-	 *            user agent
-	 * @param referer
-	 *            referer
-	 * @return the connection
-	 * @throws IOException
-	 *             IOException
-	 */
-	@Deprecated
-	public static HttpResponse getHttpClient(final String url,
-			final ArrayList<Cookie> cookies,
-			final ArrayList<BasicNameValuePair> postData,
-			final String userAgent, final String referer) throws IOException {
-		return getHttpClient(url, cookies, postData, userAgent, referer, false);
-	}
-
-	/**
 	 * Print all cookies from {@link CookieStore} to {@link String}.
 	 * 
 	 * @param client
@@ -568,35 +542,6 @@ public final class Utils {
 	 *            user agent
 	 * @param referer
 	 *            referer
-	 * @param trustAll
-	 *            trust all SSL certificates; only used on first call!
-	 * @return the connection
-	 * @throws IOException
-	 *             IOException
-	 */
-	@Deprecated
-	public static HttpResponse getHttpClient(final String url,
-			final ArrayList<Cookie> cookies,
-			final ArrayList<BasicNameValuePair> postData,
-			final String userAgent, final String referer, // .
-			final boolean trustAll) throws IOException {
-		return getHttpClient(url, cookies, postData, userAgent, referer, null,
-				trustAll, (String[]) null);
-	}
-
-	/**
-	 * Get a fresh HTTP-Connection.
-	 * 
-	 * @param url
-	 *            URL to open
-	 * @param cookies
-	 *            cookies to transmit
-	 * @param postData
-	 *            post data
-	 * @param userAgent
-	 *            user agent
-	 * @param referer
-	 *            referer
 	 * @param encoding
 	 *            encoding; default encoding: ISO-8859-15
 	 * @param trustAll
@@ -612,36 +557,6 @@ public final class Utils {
 			final String encoding, final boolean trustAll) throws IOException {
 		return getHttpClient(url, cookies, postData, userAgent, referer,
 				encoding, trustAll, (String[]) null);
-	}
-
-	/**
-	 * Get a fresh HTTP-Connection.
-	 * 
-	 * @param url
-	 *            URL to open
-	 * @param cookies
-	 *            cookies to transmit
-	 * @param postData
-	 *            post data
-	 * @param userAgent
-	 *            user agent
-	 * @param referer
-	 *            referer
-	 * @param knownFingerprints
-	 *            fingerprints that are known to be valid; only used on first
-	 *            call!
-	 * @return the connection
-	 * @throws IOException
-	 *             IOException
-	 */
-	@Deprecated
-	public static HttpResponse getHttpClient(final String url,
-			final ArrayList<Cookie> cookies,
-			final ArrayList<BasicNameValuePair> postData,
-			final String userAgent, final String referer, // .
-			final String... knownFingerprints) throws IOException {
-		return getHttpClient(url, cookies, postData, userAgent, referer, null,
-				false, knownFingerprints);
 	}
 
 	/**
@@ -759,7 +674,7 @@ public final class Utils {
 				cs.addCookie(cookies.get(i));
 			}
 		}
-		Log.d(TAG, getCookies(httpClient));
+		// . Log.d(TAG, getCookies(httpClient));
 
 		HttpRequestBase request;
 		if (postData == null) {
@@ -771,10 +686,9 @@ public final class Utils {
 			} else {
 				pr.setEntity(new UrlEncodedFormEntity(postData, "ISO-8859-15"));
 			}
-			Log.d(TAG, "HTTPClient POST: " + postData);
+			// . Log.d(TAG, "HTTPClient POST: " + postData);
 			request = pr;
 		}
-		request.addHeader("Host", new URL(url).getHost());
 		request.addHeader("Accept", "*/*");
 		request.addHeader(ACCEPT_ENCODING, GZIP);
 		if (referer != null) {
@@ -787,63 +701,8 @@ public final class Utils {
 		}
 		Log.d(TAG, "HTTP Method: " + request.getMethod());
 		Log.d(TAG, "HTTP URI: " + request.getURI());
-		Log.d(TAG, getHeaders(request));
+		// . Log.d(TAG, getHeaders(request));
 		return httpClient.execute(request);
-	}
-
-	/**
-	 * Update cookies from response.
-	 * 
-	 * @param cookies
-	 *            old {@link Cookie} list
-	 * @param headers
-	 *            {@link Header}s from {@link HttpResponse}
-	 * @param url
-	 *            requested URL
-	 * @throws URISyntaxException
-	 *             malformed URI
-	 * @throws MalformedCookieException
-	 *             malformed {@link Cookie}
-	 */
-	@Deprecated
-	public static void updateCookies(final ArrayList<Cookie> cookies,
-			final Header[] headers, final String url)
-			throws URISyntaxException, MalformedCookieException {
-		final URI uri = new URI(url);
-		int port = uri.getPort();
-		if (port < 0) {
-			if (url.startsWith("https")) {
-				port = PORT_HTTPS;
-			} else {
-				port = PORT_HTTP;
-			}
-		}
-		final CookieOrigin origin = new CookieOrigin(uri.getHost(), port, uri
-				.getPath(), false);
-		final CookieSpecBase cookieSpecBase = new BrowserCompatSpec();
-		String name;
-		String value;
-		for (final Header header : headers) {
-			for (final Cookie cookie : cookieSpecBase.parse(header, origin)) {
-				// THE cookie
-				name = cookie.getName();
-				value = cookie.getValue();
-				if (value == null || value.equals("")) {
-					continue;
-				}
-				for (final Cookie c : cookies) {
-					if (name.equals(c.getName())) {
-						cookies.remove(c);
-						cookies.add(cookie);
-						name = null;
-						break;
-					}
-				}
-				if (name != null) {
-					cookies.add(cookie);
-				}
-			}
-		}
 	}
 
 	/**
