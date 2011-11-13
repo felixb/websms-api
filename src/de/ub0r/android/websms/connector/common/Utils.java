@@ -706,6 +706,26 @@ public final class Utils {
 	}
 
 	/**
+	 * Shutdown and forget the cached HttpClient.
+	 *
+	 * This causes the client to be re-created with the used settings on the next
+	 * call to the getHttpClient()-family of functions.
+	 *
+	 * The caller has to use this method before calling a getHttpClient() with new
+	 * trustAll or fingerprints.
+	 *
+	 * Calling this function while no cached Client exits does nothing.
+	 */
+	public static void resetHttpClient() {
+		if (httpClient == null) {
+			return;
+		}
+
+		httpClient.getConnectionManager().shutdown();
+		httpClient = null;
+	}
+
+	/**
 	 * Read {@link InputStream} and convert it into {@link String}.
 	 * 
 	 * @param is
