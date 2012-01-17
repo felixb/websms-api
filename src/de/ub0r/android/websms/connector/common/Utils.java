@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 Felix Bechstein
+ * Copyright (C) 2010-2012 Felix Bechstein
  * 
  * This file is part of WebSMS.
  * 
@@ -24,9 +24,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -50,17 +47,17 @@ import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.cookie.Cookie;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.entity.HttpEntityWrapper;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
-import org.apache.http.impl.cookie.BrowserCompatSpec;
-import org.apache.http.impl.cookie.CookieSpecBase;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
+import org.json.JSONObject;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -699,6 +696,68 @@ public final class Utils {
 		}
 		request.addHeader("Accept", "*/*");
 		request.addHeader(ACCEPT_ENCODING, GZIP);
+		if (referer != null) {
+			request.setHeader("Referer", referer);
+			Log.d(TAG, "HTTPClient REF: " + referer);
+		}
+		if (userAgent != null) {
+			request.setHeader("User-Agent", userAgent);
+			Log.d(TAG, "HTTPClient AGENT: " + userAgent);
+		}
+		Log.d(TAG, "HTTP Method: " + request.getMethod());
+		Log.d(TAG, "HTTP URI: " + request.getURI());
+		// . Log.d(TAG, getHeaders(request));
+		return httpClient.execute(request);
+	}
+
+	/**
+	 * Get a fresh HTTP-Connection.
+	 * 
+	 * @param url
+	 *            URL to open
+	 * @param cookies
+	 *            cookies to transmit
+	 * @param json
+	 *            data to post in JSON format
+	 * @param userAgent
+	 *            user agent
+	 * @param referer
+	 *            referer
+	 * @param encoding
+	 *            encoding; default encoding: ISO-8859-15
+	 * @param trustAll
+	 *            trust all SSL certificates; only used on first call! *
+	 * @return the connection
+	 * @throws IOException
+	 *             IOException
+	 */
+	public static HttpResponse getHttpClient(final String url,
+			final ArrayList<Cookie> cookies, final JSONObject json,
+			final String userAgent, final String referer,
+			final String encoding, final boolean trustAll) throws IOException {
+		Log.d(TAG, "HTTPClient URL: " + url);
+
+		if (cookies != null && cookies.size() > 0) {
+			final int l = cookies.size();
+			CookieStore cs = httpClient.getCookieStore();
+			for (int i = 0; i < l; i++) {
+				cs.addCookie(cookies.get(i));
+			}
+		}
+
+		HttpRequestBase request;
+		Log.d(TAG, "JSON: " + json.toString());
+		StringEntity requestBody = new StringEntity(json.toString(), encoding);
+		requestBody.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,
+				"application/json"));
+		HttpPost pr = new HttpPost(url);
+
+		pr.setEntity(requestBody);
+
+		request = pr;
+		request.addHeader("Accept", "*/*");
+		request.addHeader(ACCEPT_ENCODING, GZIP);
+		request.addHeader("Content-Type", "application/json");
 		if (referer != null) {
 			request.setHeader("Referer", referer);
 			Log.d(TAG, "HTTPClient REF: " + referer);
