@@ -108,6 +108,8 @@ public final class ConnectorSpec implements Serializable {
 	"connector_sms_length_calc";
 	/** Connector: Ad unit id for google's admob. */
 	private static final String AD_UNITID = "ad_unitid";
+	/** Connector: selected subconnector. */
+	private static final String SELECTED_SUBCONECTOR = "sub_selected";
 
 	// Subconnectors
 	/** Connector: SubConnector prefix. */
@@ -965,6 +967,39 @@ public final class ConnectorSpec implements Serializable {
 	}
 
 	/**
+	 * @return selected {@link SubConnectorSpec}
+	 */
+	public SubConnectorSpec getSelectedSubConnector() {
+		if (this.bundle == null) {
+			return null;
+		}
+		final int c = this.bundle.getInt(SUB_COUNT, 0);
+		if (c == 1) {
+			return new SubConnectorSpec(this.bundle.getBundle(SUB_PREFIX + 1));
+		}
+		for (int i = 0; i < c; i++) {
+			SubConnectorSpec s = new SubConnectorSpec(
+					this.bundle.getBundle(SUB_PREFIX + i));
+			if (s.getID().equals(this.bundle.getString(SELECTED_SUBCONECTOR))) {
+				return s;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Set selected {@link SubConnectorSpec}.
+	 * 
+	 * @param id
+	 *            id of selected {@link SubConnectorSpec}
+	 */
+	public void setSelectedSubConnector(final String id) {
+		if (bundle != null) {
+			this.bundle.putString(SELECTED_SUBCONECTOR, id);
+		}
+	}
+
+	/**
 	 * Get all {@link SubConnectorSpec}s of this {@link ConnectorSpec}.
 	 * 
 	 * @return all {@link SubConnectorSpec}
@@ -1013,8 +1048,8 @@ public final class ConnectorSpec implements Serializable {
 		}
 		final int c = this.bundle.getInt(SUB_COUNT, 0);
 		for (int i = 0; i < c; i++) {
-			final SubConnectorSpec sc = new SubConnectorSpec(this.bundle
-					.getBundle(SUB_PREFIX + i));
+			final SubConnectorSpec sc = new SubConnectorSpec(
+					this.bundle.getBundle(SUB_PREFIX + i));
 			if (id.equals(sc.getID())) {
 				return sc;
 			}
