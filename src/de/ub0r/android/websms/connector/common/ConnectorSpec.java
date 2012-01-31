@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 Felix Bechstein
+ * Copyright (C) 2010-2012 Felix Bechstein
  * 
  * This file is part of WebSMS.
  * 
@@ -320,6 +320,7 @@ public final class ConnectorSpec implements Serializable {
 		stream.writeInt(this.getLimitLength());
 		writeString(stream, this.getValidCharacters());
 		writeString(stream, this.getAdUnitIds());
+		writeString(stream, this.getSelectedSubConnector().getID());
 		final SubConnectorSpec[] scss = this.getSubConnectors();
 		stream.writeInt(scss.length);
 		for (SubConnectorSpec scs : scss) {
@@ -348,6 +349,7 @@ public final class ConnectorSpec implements Serializable {
 		this.bundle.putInt(LENGTH, stream.readInt());
 		this.bundle.putString(VALID_CHARACTERS, readString(stream));
 		this.bundle.putString(AD_UNITID, readString(stream));
+		this.bundle.putString(SELECTED_SUBCONECTOR, readString(stream));
 		final int c = stream.readInt();
 		for (int i = 0; i < c; i++) {
 			this.addSubConnector((SubConnectorSpec) stream.readObject());
