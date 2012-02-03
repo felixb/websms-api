@@ -44,6 +44,11 @@ public final class InfoActivity extends Activity {
 			Intent.ACTION_VIEW, Uri.parse(// .
 					"market://search?q=pname:de.ub0r.android.websms"));
 
+	/** Link to WebSMS in android market. */
+	private static final Intent INTENT_MARKET_MYSMS = new Intent(
+			Intent.ACTION_VIEW, Uri.parse(// .
+					"market://search?q=pname:com.android.android.sms"));
+
 	/** Link to Connectors in android market. */
 	private static final Intent INTENT_MARKET_CONNECTORS = new Intent(
 			Intent.ACTION_VIEW, Uri.parse(// .
@@ -51,10 +56,14 @@ public final class InfoActivity extends Activity {
 
 	/** Info text shown to user. */
 	private static final String INFO_TEXT = "This is a WebSMS Connector."
-			+ "\nThe only way to use it, is lauching it with WebSMS.";
+			+ "\nThe only way to use it, is lauching it with WebSMS or mysms.";
 
 	/** Button label: search websms. */
 	private static final String BTN_MARKET_WEBSMS = "market: WebSMS";
+
+	/** Button label: search mysms. */
+	private static final String BTN_MARKET_MYSMS = "market: mysms";
+
 	/** Button label: search connectors. */
 	private static final String BTN_MARKET_CONNECTORS = // .
 	"market: Connectors";
@@ -113,21 +122,36 @@ public final class InfoActivity extends Activity {
 							InfoActivity.this.finish();
 						}
 					});
-		}
-		b.setNegativeButton(BTN_MARKET_CONNECTORS,
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(final DialogInterface dialog,
-							final int which) {
-						try {
-							InfoActivity.this
-									.startActivity(INTENT_MARKET_CONNECTORS);
-						} catch (ActivityNotFoundException e) {
-							Log.e(TAG, "no market", e);
+			b.setNegativeButton(BTN_MARKET_MYSMS,
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(final DialogInterface dialog,
+								final int which) {
+							try {
+								InfoActivity.this
+										.startActivity(INTENT_MARKET_MYSMS);
+							} catch (ActivityNotFoundException e) {
+								Log.e(TAG, "no market", e);
+							}
+							InfoActivity.this.finish();
 						}
-						InfoActivity.this.finish();
-					}
-				});
+					});
+		} else {
+			b.setNegativeButton(BTN_MARKET_CONNECTORS,
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(final DialogInterface dialog,
+								final int which) {
+							try {
+								InfoActivity.this
+										.startActivity(INTENT_MARKET_CONNECTORS);
+							} catch (ActivityNotFoundException e) {
+								Log.e(TAG, "no market", e);
+							}
+							InfoActivity.this.finish();
+						}
+					});
+		}
 		b.setOnCancelListener(new DialogInterface.OnCancelListener() {
 			@Override
 			public void onCancel(final DialogInterface dialog) {
