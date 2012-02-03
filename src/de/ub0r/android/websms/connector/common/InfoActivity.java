@@ -85,8 +85,11 @@ public final class InfoActivity extends Activity {
 		final String pkg = this.getPackageName();
 		final int info = this.getResources().getIdentifier("info_text",
 				"string", pkg);
-		final int icon = this.getResources().getIdentifier("icon", "drawable",
+		int icon = this.getResources().getIdentifier("app_icon", "drawable",
 				pkg);
+		if (icon == 0) {
+			icon = this.getResources().getIdentifier("icon", "drawable", pkg);
+		}
 		Log.d(TAG, "resID.icon=" + icon);
 		Log.d(TAG, "resID.info=" + info);
 		if (icon > 0) {
