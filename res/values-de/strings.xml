@@ -21,7 +21,7 @@
                Visit http://ub0r.de/translate/websms-api/edit.php?lang=de&file=strings.xml to edit the file.
        -->
 <resources>
-  <string name="info_text" formatted="false" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">Diese App ist ein WebSMS Connector.\nDu kannst ihn nur mit WebSMS nutzen.</string>
+  <string name="info_text" formatted="false" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">Diese App ist ein WebSMS Connector.\nDu kannst ihn nur mit WebSMS oder mysms nutzen.</string>
   <string name="stat_notify_sms_pending" formatted="false" orig="WebSMS: sending">WebSMS: senden</string>
   <string name="stat_notify_sending" formatted="false">Sende:</string>
   <string name="error" formatted="false">FEHLER</string>
