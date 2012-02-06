@@ -843,7 +843,6 @@ public final class Utils {
 			final String encoding, final boolean trustAll,
 			final String... knownFingerprints) throws IOException {
 
-		Log.d(TAG, "JSON: " + json.toString());
 		StringEntity requestBody = new StringEntity(json.toString(), encoding);
 		requestBody.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,
 				"application/json"));
