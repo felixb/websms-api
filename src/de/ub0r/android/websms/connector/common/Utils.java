@@ -626,6 +626,92 @@ public final class Utils {
 			final String userAgent, final String referer,
 			final String encoding, final boolean trustAll,
 			final String... knownFingerprints) throws IOException {
+
+		return getHttpClient(url, cookies, postData, null, userAgent, referer,
+				encoding, trustAll, knownFingerprints);
+	}
+
+	/**
+	 * Get a fresh HTTP-Connection.
+	 * 
+	 * @param url
+	 *            URL to open
+	 * @param cookies
+	 *            cookies to transmit
+	 * @param postData
+	 *            post data
+	 * @param headers
+	 *            Headers to add. They will be added at the end (may override so
+	 *            the previous headers such as User-Agent, etc)
+	 * @param userAgent
+	 *            user agent
+	 * @param referer
+	 *            referer
+	 * @param encoding
+	 *            encoding; default encoding: ISO-8859-15
+	 * @param trustAll
+	 *            trust all SSL certificates; only used on first call!
+	 * @param knownFingerprints
+	 *            fingerprints that are known to be valid; only used on first
+	 *            call! Only used if {@code trustAll == false}
+	 * @return the connection
+	 * @throws IOException
+	 *             IOException
+	 */
+	public static HttpResponse getHttpClient(final String url,
+			final ArrayList<Cookie> cookies,
+			final ArrayList<BasicNameValuePair> postData,
+			final ArrayList<Header> headers, final String userAgent,
+			final String referer, final String encoding,
+			final boolean trustAll, final String... knownFingerprints)
+			throws IOException {
+
+		HttpEntity he = null;
+
+		if (postData != null) {
+			if (encoding != null && encoding.length() > 0) {
+				he = new UrlEncodedFormEntity(postData, encoding);
+			} else {
+				he = new UrlEncodedFormEntity(postData, "ISO-8859-15");
+			}
+		}
+		return getHttpClient(url, cookies, he, headers, userAgent, referer,
+				encoding, trustAll, knownFingerprints);
+	}
+
+	/**
+	 * Get a fresh HTTP-Connection.
+	 * 
+	 * @param url
+	 *            URL to open
+	 * @param cookies
+	 *            cookies to transmit
+	 * @param postData
+	 *            post data
+	 * @param headers
+	 *            Headers to add. They will be added at the end (may override so
+	 *            the previous headers such as User-Agent, etc)
+	 * @param userAgent
+	 *            user agent
+	 * @param referer
+	 *            referer
+	 * @param encoding
+	 *            encoding; default encoding: ISO-8859-15
+	 * @param trustAll
+	 *            trust all SSL certificates; only used on first call!
+	 * @param knownFingerprints
+	 *            fingerprints that are known to be valid; only used on first
+	 *            call! Only used if {@code trustAll == false}
+	 * @return the connection
+	 * @throws IOException
+	 *             IOException
+	 */
+	public static HttpResponse getHttpClient(final String url,
+			final ArrayList<Cookie> cookies, final HttpEntity postData,
+			final ArrayList<Header> headers, final String userAgent,
+			final String referer, final String encoding,
+			final boolean trustAll, final String... knownFingerprints)
+			throws IOException {
 		Log.d(TAG, "HTTPClient URL: " + url);
 
 		SchemeRegistry registry = null;
@@ -686,28 +772,48 @@ public final class Utils {
 			request = new HttpGet(url);
 		} else {
 			HttpPost pr = new HttpPost(url);
-			if (encoding != null && encoding.length() > 0) {
-				pr.setEntity(new UrlEncodedFormEntity(postData, encoding));
-			} else {
-				pr.setEntity(new UrlEncodedFormEntity(postData, "ISO-8859-15"));
-			}
+			pr.setEntity(postData);
 			// . Log.d(TAG, "HTTPClient POST: " + postData);
 			request = pr;
 		}
 		request.addHeader("Accept", "*/*");
 		request.addHeader(ACCEPT_ENCODING, GZIP);
+
 		if (referer != null) {
 			request.setHeader("Referer", referer);
 			Log.d(TAG, "HTTPClient REF: " + referer);
 		}
+
 		if (userAgent != null) {
 			request.setHeader("User-Agent", userAgent);
 			Log.d(TAG, "HTTPClient AGENT: " + userAgent);
 		}
+
+		addHeaders(request, headers);
+
 		Log.d(TAG, "HTTP Method: " + request.getMethod());
 		Log.d(TAG, "HTTP URI: " + request.getURI());
 		// . Log.d(TAG, getHeaders(request));
 		return httpClient.execute(request);
+	}
+
+	/**
+	 * Add headers to the Request
+	 * 
+	 * @param request
+	 *            Request to be added headers to
+	 * @param headers
+	 *            Headers to add
+	 */
+	private static void addHeaders(final HttpRequestBase request,
+			final ArrayList<Header> headers) {
+		if (headers == null) {
+			return;
+		}
+
+		for (Header h : headers) {
+			request.addHeader(h);
+		}
 	}
 
 	/**
@@ -734,42 +840,18 @@ public final class Utils {
 	public static HttpResponse getHttpClient(final String url,
 			final ArrayList<Cookie> cookies, final JSONObject json,
 			final String userAgent, final String referer,
-			final String encoding, final boolean trustAll) throws IOException {
-		Log.d(TAG, "HTTPClient URL: " + url);
+			final String encoding, final boolean trustAll,
+			final String... knownFingerprints) throws IOException {
 
-		if (cookies != null && cookies.size() > 0) {
-			final int l = cookies.size();
-			CookieStore cs = httpClient.getCookieStore();
-			for (int i = 0; i < l; i++) {
-				cs.addCookie(cookies.get(i));
-			}
-		}
-
-		HttpRequestBase request;
-		Log.d(TAG, "JSON: " + json.toString());
 		StringEntity requestBody = new StringEntity(json.toString(), encoding);
 		requestBody.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,
 				"application/json"));
-		HttpPost pr = new HttpPost(url);
 
-		pr.setEntity(requestBody);
+		ArrayList<Header> headers = new ArrayList<Header>(1);
+		headers.add(new BasicHeader("Content-Type", "application/json"));
 
-		request = pr;
-		request.addHeader("Accept", "*/*");
-		request.addHeader(ACCEPT_ENCODING, GZIP);
-		request.addHeader("Content-Type", "application/json");
-		if (referer != null) {
-			request.setHeader("Referer", referer);
-			Log.d(TAG, "HTTPClient REF: " + referer);
-		}
-		if (userAgent != null) {
-			request.setHeader("User-Agent", userAgent);
-			Log.d(TAG, "HTTPClient AGENT: " + userAgent);
-		}
-		Log.d(TAG, "HTTP Method: " + request.getMethod());
-		Log.d(TAG, "HTTP URI: " + request.getURI());
-		// . Log.d(TAG, getHeaders(request));
-		return httpClient.execute(request);
+		return getHttpClient(url, cookies, requestBody, headers, userAgent,
+				referer, encoding, trustAll, knownFingerprints);
 	}
 
 	/**
