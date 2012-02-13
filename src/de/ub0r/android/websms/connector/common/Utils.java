@@ -406,6 +406,9 @@ public final class Utils {
 			return "+" + number.substring(2);
 		} else if (number.startsWith("0")) {
 			return defPrefix + number.substring(1);
+		} else if (defPrefix.length() > 1
+				&& number.startsWith(defPrefix.substring(1))) {
+			return "+" + number;
 		}
 		return defPrefix + number;
 	}
