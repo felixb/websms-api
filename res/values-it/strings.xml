@@ -18,7 +18,7 @@
        -->
 <!--
                This file is generated automatically by ub0rlib/php.
-               Visit http://ub0r.de/translate/websms-api/edit.php?lang=it&file=strings.xml to edit the file.
+               Visit http://ub0r.de/translate/websms-api/it/strings.xml to edit the file.
        -->
 <resources>
   <string name="info_text" formatted="false" username="carloraudino@fedoraproject.org" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">Questo è un Connector per WebSMS&#13;
