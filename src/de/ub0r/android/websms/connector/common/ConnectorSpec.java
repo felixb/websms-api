@@ -159,6 +159,7 @@ public final class ConnectorSpec implements Serializable {
 		 *            {@link Bundle}
 		 */
 		SubConnectorSpec(final Bundle b) {
+			Log.d(TAG, "new SubConnectorSpec(" + bundle + ")");
 			this.bundle = b;
 		}
 
@@ -174,6 +175,7 @@ public final class ConnectorSpec implements Serializable {
 		 */
 		SubConnectorSpec(final String id, final String name,
 				final short features) {
+			Log.d(TAG, "new SubConnectorSpec(" + id + "," + name + ",ftrs)");
 			this.bundle = new Bundle();
 			this.bundle.putString(ID, id);
 			this.bundle.putString(NAME, name);
@@ -190,6 +192,7 @@ public final class ConnectorSpec implements Serializable {
 		 */
 		private void writeObject(final ObjectOutputStream stream)
 				throws IOException {
+			Log.d(TAG, "writeObject()");
 			writeString(stream, this.getID());
 			writeString(stream, this.getName());
 			stream.writeInt(this.getFeatures());
@@ -207,6 +210,7 @@ public final class ConnectorSpec implements Serializable {
 		 */
 		private void readObject(final ObjectInputStream stream)
 				throws IOException, ClassNotFoundException {
+			Log.d(TAG, "readObject()");
 			this.bundle = new Bundle();
 			this.bundle.putString(ID, readString(stream));
 			this.bundle.putString(NAME, readString(stream));
@@ -312,6 +316,7 @@ public final class ConnectorSpec implements Serializable {
 	 */
 	private void writeObject(final ObjectOutputStream stream)
 			throws IOException {
+		Log.d(TAG, "writeObject() on " + this.getPackage());
 		writeString(stream, this.getPackage());
 		writeString(stream, this.getName());
 		writeString(stream, this.getAuthor());
@@ -320,9 +325,20 @@ public final class ConnectorSpec implements Serializable {
 		stream.writeInt(this.getLimitLength());
 		writeString(stream, this.getValidCharacters());
 		writeString(stream, this.getAdUnitIds());
-		writeString(stream, this.getSelectedSubConnector().getID());
+		Log.d(TAG, "write selected SubConnector..");
+		SubConnectorSpec sub = this.getSelectedSubConnector();
+		if (sub == null) {
+			Log.d(TAG, "selected: none");
+			writeString(stream, null);
+		} else {
+			Log.d(TAG, "selected: " + sub.getID());
+			writeString(stream, sub.getID());
+		}
+		Log.d(TAG, "get SubConnectors..");
 		final SubConnectorSpec[] scss = this.getSubConnectors();
+		Log.d(TAG, "write #SubConnector: " + scss.length);
 		stream.writeInt(scss.length);
+		Log.d(TAG, "write SubConnectors..");
 		for (SubConnectorSpec scs : scss) {
 			stream.writeObject(scs);
 		}
@@ -340,6 +356,7 @@ public final class ConnectorSpec implements Serializable {
 	 */
 	private void readObject(final ObjectInputStream stream) throws IOException,
 			ClassNotFoundException {
+		Log.d(TAG, "readObject() on " + this.getPackage());
 		this.bundle = new Bundle();
 		this.bundle.putString(PACKAGE, readString(stream));
 		this.bundle.putString(NAME, readString(stream));
@@ -977,7 +994,7 @@ public final class ConnectorSpec implements Serializable {
 		}
 		final int c = this.bundle.getInt(SUB_COUNT, 0);
 		if (c == 1) {
-			return new SubConnectorSpec(this.bundle.getBundle(SUB_PREFIX + 1));
+			return new SubConnectorSpec(this.bundle.getBundle(SUB_PREFIX + 0));
 		}
 		for (int i = 0; i < c; i++) {
 			SubConnectorSpec s = new SubConnectorSpec(
@@ -1007,12 +1024,16 @@ public final class ConnectorSpec implements Serializable {
 	 * @return all {@link SubConnectorSpec}
 	 */
 	public SubConnectorSpec[] getSubConnectors() {
+		Log.d(TAG, "getSubConnectors()");
+		Log.d(TAG, "getSubConnectors(): bundle=" + bundle);
 		if (this.bundle == null) {
 			return null;
 		}
 		final int c = this.bundle.getInt(SUB_COUNT, 0);
+		Log.d(TAG, "getSubConnectors(): c=" + c);
 		final SubConnectorSpec[] ret = new SubConnectorSpec[c];
 		for (int i = 0; i < c; i++) {
+			Log.d(TAG, "getSubConnectors(): i=" + i);
 			ret[i] = new SubConnectorSpec(// .
 					this.bundle.getBundle(SUB_PREFIX + i));
 		}
