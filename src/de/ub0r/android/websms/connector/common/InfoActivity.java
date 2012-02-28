@@ -47,7 +47,7 @@ public final class InfoActivity extends Activity {
 	/** Link to WebSMS in android market. */
 	private static final Intent INTENT_MARKET_MYSMS = new Intent(
 			Intent.ACTION_VIEW, Uri.parse(// .
-					"market://search?q=pname:com.android.android.sms"));
+					"market://search?q=pname:com.mysms.android.sms"));
 
 	/** Link to Connectors in android market. */
 	private static final Intent INTENT_MARKET_CONNECTORS = new Intent(
