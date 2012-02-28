@@ -21,9 +21,9 @@
                Visit http://ub0r.de/translate/websms-api/edit.php?lang=it&file=strings.xml to edit the file.
        -->
 <resources>
-  <string name="info_text" formatted="false" username="carloraudino@fedoraproject.org" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">Questo è un Connector per WebSMS&#13;
+  <string name="info_text" formatted="false" username="carloraudino@fedoraproject.org" orig="This is a Websms Connector.\nThe only way to use it, is lauching it with WebSMS or mysms.">Questo è un Connector per Websms&#13;
 L\'unico modo per usarlo è lanciarlo con WebSMS.</string>
-  <string name="stat_notify_sms_pending" formatted="false" username="carloraudino@fedoraproject.org" orig="WebSMS: sending">WebSMS: invio</string>
+  <string name="stat_notify_sms_pending" formatted="false" username="carloraudino@fedoraproject.org" orig="Websms: sending">Websms: invio</string>
   <string name="stat_notify_sending" formatted="false" username="carloraudino@fedoraproject.org" orig="Sending:">Invio:</string>
   <string name="error" formatted="false" username="carloraudino@fedoraproject.org" orig="ERROR">ERRORE</string>
   <string name="error_connection" formatted="false" username="carloraudino@fedoraproject.org" orig="Connection terminated/timed out. If your connection is working, it\'s most likely a downtime of the target service. Check the app\'s website issues and twitter for status.">Connessione terminata/scaduta. Se la connessione funziona, probabilmente si tratta di un guasto del servizio. Vedere il sito dell\'app per problemi e twitter per lo stato.</string>
