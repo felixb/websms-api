@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+               Copyright (C) 2009-2011 Felix Bechstein
+       -->
+<!--
+               This file is part of WebSMS API. This program is free software; you can
+               redistribute it and/or modify it under the terms of the GNU General
+               Public License as published by the Free Software Foundation; either
+               version 3 of the License, or (at your option) any later version.
+       -->
+<!--
+               This program is distributed in the hope that it will be useful, but
+               WITHOUT ANY WARRANTY; without even the implied warranty of
+               MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+               General Public License for more details. You should have received a
+               copy of the GNU General Public License along with this program; If
+               not, see <http://www.gnu.org/licenses/>.
+       -->
+<!--
+               This file is generated automatically by ub0rlib/php.
+               Visit http://ub0r.de/translate/websms-api/de/strings.xml to edit the file.
+       -->
+<resources>
+  <string name="info_text" formatted="false" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">WebSMS Rozhraní je aplikace, kterou lze používat prostřednictvím aplikace WebSMS.</string>
+  <string name="stat_notify_sms_pending" formatted="false" orig="WebSMS: sending">WebSMS: odesílaní</string>
+  <string name="stat_notify_sending" formatted="false">Odesílání:</string>
+  <string name="error" formatted="false">CHYBA</string>
+  <string name="error_connection" formatted="false" username="Petr &lt;svobodnik.petr@gmail.com&gt;" orig="Connection terminated/timed out. If your connection is working, it\'s most likely a downtime of the target service. Check the app\'s website issues and twitter for status.">Připojení ukončeno/vypršel časový limit. Pokud je Vaše připojení aktivní, pravděpodobně není dostupná cílová služba. Prosím zkontrolujte stránky aplikace, případně twitter.</string>
+  <string name="error_http" formatted="false" username="Petr &lt;svobodnik.petr@gmail.com&gt;" orig="FAILURE: HTTP">NEÚSPĚCH: HTTP</string>
+  <string name="error_mail" formatted="false" username="Petr &lt;svobodnik.petr@gmail.com&gt;" orig="Wrong mail address or password given!">Zadán neplatný email nebo heslo!</string>
+  <string name="error_pw" formatted="false">Zadáno neplatné uživatelské jméno nebo heslo!</string>
+  <string name="error_sender" formatted="false" username="Petr &lt;svobodnik.petr@gmail.com&gt;" orig="Wrong sender! Set it in international form like +4917012345678.">Špatné číslo odesílatele. Formát musí mít mezinárodní tvar, např. +4917012345678.</string>
+  <string name="error_sender_unregistered" formatted="false" username="Petr &lt;svobodnik.petr@gmail.com&gt;" orig="Sender must be registered and confirmed your provider.">Odesílatel musí být registrovaný a mít ověřené číslo u poskytovatele služby.</string>
+  <string name="error_server" formatted="false">NEÚSPĚCH: Odpověď serveru:</string>
+  <string name="error_service" formatted="false" username="Petr &lt;svobodnik.petr@gmail.com&gt;" orig="Webservice is down! This is most likely not a problem of the connector. Please try again later. Check the app\'s website\'s issues and twitter for status.">Webová služba není dostupná. Pravděpodobně se nejedná o chybu rozhraní. Prosím zkuste to později. Zkontrolujte stránky aplikace, případně twitter.</string>
+  <string name="error_wrongcaptcha" formatted="false">Špatně vyplněný kód. Prosím zkuste to znovu.</string>
+  <string name="error_input" formatted="false">Chybě zadaný vstup!</string>
+  <string name="error_http_header_missing" formatted="false" orig="Header: Content-Length is missing!">Hlavička: Chybí velikost obsahu!</string>
+  <string name="error_sendlater_quater" formatted="false">Maximálně 15 minut je dostupných pro Váše rozhraní!</string>
+  <string name="ignore_withsender_" formatted="false">Skrýt podrozhraní "s odesílatelem"</string>
+  <string name="ignore_withsender_hint" formatted="false">Skrýt podrozhraní "s odesílatelem" z výběru</string>
+  <string name="ignore_nosender_" formatted="false">Skrýt podrozhraní "bez odesílatele"</string>
+  <string name="ignore_nosender_hint" formatted="false">Skrýt podrozhraní "bez odesílatele" z výběru</string>
+  <string name="ignore_free_" formatted="false">Skrýt podrozhraní "zdarma"</string>
+  <string name="ignore_free_hint" formatted="false">Skrýt podrozhraní "zdarma" z výběru.</string>
+  <string name="ignore_ssl_error_" formatted="false">Ignorovat chyby v ověření SSL</string>
+  <string name="ignore_ssl_error_hint" formatted="false">Ignorovat chyby během ověření SSL. Některé telefony nemají instalovány potřebné certifikáty. Ignorování snižuje zabezpečení komunikace.</string>
+  <string name="username_" formatted="false">Uživatelské jméno</string>
+  <string name="password_" formatted="false">Heslo</string>
+  <string name="create_account_" formatted="false">Vytvořit účet</string>
+  <string name="use_derfault_sender_" formatted="false" username="Petr &lt;svobodnik.petr@gmail.com&gt;" orig="Use default sender">Použít výchozího odesílatele</string>
+  <string name="use_derfault_sender_hint" formatted="false">Použít výchozího odesílatele, kterého poskytuje WebSMS.</string>
+  <string name="custom_sender_" formatted="false">Vlastní odesílatel</string>
+  <string name="sender_hint" formatted="false" username="Petr &lt;svobodnik.petr@gmail.com&gt;" orig="Int. phonenumber e.g. +4917912345678">Mez. telefonní číslo, např. +491791234567</string>
+  <string name="send_logs_" formatted="false">Odeslat záznamy</string>
+  <string name="send_logs_hint" formatted="false">Odeslat záznamy telefonu vývojářům. Vyberte pouze pokud jste byli požádáni.</string>
+  <string name="sendlog_run_" formatted="false">Spustit SendLog</string>
+  <string name="sendlog_run" formatted="false">SendLog automaticky shromáždí záznamy Vašeho telefonu a odešle je vývojářům.\nBudete mít možnost tyto data prohlížet, případně měnit.</string>
+  <string name="sendlog_install_" formatted="false">Instalovat SendLog</string>
+  <string name="sendlog_install" formatted="false">Instalovat zdarma aplikaci SendLog, která shromažďuje data a odesílá je vývojářům.</string>
+  <string name="update_title" formatted="false">Dostupný update pro rozhraní</string>
+  <string name="update_message" formatted="false">Rozhraní bylo změněno.\nPro získání nové verze klikněte prosím zde.</string>
+</resources>
