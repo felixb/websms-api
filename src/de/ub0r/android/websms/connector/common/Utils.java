@@ -190,6 +190,7 @@ public final class Utils {
 			HttpEntity he = null;
 			if (formData != null) {
 				he = new UrlEncodedFormEntity(formData, this.encoding);
+				this.postData = he;
 			}
 			return he;
 		}
@@ -214,6 +215,7 @@ public final class Utils {
 			}
 			this.headers
 					.add(new BasicHeader("Content-Type", "application/json"));
+			this.postData = he;
 			return he;
 		}
 	}
