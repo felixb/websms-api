@@ -34,6 +34,9 @@
 	<string name="error_input">Error in user input!</string>
 	<string name="error_http_header_missing">Header: Content-Length is missing!</string>
 	<string name="error_sendlater_quater">Only full 15minutes are supported by your connector!</string>
+	<string name="error_balance">Insufficant balance!</string>
+	<string name="error_recipient">Invalid recipient!</string>
+	<string name="error_text" formatted="false">Invalid message!</string>
 	
 	<string name="ignore_withsender_">Hide "with sender" SubConnector</string>
 	<string name="ignore_withsender_hint">Hide "with sender" SubConnector from selection.</string>

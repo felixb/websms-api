@@ -540,11 +540,16 @@ public final class Utils {
 	 */
 	public static String[] national2international(final String defPrefix,
 			final String[] number) {
+		if (number == null || number.length == 0) {
+			return null;
+		}
 		final int l = number.length;
 		String[] n = new String[l];
 		for (int i = 0; i < l; i++) {
-			n[i] = national2international(defPrefix,
-					getRecipientsNumber(number[i]));
+			if (!TextUtils.isEmpty(number[i])) {
+				n[i] = national2international(defPrefix,
+						getRecipientsNumber(number[i]));
+			}
 		}
 		return n;
 	}
@@ -1013,10 +1018,13 @@ public final class Utils {
 		final int l = params.size();
 		for (int i = 0; i < l; i++) {
 			final BasicNameValuePair nv = params.get(i);
-			u.append(nv.getName());
-			u.append("=");
-			u.append(URLEncoder.encode(nv.getValue(), encoding));
-			u.append("&");
+			if (!TextUtils.isEmpty(nv.getName())
+					&& !TextUtils.isEmpty(nv.getValue())) {
+				u.append(nv.getName());
+				u.append("=");
+				u.append(URLEncoder.encode(nv.getValue(), encoding));
+				u.append("&");
+			}
 		}
 		String ret = u.toString();
 		if (ret.endsWith("?") || ret.endsWith("&")) {
