@@ -447,7 +447,7 @@ public abstract class BasicConnector extends Connector {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected final void doUpdate(final Context context, final Intent intent)
+	protected void doUpdate(final Context context, final Intent intent)
 			throws IOException {
 		this.sendData(context, new ConnectorCommand(intent));
 	}
@@ -456,7 +456,7 @@ public abstract class BasicConnector extends Connector {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected final void doSend(final Context context, final Intent intent)
+	protected void doSend(final Context context, final Intent intent)
 			throws IOException {
 		this.sendData(context, new ConnectorCommand(intent));
 	}
