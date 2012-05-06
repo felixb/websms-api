@@ -337,11 +337,8 @@ public final class Utils {
 		}
 		ArrayList<String> ret = new ArrayList<String>();
 		String[] ss = s.split(",");
-		final int l = ss.length;
 		String r = null;
-		String rr;
-		for (int i = 0; i < l; i++) {
-			rr = ss[i];
+		for (String rr : ss) {
 			if (r == null) {
 				r = rr;
 			} else {
@@ -441,7 +438,7 @@ public final class Utils {
 	 */
 	public static String getRecipientsNumber(final String recipient) {
 		final int i = recipient.lastIndexOf('<');
-		if (i >= 0) {
+		if (i != -1) {
 			final int j = recipient.indexOf('>', i);
 			if (j > 0) {
 				return recipient.substring(i + 1, j);
@@ -459,7 +456,7 @@ public final class Utils {
 	 */
 	public static String getRecipientsName(final String recipient) {
 		final int i = recipient.lastIndexOf('<');
-		if (i > 0) {
+		if (i != -1) {
 			return recipient.substring(0, i - 1).trim();
 		}
 		return recipient;
@@ -707,8 +704,8 @@ public final class Utils {
 					if (contentEncodingHeader != null) {
 						HeaderElement[] codecs = contentEncodingHeader
 								.getElements();
-						for (int i = 0; i < codecs.length; i++) {
-							if (codecs[i].getName().equalsIgnoreCase(GZIP)) {
+						for (HeaderElement codec : codecs) {
+							if (codec.getName().equalsIgnoreCase(GZIP)) {
 								response.setEntity(new GzipDecompressingEntity(
 										response.getEntity()));
 								return;
@@ -984,8 +981,8 @@ public final class Utils {
 			// Create Hex String
 			final StringBuilder hexString = new StringBuilder(32);
 			int b;
-			for (int i = 0; i < messageDigest.length; i++) {
-				b = 0xFF & messageDigest[i];
+			for (byte bt : messageDigest) {
+				b = 0xFF & bt;
 				if (b < 0x10) {
 					hexString.append('0' + Integer.toHexString(b));
 				} else {
