@@ -477,9 +477,10 @@ public final class Utils {
 			return "";
 		}
 		String n;
-		if (recipient.indexOf("<") < recipient.indexOf(">")) {
-			n = recipient.substring(recipient.indexOf("<"),
-					recipient.indexOf(">"));
+		int i = recipient.indexOf("<");
+		int j = recipient.indexOf(">");
+		if (i != -1 && i < j) {
+			n = recipient.substring(i, j);
 		} else {
 			n = recipient;
 		}
