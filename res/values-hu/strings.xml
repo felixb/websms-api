@@ -21,8 +21,8 @@
                Visit http://ub0r.de/translate/websms-api/hu/strings.xml to edit the file.
        -->
 <resources>
-  <string name="info_text" formatted="false">Ez egy WebSMS kiegészítő.\nKizárólag a WebSMS-el együtt haszálható!</string>
-  <string name="stat_notify_sms_pending" formatted="false">WebSMS: küldés</string>
+  <string name="info_text" formatted="false">Ez egy Websms kiegészítő.\nKizárólag a WebSMS-el együtt haszálható!</string>
+  <string name="stat_notify_sms_pending" formatted="false">Websms: küldés</string>
   <string name="stat_notify_sending" formatted="false">Küldés:</string>
   <string name="error" formatted="false">HIBA</string>
   <string name="error_connection" formatted="false" username="Tamás Béres &lt;berestamas2@gmail.com&gt;" orig="Connection terminated/timed out. If your connection is working, it\'s most likely a downtime of the target service. Check the app\'s website issues and twitter for status.">Kapcsolat időtúllépési hiba. Ha az internetkapcsolatod működik, akkor valószínűleg a cél szerverrel van a hiba. A program honlapján és twitter accountján általában be van jelentve ha valami gond van.</string>

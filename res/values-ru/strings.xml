@@ -21,8 +21,8 @@
                Visit http://ub0r.de/translate/websms-api/ru/strings.xml to edit the file.
        -->
 <resources>
-  <string name="info_text" formatted="false">This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.</string>
-  <string name="stat_notify_sms_pending" formatted="false" orig="WebSMS: sending">WebSMS: Отправка</string>
+  <string name="info_text" formatted="false">This is a Websms Connector.\nThe only way to use it, is lauching it with WebSMS or mysms.</string>
+  <string name="stat_notify_sms_pending" formatted="false" orig="Websms: sending">Websms: Отправка</string>
   <string name="stat_notify_sending" formatted="false">Отправка:</string>
   <string name="error" formatted="false">ОШИБКА</string>
   <string name="error_http" formatted="false">ОШИБКА: HTTP</string>

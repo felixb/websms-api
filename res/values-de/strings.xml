@@ -21,8 +21,8 @@
                Visit http://ub0r.de/translate/websms-api/de/strings.xml to edit the file.
        -->
 <resources>
-  <string name="info_text" formatted="false" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">Diese App ist ein WebSMS Connector.\nDu kannst ihn nur mit WebSMS nutzen.</string>
-  <string name="stat_notify_sms_pending" formatted="false" orig="WebSMS: sending">WebSMS: senden</string>
+  <string name="info_text" formatted="false" orig="This is a Websms Connector.\nThe only way to use it, is lauching it with WebSMS or mysms.">Diese App ist ein Websms Connector.\nDu kannst ihn nur mit WebSMS oder mysms nutzen.</string>
+  <string name="stat_notify_sms_pending" formatted="false" orig="Websms: sending">Websms: senden</string>
   <string name="stat_notify_sending" formatted="false">Sende:</string>
   <string name="error" formatted="false">FEHLER</string>
   <string name="error_connection" formatted="false" username="Schiri &lt;schirinowski@gmail.com&gt;" orig="Connection terminated/timed out. If your connection is working, it\'s most likely a downtime of the target service. Check the app\'s website issues and twitter for status.">Verbindung abgebrochen/fehlgeschlagen. Wenn deine Verbindung funktioniert, ist das sehr wahrscheinlich eine Downtime des Services. Kontrolliere die Issues auf der App-Website sowie Twitter für weitere Informationen.</string>

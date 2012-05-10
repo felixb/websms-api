@@ -21,8 +21,8 @@
                Visit http://ub0r.de/translate/websms-api/ro/strings.xml to edit the file.
        -->
 <resources>
-  <string name="info_text" formatted="false" username="Laurentiu Lozan &lt;lozanro@gmail.com&gt;" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">Acesta este un Conector WebSMS.\nUnica modalitate de a-l folosi este cu ajutorul aplicației WebSMS.</string>
-  <string name="stat_notify_sms_pending" formatted="false" username="Laurentiu Lozan &lt;lozanro@gmail.com&gt;" orig="WebSMS: sending">WebSMS: trimitere</string>
+  <string name="info_text" formatted="false" username="Laurentiu Lozan &lt;lozanro@gmail.com&gt;" orig="This is a Websms Connector.\nThe only way to use it, is lauching it with WebSMS or mysms.">Acesta este un Conector Websms.\nUnica modalitate de a-l folosi este cu ajutorul aplicației WebSMS.</string>
+  <string name="stat_notify_sms_pending" formatted="false" username="Laurentiu Lozan &lt;lozanro@gmail.com&gt;" orig="Websms: sending">Websms: trimitere</string>
   <string name="stat_notify_sending" formatted="false" username="Laurentiu Lozan &lt;lozanro@gmail.com&gt;" orig="Sending:">Trimitere:</string>
   <string name="error" formatted="false" username="Laurentiu Lozan &lt;lozanro@gmail.com&gt;" orig="ERROR">EROARE</string>
   <string name="error_connection" formatted="false" username="Laurentiu Lozan &lt;lozanro@gmail.com&gt;" orig="Connection terminated/timed out. If your connection is working, it\'s most likely a downtime of the target service. Check the app\'s website issues and twitter for status.">Conexiune terminată/întârziată. Dacă aveți o conexiune care lucrează, cel mai probabil e o problemă a serviciului țintă. Verificați situl web al aplicației sau canalul Twitter pentru statut.</string>

@@ -39,25 +39,29 @@ public final class InfoActivity extends Activity {
 	/** Tag for debug output. */
 	private static final String TAG = "Info";
 
-	/** Link to WebSMS in android market. */
-	private static final Intent INTENT_MARKET_WEBSMS = new Intent(
-			Intent.ACTION_VIEW, Uri.parse(// .
-					"market://search?q=pname:de.ub0r.android.websms"));
+	/** WebSMS package name */
+	private static final String PACKAGENAME_WEBSMS = "de.ub0r.android.websms";
 
-	/** Link to Connectors in android market. */
-	private static final Intent INTENT_MARKET_CONNECTORS = new Intent(
-			Intent.ACTION_VIEW, Uri.parse(// .
-					"market://search?q=websms+connector"));
+	/** mysms package name */
+	private static final String PACKAGENAME_MYSMS = "com.mysms.android.sms";
 
 	/** Info text shown to user. */
 	private static final String INFO_TEXT = "This is a WebSMS Connector."
-			+ "\nThe only way to use it, is lauching it with WebSMS.";
+			+ "\nThe only way to use it, is lauching it with WebSMS or mysms.";
 
-	/** Button label: search websms. */
-	private static final String BTN_MARKET_WEBSMS = "market: WebSMS";
-	/** Button label: search connectors. */
-	private static final String BTN_MARKET_CONNECTORS = // .
-	"market: Connectors";
+	/** Button label: websms. */
+	private static final String BTN_WEBSMS = "WebSMS";
+
+	/** Button label: mysms. */
+	private static final String BTN_MYSMS = "mysms";
+
+	/** Link to WebSMS in android market. */
+	private Intent intentWebsms = new Intent(Intent.ACTION_VIEW, Uri.parse(// .
+			"market://search?q=pname:" + PACKAGENAME_WEBSMS));
+
+	/** Link to mysms in android market. */
+	private Intent intentMysms = new Intent(Intent.ACTION_VIEW, Uri.parse(// .
+			"market://search?q=pname:" + PACKAGENAME_MYSMS));
 
 	/**
 	 * {@inheritDoc}
@@ -76,8 +80,11 @@ public final class InfoActivity extends Activity {
 		final String pkg = this.getPackageName();
 		final int info = this.getResources().getIdentifier("info_text",
 				"string", pkg);
-		final int icon = this.getResources().getIdentifier("icon", "drawable",
+		int icon = this.getResources().getIdentifier("app_icon", "drawable",
 				pkg);
+		if (icon == 0) {
+			icon = this.getResources().getIdentifier("icon", "drawable", pkg);
+		}
 		Log.d(TAG, "resID.icon=" + icon);
 		Log.d(TAG, "resID.info=" + info);
 		if (icon > 0) {
@@ -96,38 +103,55 @@ public final class InfoActivity extends Activity {
 						InfoActivity.this.finish();
 					}
 				});
-		final List<ResolveInfo> ri = this.getPackageManager()
-				.queryBroadcastReceivers(new Intent(Connector.ACTION_INFO), 0);
-		if (ri.size() == 0) {
-			b.setNeutralButton(BTN_MARKET_WEBSMS,
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(final DialogInterface dialog,
-								final int which) {
-							try {
-								InfoActivity.this
-										.startActivity(INTENT_MARKET_WEBSMS);
-							} catch (ActivityNotFoundException e) {
-								Log.e(TAG, "no market", e);
-							}
-							InfoActivity.this.finish();
-						}
-					});
+
+		Intent intent = new Intent(Intent.ACTION_MAIN);
+		intent.addCategory(Intent.CATEGORY_LAUNCHER);
+		List<ResolveInfo> ris = this.getPackageManager().queryIntentActivities(
+				intent, 0);
+		for (ResolveInfo ri : ris) {
+			if (ri.activityInfo == null) {
+				continue;
+			}
+			if (ri.activityInfo.packageName.equals(PACKAGENAME_WEBSMS)) {
+				this.intentWebsms = new Intent(Intent.ACTION_MAIN);
+				this.intentWebsms.addCategory(Intent.CATEGORY_LAUNCHER);
+				this.intentWebsms.setClassName(ri.activityInfo.packageName,
+						ri.activityInfo.name);
+			} else if (ri.activityInfo.packageName.equals(PACKAGENAME_MYSMS)) {
+				this.intentMysms = new Intent(Intent.ACTION_MAIN);
+				this.intentMysms.addCategory(Intent.CATEGORY_LAUNCHER);
+				this.intentMysms.setClassName(ri.activityInfo.packageName,
+						ri.activityInfo.name);
+			}
 		}
-		b.setNegativeButton(BTN_MARKET_CONNECTORS,
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(final DialogInterface dialog,
-							final int which) {
-						try {
-							InfoActivity.this
-									.startActivity(INTENT_MARKET_CONNECTORS);
-						} catch (ActivityNotFoundException e) {
-							Log.e(TAG, "no market", e);
-						}
-						InfoActivity.this.finish();
-					}
-				});
+		b.setPositiveButton(BTN_WEBSMS, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int which) {
+				try {
+					InfoActivity.this.intentWebsms
+							.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					InfoActivity.this
+							.startActivity(InfoActivity.this.intentWebsms);
+				} catch (ActivityNotFoundException e) {
+					Log.e(TAG, "no market", e);
+				}
+				InfoActivity.this.finish();
+			}
+		});
+		b.setNeutralButton(BTN_MYSMS, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int which) {
+				try {
+					InfoActivity.this.intentMysms
+							.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					InfoActivity.this
+							.startActivity(InfoActivity.this.intentMysms);
+				} catch (ActivityNotFoundException e) {
+					Log.e(TAG, "no market", e);
+				}
+				InfoActivity.this.finish();
+			}
+		});
 		b.setOnCancelListener(new DialogInterface.OnCancelListener() {
 			@Override
 			public void onCancel(final DialogInterface dialog) {
