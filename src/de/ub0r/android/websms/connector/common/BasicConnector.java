@@ -23,11 +23,14 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
+import de.ub0r.android.websms.connector.common.Utils.HttpOptions;
 
 /**
  * AsyncTask to manage IO to a basic WebAPI.
@@ -39,7 +42,8 @@ public abstract class BasicConnector extends Connector {
 	private static final String TAG = "bcon";
 	/** User Agent. */
 	private static final String USERAGENT = // .
-	"curl/7.21.3 (x86_64-pc-linux-gnu) libcurl/7.21.3 OpenSSL/0.9.8o zlib/1.2.3.4 libidn/1.18";
+	"curl/7.21.3 (x86_64-pc-linux-gnu) "
+			+ "libcurl/7.21.3 OpenSSL/0.9.8o zlib/1.2.3.4 libidn/1.18";
 
 	/**
 	 * Get the URL used for sending messages.
@@ -66,8 +70,22 @@ public abstract class BasicConnector extends Connector {
 	 * @return true to use POST, false for GET; default implementation returns
 	 *         true
 	 */
-	protected boolean usePost() {
+	protected boolean usePost(final ConnectorCommand command) {
 		return true;
+	}
+
+	/**
+	 * Do HTTP basic auth.
+	 * 
+	 * @return true to do HTTP basic auth
+	 */
+	protected boolean useBasicAuth() {
+		return false;
+	}
+
+	/** @return user agent */
+	protected String getUserAgent() {
+		return USERAGENT;
 	}
 
 	/**
@@ -268,23 +286,6 @@ public abstract class BasicConnector extends Connector {
 
 	/**
 	 * Parse HTTP response code. Default implementation throws
-	 * {@link WebSMSException} if resp != HTTP_OK.
-	 * 
-	 * @param context
-	 *            {@link Context}
-	 * @param resp
-	 *            HTTP response code
-	 */
-	@Deprecated
-	protected void parseResponseCode(final Context context, final int resp) {
-		if (resp != HttpURLConnection.HTTP_OK) {
-			throw new WebSMSException(context, R.string.error_http, String
-					.valueOf(resp));
-		}
-	}
-
-	/**
-	 * Parse HTTP response code. Default implementation throws
 	 * {@link WebSMSException} if response != HTTP_OK.
 	 * 
 	 * @param context
@@ -312,8 +313,8 @@ public abstract class BasicConnector extends Connector {
 			} catch (Exception e) {
 				Log.w(TAG, "error getting content", e);
 			}
-			throw new WebSMSException(context, R.string.error_http, String
-					.valueOf(resp));
+			throw new WebSMSException(context, R.string.error_http,
+					String.valueOf(resp));
 		}
 	}
 
@@ -337,6 +338,22 @@ public abstract class BasicConnector extends Connector {
 	}
 
 	/**
+	 * Add a HTTP entity and push it with HTTP POST.
+	 * 
+	 * @param context
+	 *            {@link Context}
+	 * @param command
+	 *            {@link ConnectorCommand}
+	 * @param cs
+	 *            {@link ConnectorSpec}
+	 * @return {@link HttpEntity}
+	 */
+	protected HttpEntity addHttpEntity(final Context context,
+			final ConnectorCommand command, final ConnectorSpec cs) {
+		return null;
+	}
+
+	/**
 	 * Send data. This method actually calls the web service with all set
 	 * parameters. The response is parsed in custom methods implemented by the
 	 * actual connector.
@@ -348,40 +365,33 @@ public abstract class BasicConnector extends Connector {
 	 * @throws IOException
 	 *             IOException
 	 */
-	private void sendData(final Context context, // .
-			final ConnectorCommand command) throws IOException {
+	private void sendData(final Context context, final ConnectorCommand command)
+			throws IOException {
+		HttpOptions o = new HttpOptions(this.getEncoding());
+		o.userAgent = this.getUserAgent();
 		// get Connection
 		final ConnectorSpec cs = this.getSpec(context);
-		String url;
-		ArrayList<BasicNameValuePair> d = // .
-		new ArrayList<BasicNameValuePair>();
+		ArrayList<BasicNameValuePair> d = new ArrayList<BasicNameValuePair>();
 		final String text = command.getText();
 		if (text != null && text.length() > 0) {
-			url = this.getUrlSend(d);
+			o.url = this.getUrlSend(d);
 			final String subCon = command.getSelectedSubConnector();
-			d.add(new BasicNameValuePair(this.getParamText(), this
-					.getText(text)));
+			addParam(d, this.getParamText(), this.getText(text));
+			addParam(d, this.getParamRecipients(), this.getRecipients(command));
 
-			d.add(new BasicNameValuePair(this.getParamRecipients(), this
-					.getRecipients(command)));
-
-			String param = this.getParamSubconnector();
-			if (param != null) {
-				if (command.getFlashSMS()) {
-					d.add(new BasicNameValuePair(param, this.getParamFlash()));
-				} else {
-					d.add(new BasicNameValuePair(param, this
-							.getSubconnector(subCon)));
-				}
+			if (command.getFlashSMS()) {
+				addParam(d, this.getParamSubconnector(), this.getParamFlash());
+			} else {
+				addParam(d, this.getParamSubconnector(),
+						this.getSubconnector(subCon));
 			}
 
 			final String customSender = command.getCustomSender();
 			if (customSender == null) {
-				d.add(new BasicNameValuePair(this.getParamSender(), this
-						.getSender(context, command, cs)));
+				addParam(d, this.getParamSender(),
+						this.getSender(context, command, cs));
 			} else {
-				d.add(new BasicNameValuePair(this.getParamSender(),
-						customSender));
+				addParam(d, this.getParamSender(), customSender);
 			}
 			final long sendLater = command.getSendLater();
 			final String pSendLater = this.getParamSendLater();
@@ -390,32 +400,42 @@ public abstract class BasicConnector extends Connector {
 						.getSendLater(sendLater)));
 			}
 		} else {
-			url = this.getUrlBalance(d);
+			o.url = this.getUrlBalance(d);
 		}
 
-		d.add(new BasicNameValuePair(this.getParamUsername(), this.getUsername(
-				context, command, cs)));
-		d.add(new BasicNameValuePair(this.getParamPassword(), this.getPassword(
-				context, command, cs)));
+		if (!this.useBasicAuth()) {
+			addParam(d, this.getParamUsername(),
+					this.getUsername(context, command, cs));
+			addParam(d, this.getParamPassword(),
+					this.getPassword(context, command, cs));
+		}
 
 		this.addExtraArgs(context, command, cs, d);
 
 		final String encoding = this.getEncoding();
-		if (!this.usePost()) {
-			url = Utils.httpGetParams(url, d, encoding);
+		if (!this.usePost(command)) {
+			o.url = Utils.httpGetParams(o.url, d, encoding);
 			d = null;
-		}
-		Log.d(TAG, "HTTP REQUEST: " + url);
-		final boolean trustAll = this.trustAllSLLCerts();
-		final String[] trustedCerts = this.trustedSSLCerts();
-		HttpResponse response;
-		if (trustedCerts != null) {
-			response = Utils.getHttpClient(url, null, d, USERAGENT, null,
-					encoding, trustedCerts);
 		} else {
-			response = Utils.getHttpClient(url, null, d, USERAGENT, null,
-					encoding, trustAll);
+			o.postData = this.addHttpEntity(context, command, cs);
+			if (o.postData == null) {
+				o.addFormParameter(d);
+			} else {
+				o.url = Utils.httpGetParams(o.url, d, encoding);
+				d = null;
+			}
 		}
+		if (this.useBasicAuth()) {
+			o.addBasicAuthHeader(this.getUsername(context, command, cs),
+					this.getPassword(context, command, cs));
+		}
+
+		o.trustAll = this.trustAllSLLCerts();
+		o.knownFingerprints = this.trustedSSLCerts();
+
+		Log.d(TAG, "HTTP REQUEST: " + o.url);
+		HttpResponse response = Utils.getHttpClient(o);
+
 		this.parseResponseCode(context, response);
 		final String htmlText = Utils.stream2str(
 				response.getEntity().getContent()).trim();
@@ -427,7 +447,7 @@ public abstract class BasicConnector extends Connector {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected final void doUpdate(final Context context, final Intent intent)
+	protected void doUpdate(final Context context, final Intent intent)
 			throws IOException {
 		this.sendData(context, new ConnectorCommand(intent));
 	}
@@ -436,8 +456,28 @@ public abstract class BasicConnector extends Connector {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected final void doSend(final Context context, final Intent intent)
+	protected void doSend(final Context context, final Intent intent)
 			throws IOException {
 		this.sendData(context, new ConnectorCommand(intent));
+	}
+
+	/**
+	 * Add a {@link BasicNameValuePair} to a {@link ArrayList}.
+	 * 
+	 * @param d
+	 *            {@link ArrayList} of {@link BasicNameValuePair}
+	 * @param n
+	 *            name
+	 * @param v
+	 *            value
+	 * @return the list
+	 */
+	protected static ArrayList<BasicNameValuePair> addParam(
+			final ArrayList<BasicNameValuePair> d, final String n,
+			final String v) {
+		if (!TextUtils.isEmpty(n)) {
+			d.add(new BasicNameValuePair(n, v));
+		}
+		return d;
 	}
 }

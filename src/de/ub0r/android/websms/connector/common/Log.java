@@ -18,12 +18,16 @@
  */
 package de.ub0r.android.websms.connector.common;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.text.TextUtils;
 
 /**
  * @author flx
@@ -145,6 +149,35 @@ public final class Log {
 			}
 		}
 		android.util.Log.d(TAG, tag + ": " + msg + buf.toString());
+	}
+
+	/**
+	 * Send a DEBUG log message.
+	 * 
+	 * @param tag
+	 *            Used to identify the source of a log message. It usually
+	 *            identifies the class or activity where the log call occurs.
+	 * @param s
+	 *            message as stream
+	 */
+	public static void d(final String tag, final InputStream s) {
+		if (s == null) {
+			d(tag, "<null stram>");
+		} else {
+			try {
+				String str = Utils.stream2str(s);
+				if (TextUtils.isEmpty(str)) {
+					d(tag, "<empty stram>");
+				} else {
+					String[] ss = str.split("\n");
+					for (String sstr : ss) {
+						d(tag, sstr);
+					}
+				}
+			} catch (IOException e) {
+				d(tag, "<exceptional stram>", e);
+			}
+		}
 	}
 
 	/**
@@ -276,8 +309,9 @@ public final class Log {
 		final String pkg = activity.getPackageName();
 		int title, message;
 		if (intent == null) {
-			intent = new Intent(Intent.ACTION_VIEW, Uri
-					.parse("market://search?q=pname:" + SENDLOG_PACKAGE_NAME));
+			intent = new Intent(
+					Intent.ACTION_VIEW,
+					Uri.parse("market://search?q=pname:" + SENDLOG_PACKAGE_NAME));
 			title = activity.getResources().getIdentifier("sendlog_install_",
 					"string", pkg);
 			message = activity.getResources().getIdentifier("sendlog_install",

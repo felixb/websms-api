@@ -103,6 +103,124 @@ public final class Utils {
 	private static DefaultHttpClient httpClient = null;
 
 	/**
+	 * Options passed to getHttpClient().
+	 * 
+	 * @author flx
+	 */
+	public static class HttpOptions {
+		/** URL to open. */
+		public String url = null;
+		/** Cookies to transmit. */
+		public ArrayList<Cookie> cookies = null;
+		/** HTTP POST data. */
+		public HttpEntity postData = null;
+		/** additional HTTP headers. */
+		public ArrayList<Header> headers = null;
+		/** Useragent. */
+		public String userAgent = null;
+		/** Referer. */
+		public String referer = null;
+		/** Encoding. Default is "ISO-8859-15". */
+		public final String encoding;
+		/** Trust all SSL certificates; only used on first call! */
+		public boolean trustAll = false;
+		/**
+		 * Finger prints that are known to be valid; only used on first call!
+		 * Only used if {@code trustAll == false}
+		 */
+		public String[] knownFingerprints = null;
+
+		/** Default Constructor. */
+		public HttpOptions() {
+			this(null);
+		}
+
+		/**
+		 * Default Constructor.
+		 * 
+		 * @param e
+		 *            encoding
+		 */
+		public HttpOptions(final String e) {
+			if (TextUtils.isEmpty(e)) {
+				this.encoding = "ISO-8859-15";
+			} else {
+				this.encoding = e;
+			}
+		}
+
+		/** Clear {@link HttpOptions} to reuse it. */
+		public void clear() {
+			this.url = null;
+			this.postData = null;
+		}
+
+		/**
+		 * Add HTTP basic auth header to list of headers.
+		 * 
+		 * @param user
+		 *            user
+		 * @param password
+		 *            password
+		 * @return HTTP basic auth header
+		 */
+		public final Header addBasicAuthHeader(final String user,
+				final String password) {
+			Header h = new BasicHeader("Authorization", "Basic "
+					+ Base64Coder.encodeString(user + ":" + password));
+			if (this.headers == null) {
+				this.headers = new ArrayList<Header>();
+			}
+			this.headers.add(h);
+			return h;
+		}
+
+		/**
+		 * Add form data as {@link HttpEntity}.
+		 * 
+		 * @param formData
+		 *            form data
+		 * @return {@link HttpEntity}
+		 * @throws UnsupportedEncodingException
+		 *             UnsupportedEncodingException
+		 */
+		public final HttpEntity addFormParameter(
+				final List<BasicNameValuePair> formData)
+				throws UnsupportedEncodingException {
+			HttpEntity he = null;
+			if (formData != null) {
+				he = new UrlEncodedFormEntity(formData, this.encoding);
+				this.postData = he;
+			}
+			return he;
+		}
+
+		/**
+		 * Add {@link JSONObject} as {@link HttpEntity}.
+		 * 
+		 * @param json
+		 *            {@link JSONObject} form data
+		 * @return {@link HttpEntity}
+		 * @throws UnsupportedEncodingException
+		 *             UnsupportedEncodingException
+		 */
+		public final HttpEntity addJson(final JSONObject json)
+				throws UnsupportedEncodingException {
+			StringEntity he = new StringEntity(json.toString(), this.encoding);
+			he.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,
+					"application/json"));
+
+			if (this.headers == null) {
+				this.headers = new ArrayList<Header>();
+			}
+			this.headers
+					.add(new BasicHeader("Content-Type", "application/json"));
+			this.postData = he;
+			return he;
+		}
+	}
+
+	/**
 	 * {@link HttpEntityWrapper} to wrap giziped content.
 	 * 
 	 * @author flx
@@ -219,11 +337,8 @@ public final class Utils {
 		}
 		ArrayList<String> ret = new ArrayList<String>();
 		String[] ss = s.split(",");
-		final int l = ss.length;
 		String r = null;
-		String rr;
-		for (int i = 0; i < l; i++) {
-			rr = ss[i];
+		for (String rr : ss) {
 			if (r == null) {
 				r = rr;
 			} else {
@@ -323,7 +438,7 @@ public final class Utils {
 	 */
 	public static String getRecipientsNumber(final String recipient) {
 		final int i = recipient.lastIndexOf('<');
-		if (i >= 0) {
+		if (i != -1) {
 			final int j = recipient.indexOf('>', i);
 			if (j > 0) {
 				return recipient.substring(i + 1, j);
@@ -341,7 +456,7 @@ public final class Utils {
 	 */
 	public static String getRecipientsName(final String recipient) {
 		final int i = recipient.lastIndexOf('<');
-		if (i > 0) {
+		if (i != -1) {
 			return recipient.substring(0, i - 1).trim();
 		}
 		return recipient;
@@ -359,9 +474,10 @@ public final class Utils {
 			return "";
 		}
 		String n;
-		if (recipient.indexOf("<") < recipient.indexOf(">")) {
-			n = recipient.substring(recipient.indexOf("<"),
-					recipient.indexOf(">"));
+		int i = recipient.indexOf("<");
+		int j = recipient.indexOf(">");
+		if (i != -1 && i < j) {
+			n = recipient.substring(i, j);
 		} else {
 			n = recipient;
 		}
@@ -406,6 +522,9 @@ public final class Utils {
 			return "+" + number.substring(2);
 		} else if (number.startsWith("0")) {
 			return defPrefix + number.substring(1);
+		} else if (defPrefix.length() > 1
+				&& number.startsWith(defPrefix.substring(1))) {
+			return "+" + number;
 		}
 		return defPrefix + number;
 	}
@@ -421,11 +540,16 @@ public final class Utils {
 	 */
 	public static String[] national2international(final String defPrefix,
 			final String[] number) {
+		if (number == null || number.length == 0) {
+			return null;
+		}
 		final int l = number.length;
 		String[] n = new String[l];
 		for (int i = 0; i < l; i++) {
-			n[i] = national2international(defPrefix,
-					getRecipientsNumber(number[i]));
+			if (!TextUtils.isEmpty(number[i])) {
+				n[i] = national2international(defPrefix,
+						getRecipientsNumber(number[i]));
+			}
 		}
 		return n;
 	}
@@ -537,111 +661,30 @@ public final class Utils {
 	/**
 	 * Get a fresh HTTP-Connection.
 	 * 
-	 * @param url
-	 *            URL to open
-	 * @param cookies
-	 *            cookies to transmit
-	 * @param postData
-	 *            post data
-	 * @param userAgent
-	 *            user agent
-	 * @param referer
-	 *            referer
-	 * @param encoding
-	 *            encoding; default encoding: ISO-8859-15
-	 * @param trustAll
-	 *            trust all SSL certificates; only used on first call!
+	 * @param o
+	 *            {@link HttpOptions}
 	 * @return the connection
 	 * @throws IOException
 	 *             IOException
 	 */
-	public static HttpResponse getHttpClient(final String url,
-			final ArrayList<Cookie> cookies,
-			final ArrayList<BasicNameValuePair> postData,
-			final String userAgent, final String referer,
-			final String encoding, final boolean trustAll) throws IOException {
-		return getHttpClient(url, cookies, postData, userAgent, referer,
-				encoding, trustAll, (String[]) null);
-	}
-
-	/**
-	 * Get a fresh HTTP-Connection.
-	 * 
-	 * @param url
-	 *            URL to open
-	 * @param cookies
-	 *            cookies to transmit
-	 * @param postData
-	 *            post data
-	 * @param userAgent
-	 *            user agent
-	 * @param referer
-	 *            referer
-	 * @param encoding
-	 *            encoding; default encoding: ISO-8859-15
-	 * @param knownFingerprints
-	 *            fingerprints that are known to be valid; only used on first
-	 *            call!
-	 * @return the connection
-	 * @throws IOException
-	 *             IOException
-	 */
-	public static HttpResponse getHttpClient(final String url,
-			final ArrayList<Cookie> cookies,
-			final ArrayList<BasicNameValuePair> postData,
-			final String userAgent, final String referer,
-			final String encoding, final String... knownFingerprints)
+	public static HttpResponse getHttpClient(final HttpOptions o)
 			throws IOException {
-		return getHttpClient(url, cookies, postData, userAgent, referer,
-				encoding, false, knownFingerprints);
-	}
-
-	/**
-	 * Get a fresh HTTP-Connection.
-	 * 
-	 * @param url
-	 *            URL to open
-	 * @param cookies
-	 *            cookies to transmit
-	 * @param postData
-	 *            post data
-	 * @param userAgent
-	 *            user agent
-	 * @param referer
-	 *            referer
-	 * @param encoding
-	 *            encoding; default encoding: ISO-8859-15
-	 * @param trustAll
-	 *            trust all SSL certificates; only used on first call!
-	 * @param knownFingerprints
-	 *            fingerprints that are known to be valid; only used on first
-	 *            call! Only used if {@code trustAll == false}
-	 * @return the connection
-	 * @throws IOException
-	 *             IOException
-	 */
-	public static HttpResponse getHttpClient(final String url,
-			final ArrayList<Cookie> cookies,
-			final ArrayList<BasicNameValuePair> postData,
-			final String userAgent, final String referer,
-			final String encoding, final boolean trustAll,
-			final String... knownFingerprints) throws IOException {
-		Log.d(TAG, "HTTPClient URL: " + url);
+		Log.d(TAG, "HTTPClient URL: " + o.url);
 
 		SchemeRegistry registry = null;
 		if (httpClient == null) {
-			if (trustAll || (// .
-					knownFingerprints != null && // .
-					knownFingerprints.length > 0)) {
+			if (o.trustAll || (// .
+					o.knownFingerprints != null && // .
+					o.knownFingerprints.length > 0)) {
 				registry = new SchemeRegistry();
 				registry.register(new Scheme("http", new PlainSocketFactory(),
 						PORT_HTTP));
 				final FakeSocketFactory httpsSocketFactory;
-				if (trustAll) {
+				if (o.trustAll) {
 					httpsSocketFactory = new FakeSocketFactory();
 				} else {
 					httpsSocketFactory = new FakeSocketFactory(
-							knownFingerprints);
+							o.knownFingerprints);
 				}
 				registry.register(new Scheme("https", httpsSocketFactory,
 						PORT_HTTPS));
@@ -661,8 +704,8 @@ public final class Utils {
 					if (contentEncodingHeader != null) {
 						HeaderElement[] codecs = contentEncodingHeader
 								.getElements();
-						for (int i = 0; i < codecs.length; i++) {
-							if (codecs[i].getName().equalsIgnoreCase(GZIP)) {
+						for (HeaderElement codec : codecs) {
+							if (codec.getName().equalsIgnoreCase(GZIP)) {
 								response.setEntity(new GzipDecompressingEntity(
 										response.getEntity()));
 								return;
@@ -672,104 +715,65 @@ public final class Utils {
 				}
 			});
 		}
-		if (cookies != null && cookies.size() > 0) {
-			final int l = cookies.size();
+		if (o.cookies != null && o.cookies.size() > 0) {
+			final int l = o.cookies.size();
 			CookieStore cs = httpClient.getCookieStore();
 			for (int i = 0; i < l; i++) {
-				cs.addCookie(cookies.get(i));
+				cs.addCookie(o.cookies.get(i));
 			}
 		}
 		// . Log.d(TAG, getCookies(httpClient));
 
 		HttpRequestBase request;
-		if (postData == null) {
-			request = new HttpGet(url);
+		if (o.postData == null) {
+			request = new HttpGet(o.url);
 		} else {
-			HttpPost pr = new HttpPost(url);
-			if (encoding != null && encoding.length() > 0) {
-				pr.setEntity(new UrlEncodedFormEntity(postData, encoding));
-			} else {
-				pr.setEntity(new UrlEncodedFormEntity(postData, "ISO-8859-15"));
-			}
+			HttpPost pr = new HttpPost(o.url);
+			pr.setEntity(o.postData);
 			// . Log.d(TAG, "HTTPClient POST: " + postData);
 			request = pr;
 		}
 		request.addHeader("Accept", "*/*");
 		request.addHeader(ACCEPT_ENCODING, GZIP);
-		if (referer != null) {
-			request.setHeader("Referer", referer);
-			Log.d(TAG, "HTTPClient REF: " + referer);
+
+		if (o.referer != null) {
+			request.setHeader("Referer", o.referer);
+			Log.d(TAG, "HTTPClient REF: " + o.referer);
 		}
-		if (userAgent != null) {
-			request.setHeader("User-Agent", userAgent);
-			Log.d(TAG, "HTTPClient AGENT: " + userAgent);
+
+		if (o.userAgent != null) {
+			request.setHeader("User-Agent", o.userAgent);
+			Log.d(TAG, "HTTPClient AGENT: " + o.userAgent);
 		}
-		Log.d(TAG, "HTTP Method: " + request.getMethod());
-		Log.d(TAG, "HTTP URI: " + request.getURI());
-		// . Log.d(TAG, getHeaders(request));
+
+		addHeaders(request, o.headers);
+
+		Log.d(TAG, "HTTP " + request.getMethod() + " " + request.getURI());
+		Log.d(TAG, getHeaders(request));
+		if (request instanceof HttpPost) {
+			Log.d(TAG, "");
+			Log.d(TAG, ((HttpPost) request).getEntity().getContent());
+		}
 		return httpClient.execute(request);
 	}
 
 	/**
-	 * Get a fresh HTTP-Connection.
+	 * Add headers to the Request.
 	 * 
-	 * @param url
-	 *            URL to open
-	 * @param cookies
-	 *            cookies to transmit
-	 * @param json
-	 *            data to post in JSON format
-	 * @param userAgent
-	 *            user agent
-	 * @param referer
-	 *            referer
-	 * @param encoding
-	 *            encoding; default encoding: ISO-8859-15
-	 * @param trustAll
-	 *            trust all SSL certificates; only used on first call! *
-	 * @return the connection
-	 * @throws IOException
-	 *             IOException
+	 * @param request
+	 *            Request to be added headers to
+	 * @param headers
+	 *            Headers to add
 	 */
-	public static HttpResponse getHttpClient(final String url,
-			final ArrayList<Cookie> cookies, final JSONObject json,
-			final String userAgent, final String referer,
-			final String encoding, final boolean trustAll) throws IOException {
-		Log.d(TAG, "HTTPClient URL: " + url);
-
-		if (cookies != null && cookies.size() > 0) {
-			final int l = cookies.size();
-			CookieStore cs = httpClient.getCookieStore();
-			for (int i = 0; i < l; i++) {
-				cs.addCookie(cookies.get(i));
-			}
+	private static void addHeaders(final HttpRequestBase request,
+			final ArrayList<Header> headers) {
+		if (headers == null) {
+			return;
 		}
 
-		HttpRequestBase request;
-		Log.d(TAG, "JSON: " + json.toString());
-		StringEntity requestBody = new StringEntity(json.toString(), encoding);
-		requestBody.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,
-				"application/json"));
-		HttpPost pr = new HttpPost(url);
-
-		pr.setEntity(requestBody);
-
-		request = pr;
-		request.addHeader("Accept", "*/*");
-		request.addHeader(ACCEPT_ENCODING, GZIP);
-		request.addHeader("Content-Type", "application/json");
-		if (referer != null) {
-			request.setHeader("Referer", referer);
-			Log.d(TAG, "HTTPClient REF: " + referer);
+		for (Header h : headers) {
+			request.addHeader(h);
 		}
-		if (userAgent != null) {
-			request.setHeader("User-Agent", userAgent);
-			Log.d(TAG, "HTTPClient AGENT: " + userAgent);
-		}
-		Log.d(TAG, "HTTP Method: " + request.getMethod());
-		Log.d(TAG, "HTTP URI: " + request.getURI());
-		// . Log.d(TAG, getHeaders(request));
-		return httpClient.execute(request);
 	}
 
 	/**
@@ -977,8 +981,8 @@ public final class Utils {
 			// Create Hex String
 			final StringBuilder hexString = new StringBuilder(32);
 			int b;
-			for (int i = 0; i < messageDigest.length; i++) {
-				b = 0xFF & messageDigest[i];
+			for (byte bt : messageDigest) {
+				b = 0xFF & bt;
 				if (b < 0x10) {
 					hexString.append('0' + Integer.toHexString(b));
 				} else {
@@ -1014,12 +1018,18 @@ public final class Utils {
 		final int l = params.size();
 		for (int i = 0; i < l; i++) {
 			final BasicNameValuePair nv = params.get(i);
-			u.append(nv.getName());
-			u.append("=");
-			u.append(URLEncoder.encode(nv.getValue(), encoding));
-			u.append("&");
+			if (!TextUtils.isEmpty(nv.getName())
+					&& !TextUtils.isEmpty(nv.getValue())) {
+				u.append(nv.getName());
+				u.append("=");
+				u.append(URLEncoder.encode(nv.getValue(), encoding));
+				u.append("&");
+			}
 		}
-		final String ret = u.toString();
+		String ret = u.toString();
+		if (ret.endsWith("?") || ret.endsWith("&")) {
+			ret = ret.substring(0, ret.length() - 1);
+		}
 		Log.d(TAG, "new url: " + ret);
 		return ret;
 	}

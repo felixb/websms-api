@@ -18,7 +18,7 @@
        -->
 <!--
                This file is generated automatically by ub0rlib/php.
-               Visit http://ub0r.de/translate/websms-api/edit.php?lang=de&file=strings.xml to edit the file.
+               Visit http://ub0r.de/translate/websms-api/de/strings.xml to edit the file.
        -->
 <resources>
   <string name="info_text" formatted="false" orig="This is a Websms Connector.\nThe only way to use it, is lauching it with WebSMS or mysms.">Diese App ist ein Websms Connector.\nDu kannst ihn nur mit WebSMS oder mysms nutzen.</string>
@@ -37,6 +37,9 @@
   <string name="error_input" formatted="false">Benutzereingabe ist falsch!</string>
   <string name="error_http_header_missing" formatted="false" orig="Header: Content-Length is missing!">Header: Content-Length fehlt!</string>
   <string name="error_sendlater_quater" formatted="false">Nur volle 15 Minuten werden von deinem Provider erlaubt!</string>
+  <string name="error_balance" formatted="false">Guthaben reicht nicht aus!</string>
+  <string name="error_recipient" formatted="false">Empfänger nicht gültig!</string>
+  <string name="error_text" formatted="false">Nachricht nicht gültig!</string>
   <string name="ignore_withsender_" formatted="false">Verstecke "mit Absender" SubConnector</string>
   <string name="ignore_withsender_hint" formatted="false">Verstecke "mit Absender" SubConnector in der Auswahl.</string>
   <string name="ignore_nosender_" formatted="false">Verstecke "ohne Absender" SubConnector</string>

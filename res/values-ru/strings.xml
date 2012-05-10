@@ -18,7 +18,7 @@
        -->
       <!--
                This file is generated automatically by ub0rlib/php.
-               Visit http://ub0r.de/translate/websms-api/edit.php?lang=ru&file=strings.xml to edit the file.
+               Visit http://ub0r.de/translate/websms-api/ru/strings.xml to edit the file.
        -->
 <resources>
   <string name="info_text" formatted="false">This is a Websms Connector.\nThe only way to use it, is lauching it with WebSMS or mysms.</string>
