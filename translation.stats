@@ -8,7 +8,10 @@ res/values-ro/strings.xml:39
 res/values-ru/strings.xml:27
 res/values:42
 res/values-cs:39
-res/values-de:42
+res/values-de:res/values-fr:res/values-hu:res/values-it:res/values-ro:res/values-ru:res/values:42
+res/values:42:res/values-cs:39
+res/values-cs:39:res/values-de:42
+res/values-de:res:res/values-fr
 res/values-fr:42
 res/values-hu:35
 res/values-it:35
