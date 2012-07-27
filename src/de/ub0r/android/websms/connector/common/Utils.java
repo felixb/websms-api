@@ -102,6 +102,9 @@ public final class Utils {
 	/** Common {@link DefaultHttpClient}. */
 	private static DefaultHttpClient httpClient = null;
 
+	/** Log level. */
+	private static boolean verboseLog = false;
+
 	/**
 	 * Options passed to getHttpClient().
 	 * 
@@ -261,6 +264,16 @@ public final class Utils {
 	 */
 	private Utils() {
 		return;
+	}
+
+	/**
+	 * Set log level.
+	 * 
+	 * @param enable
+	 *            true to show potentially privacy relevant traffic
+	 */
+	public static void setVerboseLog(final boolean enable) {
+		verboseLog = enable;
 	}
 
 	/**
@@ -669,7 +682,11 @@ public final class Utils {
 	 */
 	public static HttpResponse getHttpClient(final HttpOptions o)
 			throws IOException {
-		Log.d(TAG, "HTTPClient URL: " + o.url);
+		if (verboseLog) {
+			Log.d(TAG, "HTTPClient URL: " + o.url);
+		} else {
+			Log.d(TAG, "HTTPClient URL: " + o.url.replaceFirst("?.*", ""));
+		}
 
 		SchemeRegistry registry = null;
 		if (httpClient == null) {
@@ -738,21 +755,27 @@ public final class Utils {
 
 		if (o.referer != null) {
 			request.setHeader("Referer", o.referer);
-			Log.d(TAG, "HTTPClient REF: " + o.referer);
+			if (verboseLog) {
+				Log.d(TAG, "HTTPClient REF: " + o.referer);
+			}
 		}
 
 		if (o.userAgent != null) {
 			request.setHeader("User-Agent", o.userAgent);
-			Log.d(TAG, "HTTPClient AGENT: " + o.userAgent);
+			if (verboseLog) {
+				Log.d(TAG, "HTTPClient AGENT: " + o.userAgent);
+			}
 		}
 
 		addHeaders(request, o.headers);
 
-		Log.d(TAG, "HTTP " + request.getMethod() + " " + request.getURI());
-		Log.d(TAG, getHeaders(request));
-		if (request instanceof HttpPost) {
-			Log.d(TAG, "");
-			Log.d(TAG, ((HttpPost) request).getEntity().getContent());
+		if (verboseLog) {
+			Log.d(TAG, "HTTP " + request.getMethod() + " " + request.getURI());
+			Log.d(TAG, getHeaders(request));
+			if (request instanceof HttpPost) {
+				Log.d(TAG, "");
+				Log.d(TAG, ((HttpPost) request).getEntity().getContent());
+			}
 		}
 		return httpClient.execute(request);
 	}
@@ -1012,7 +1035,9 @@ public final class Utils {
 	public static String httpGetParams(final String url,
 			final List<BasicNameValuePair> params, final String encoding)
 			throws UnsupportedEncodingException {
-		Log.d(TAG, "httpGetParams(" + url + "," + params + ")");
+		if (verboseLog) {
+			Log.d(TAG, "httpGetParams(" + url + "," + params + ")");
+		}
 		final StringBuilder u = new StringBuilder(url);
 		u.append("?");
 		final int l = params.size();
@@ -1030,7 +1055,9 @@ public final class Utils {
 		if (ret.endsWith("?") || ret.endsWith("&")) {
 			ret = ret.substring(0, ret.length() - 1);
 		}
-		Log.d(TAG, "new url: " + ret);
+		if (verboseLog) {
+			Log.d(TAG, "new url: " + ret);
+		}
 		return ret;
 	}
 
