@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+               Copyright (C) 2009-2011 Felix Bechstein
+       -->
+<!--
+               This file is part of WebSMS API. This program is free software; you can
+               redistribute it and/or modify it under the terms of the GNU General
+               Public License as published by the Free Software Foundation; either
+               version 3 of the License, or (at your option) any later version.
+       -->
+<!--
+               This program is distributed in the hope that it will be useful, but
+               WITHOUT ANY WARRANTY; without even the implied warranty of
+               MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+               General Public License for more details. You should have received a
+               copy of the GNU General Public License along with this program; If
+               not, see <http://www.gnu.org/licenses/>.
+       -->
+<!--
+               This file is generated automatically by ub0rlib/php.
+               Visit http://ub0r.de/translate/websms-api/fr/strings.xml to edit the file.
+       -->
+<resources>
+  <string name="info_text" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">Ceci est un connecteur WebSMS.\nLa seule manière de l\'utiliser et de le démarrer à travers WebSMS</string>
+  <string name="stat_notify_sms_pending" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="WebSMS: sending">WebSMS: envoi en cours</string>
+  <string name="stat_notify_sending" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Sending:">Envoi en cours:</string>
+  <string name="error" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="ERROR">ERREUR</string>
+  <string name="error_connection" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Connection terminated/timed out. If your connection is working, it\'s most likely a downtime of the target service. Check the app\'s website issues and twitter for status.">Connexion interrompue. Si votre connexion fonctionne, le problème est probablement une interruption du service. Vérifiez le site web de l\'application et twitter pour un statut.</string>
+  <string name="error_http" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="FAILURE: HTTP">ECHEC: HTTP</string>
+  <string name="error_mail" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Wrong mail address or password given!">Adresse mail ou mot de passe incorrect !</string>
+  <string name="error_pw" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Wrong username or password given!">Nom d\'utilisateur ou mot de passe incorrect !</string>
+  <string name="error_sender" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Wrong sender! Set it in international form like +4917012345678.">Expéditeur invalide ! Utilisez le format international: +4917012345678.</string>
+  <string name="error_sender_unregistered" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Sender must be registered and confirmed your provider.">L\'expéditeur doit être validé et confirmé par votre fournisseur de service.</string>
+  <string name="error_server" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="FAILURE: Serverresponse:">ECHEC : réponse du serveur :</string>
+  <string name="error_service" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Webservice is down! This is most likely not a problem of the connector. Please try again later. Check the app\'s website\'s issues and twitter for status.">Web-Service inaccessible ! Ceci n\'est très probablement pas un problème du connecteur. Veuillez réessayer plus tard. Vérifiez le site web de l\'application et twitter pour un statut.</string>
+  <string name="error_wrongcaptcha" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Captcha was wrong. Please try again.">Captcha incorrect. Veuillez réessayer.</string>
+  <string name="error_http_header_missing" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Header: Content-Length is missing!">Entête: Content-Length manque !</string>
+  <string name="error_balance" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Insufficant balance!">Crédits insuffisants !</string>
+  <string name="error_input" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Error in user input!">Erreur dans la saisie utilisateur !</string>
+  <string name="error_sendlater_quater" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Only full 15minutes are supported by your connector!">Seuls des intervales de 15 minutes sont supportés par votre connecteur !</string>
+  <string name="error_recipient" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Invalid recipient!">Destinataire invalide !</string>
+  <string name="error_text" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Invalid message!">Message invalide !</string>
+  <string name="ignore_withsender_" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector">Cacher le sous-connecteur "avec expéditeur"</string>
+  <string name="ignore_nosender_" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector">Cacher le sous-connecteur "sans expéditeur"</string>
+  <string name="ignore_withsender_hint" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector from selection.">Cacher le sous-connecteur "avec expéditeur" de la sélection</string>
+  <string name="ignore_nosender_hint" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector from selection.">Cacher le sous-connecteur "sans expéditeur" de la sélection</string>
+  <string name="ignore_free_" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector">Cacher le sous-connecteur "gratuit"</string>
+  <string name="ignore_free_hint" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector from selection.">Cacher le sous-connecteur "gratuit" de la sélection</string>
+  <string name="ignore_ssl_error_" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Ignore SSL handshake errors">Ignorer les erreurs de handshake SSL</string>
+  <string name="ignore_ssl_error_hint" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Ignore errors during SSL handshake. Some phones do not have the needed certificates installed. Using this leads to insecurity.">Ignorer les erreurs de handshake SSL. Certains téléphones n\'ont pas les certificats nécessaires installés. Utiliser cette option n\'est pas sûr.</string>
+  <string name="username_" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Username">Nom d\'utilisateur</string>
+  <string name="password_" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Password">Mot de passe</string>
+  <string name="create_account_" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Create account">Créer compte</string>
+  <string name="use_derfault_sender_" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Use default sender">Utiliser expéditeur par défaut</string>
+  <string name="use_derfault_sender_hint" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Use default sender provided by WebSMS.">Utiliser expéditeur par défaut défini dans WebSMS</string>
+  <string name="custom_sender_" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Custom sender">Expéditeur custom</string>
+  <string name="sender_hint" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Int. phonenumber e.g. +4917912345678">Numéro de téléphone int., p.ex. +4917912345678</string>
+  <string name="send_logs_" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Send logs">Envoi des logs</string>
+  <string name="send_logs_hint" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Send your device\'s logs to the developer.\nDo this only if you was asked to do so.">Envoi des logs de votre téléphone au développeur.\nNe faites cela que si on vous le demande.</string>
+  <string name="sendlog_run_" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Run SendLog">Exécuter SendLog</string>
+  <string name="sendlog_run" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="SendLog will collect the device log and send it to the developer.\nYou will have an opportunity to review and modify the data being sent.">SendLog va collecter les logs du téléphone et les envoyer au développeur.\nVous aurez l\'opportunité de visualiser et modifier les données avant l\'envoi.</string>
+  <string name="sendlog_install_" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Install SendLog">Installer SendLog</string>
+  <string name="sendlog_install" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Install the free SendLog application to collect the device log and send it to the developer.">Installer l\'application gratuite SendLog qui permet de collecter les logs du téléphone et de les envoyer au développeur.</string>
+  <string name="update_title" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Connector update available">Mise à jour du connecteur disponible</string>
+  <string name="update_message" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="The ownership of this Connector has changed.\nPlease click here, to get the new App installed.">Le propriétaire de ce connecteur a changé.\nVeuillez cliquer ici pour installer la nouvelle application.</string>
+</resources>
