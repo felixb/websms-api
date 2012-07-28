@@ -685,7 +685,7 @@ public final class Utils {
 		if (verboseLog) {
 			Log.d(TAG, "HTTPClient URL: " + o.url);
 		} else {
-			Log.d(TAG, "HTTPClient URL: " + o.url.replaceFirst("?.*", ""));
+			Log.d(TAG, "HTTPClient URL: " + o.url.replaceFirst("\\?.*", ""));
 		}
 
 		SchemeRegistry registry = null;
