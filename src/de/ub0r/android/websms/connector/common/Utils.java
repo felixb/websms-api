@@ -469,7 +469,7 @@ public final class Utils {
 	 */
 	public static String getRecipientsName(final String recipient) {
 		final int i = recipient.lastIndexOf('<');
-		if (i != -1) {
+		if (i > 0) {
 			return recipient.substring(0, i - 1).trim();
 		}
 		return recipient;
