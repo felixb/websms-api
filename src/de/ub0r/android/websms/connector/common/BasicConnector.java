@@ -48,11 +48,42 @@ public abstract class BasicConnector extends Connector {
 	/**
 	 * Get the URL used for sending messages.
 	 * 
+	 * @param context
+	 *            {@link Context}
 	 * @param d
 	 *            {@link ArrayList} of arguments
 	 * @return gateway URL for sending
 	 */
-	protected abstract String getUrlSend(final ArrayList<BasicNameValuePair> d);
+	protected String getUrlSend(final Context context,
+			final ArrayList<BasicNameValuePair> d) {
+		return this.getUrlSend(d);
+	}
+
+	/**
+	 * Get the URL used for sending messages.
+	 * 
+	 * @param d
+	 *            {@link ArrayList} of arguments
+	 * @return gateway URL for sending
+	 */
+	@Deprecated
+	protected String getUrlSend(final ArrayList<BasicNameValuePair> d) {
+		return null;
+	}
+
+	/**
+	 * Get the URL used for getting balance.
+	 * 
+	 * @param context
+	 *            {@link Context}
+	 * @param d
+	 *            {@link ArrayList} of arguments
+	 * @return gateway URL for balance update
+	 */
+	protected String getUrlBalance(final Context context,
+			final ArrayList<BasicNameValuePair> d) {
+		return this.getUrlBalance(d);
+	}
 
 	/**
 	 * Get the URL used for getting balance.
@@ -61,8 +92,10 @@ public abstract class BasicConnector extends Connector {
 	 *            {@link ArrayList} of arguments
 	 * @return gateway URL for balance update
 	 */
-	protected abstract String getUrlBalance(
-			final ArrayList<BasicNameValuePair> d);
+	@Deprecated
+	protected String getUrlBalance(final ArrayList<BasicNameValuePair> d) {
+		return null;
+	}
 
 	/**
 	 * Get HTTP method used for transmitting data to the Service.
@@ -374,7 +407,7 @@ public abstract class BasicConnector extends Connector {
 		ArrayList<BasicNameValuePair> d = new ArrayList<BasicNameValuePair>();
 		final String text = command.getText();
 		if (text != null && text.length() > 0) {
-			o.url = this.getUrlSend(d);
+			o.url = this.getUrlSend(context, d);
 			final String subCon = command.getSelectedSubConnector();
 			addParam(d, this.getParamText(), this.getText(text));
 			addParam(d, this.getParamRecipients(), this.getRecipients(command));
@@ -400,7 +433,7 @@ public abstract class BasicConnector extends Connector {
 						.getSendLater(sendLater)));
 			}
 		} else {
-			o.url = this.getUrlBalance(d);
+			o.url = this.getUrlBalance(context, d);
 		}
 
 		if (!this.useBasicAuth()) {
