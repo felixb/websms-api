@@ -671,9 +671,18 @@ public final class ConnectorSpec implements Serializable {
 	 * @return if {@link Connector} is running
 	 */
 	public boolean isRunning() {
+		return getRunningStatus() != 0;
+	}
+
+	/**
+	 * Return details of the running status of this {@link Connector}.
+	 * 
+	 * @return status
+	 */
+	public short getRunningStatus() {
 		short s = this.getStatus();
-		return (s & // .
-		(STATUS_BOOTSTRAPPING | STATUS_UPDATING | STATUS_SENDING)) != 0;
+		return (short) (s & // .
+		(STATUS_BOOTSTRAPPING | STATUS_UPDATING | STATUS_SENDING));
 	}
 
 	/**

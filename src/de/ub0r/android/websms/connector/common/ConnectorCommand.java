@@ -36,6 +36,8 @@ public final class ConnectorCommand implements Cloneable {
 
 	/** Command: type. */
 	private static final String TYPE = "command_type";
+	/** Command: type - none. */
+	public static final short TYPE_NONE = 0;
 	/** Command: type - bootstrap. */
 	public static final short TYPE_BOOTSTRAP = 1;
 	/** Command: type - update. */
@@ -258,7 +260,7 @@ public final class ConnectorCommand implements Cloneable {
 		if (this.bundle != null) {
 			return this.bundle.getShort(TYPE);
 		} else {
-			return 0;
+			return TYPE_NONE;
 		}
 	}
 
