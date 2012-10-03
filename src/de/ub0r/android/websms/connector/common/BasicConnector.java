@@ -400,6 +400,10 @@ public abstract class BasicConnector extends Connector {
 	 */
 	private void sendData(final Context context, final ConnectorCommand command)
 			throws IOException {
+		// check network availability
+		if (!Utils.isNetworkAvailable(context)) {
+			throw new WebSMSNoNetworkException(context);
+		}
 		HttpOptions o = new HttpOptions(this.getEncoding());
 		o.userAgent = this.getUserAgent();
 		// get Connection

@@ -65,6 +65,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -1084,4 +1086,26 @@ public final class Utils {
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.notify(0, n);
 	}
+
+	/**
+	 * Checks if there is a data network available. Requires
+	 * ACCESS_NETWORK_STATE permission.
+	 * 
+	 * @param context
+	 *            {@link Context}
+	 * @return true if a data network is available
+	 */
+	public static boolean isNetworkAvailable(final Context context) {
+		try {
+			ConnectivityManager mgr = (ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo net = mgr.getActiveNetworkInfo();
+			return net != null && net.isConnected();
+		} catch (SecurityException ex) {
+			// for backwards compatibility, if the app has no
+			// ACCESS_NETWORK_STATE permission then carry on
+			return true;
+		}
+	}
+
 }

@@ -64,4 +64,5 @@
 	
 	<string name="update_title">Connector update available</string>
 	<string name="update_message">The ownership of this Connector has changed.\nPlease click here, to get the new App installed.</string>
+	<string name="no_network">No data network available. Check your network settings.</string>
 </resources>
