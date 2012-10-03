@@ -321,7 +321,12 @@ public final class ConnectorSpec implements Serializable {
 		writeString(stream, this.getName());
 		writeString(stream, this.getAuthor());
 		stream.writeInt(this.getCapabilities());
-		stream.writeInt(this.getStatus());
+
+		// do not persist the running status
+		short status = this.getStatus();
+		status &= ~this.getRunningStatus();
+		stream.writeInt(status);
+
 		stream.writeInt(this.getLimitLength());
 		writeString(stream, this.getValidCharacters());
 		writeString(stream, this.getAdUnitIds());
