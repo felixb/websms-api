@@ -85,6 +85,10 @@ public abstract class Connector extends BroadcastReceiver {
 	 * the activity.
 	 */
 	public static final String ACTION_CAPTCHA_SOLVED = ".CAPTCHA_SOLVED";
+	/**
+	 * Broadcast Action requesting to cancel a message.
+	 */
+	public static final String ACTION_CANCEL = ACTION_PREFIX + "CANCEL";
 
 	/** Extra holding captcha as Drawable saved as Parcelable. */
 	public static final String EXTRA_CAPTCHA_DRAWABLE = "captcha";
