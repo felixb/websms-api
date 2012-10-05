@@ -54,6 +54,7 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
@@ -134,6 +135,8 @@ public final class Utils {
 		 * Only used if {@code trustAll == false}
 		 */
 		public String[] knownFingerprints = null;
+		/** Connection and socket timeout */
+		public int timeout = 0;
 
 		/** Default Constructor. */
 		public HttpOptions() {
@@ -734,6 +737,9 @@ public final class Utils {
 				}
 			});
 		}
+		HttpConnectionParams.setConnectionTimeout(httpClient.getParams(),
+				o.timeout);
+		HttpConnectionParams.setSoTimeout(httpClient.getParams(), o.timeout);
 		if (o.cookies != null && o.cookies.size() > 0) {
 			final int l = o.cookies.size();
 			CookieStore cs = httpClient.getCookieStore();

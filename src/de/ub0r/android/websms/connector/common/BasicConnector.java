@@ -152,6 +152,16 @@ public abstract class BasicConnector extends Connector {
 	}
 
 	/**
+	 * Set timeout for establishing a connection and waiting for a response from
+	 * the server.
+	 * 
+	 * @return timeout; defaults to no timeout
+	 */
+	protected int getTimeout() {
+		return 0;
+	}
+
+	/**
 	 * Set parameter name for username.
 	 * 
 	 * @return API param for username
@@ -469,6 +479,8 @@ public abstract class BasicConnector extends Connector {
 
 		o.trustAll = this.trustAllSLLCerts();
 		o.knownFingerprints = this.trustedSSLCerts();
+
+		o.timeout = this.getTimeout();
 
 		Log.d(TAG, "HTTP REQUEST: " + o.url);
 		HttpResponse response = Utils.getHttpClient(o);
