@@ -162,6 +162,20 @@ public abstract class BasicConnector extends Connector {
 	}
 
 	/**
+	 * Set maximum number of HTTP connections.
+	 * 
+	 * @param context
+	 *            {@link Context}
+	 * @param cs
+	 *            {@link ConnectorSpec}
+	 * @return number of connections; defaults to system default
+	 */
+	protected int getMaxHttpConnections(final Context context,
+			final ConnectorSpec cs) {
+		return 0;
+	}
+
+	/**
 	 * Set parameter name for username.
 	 * 
 	 * @return API param for username
@@ -481,6 +495,7 @@ public abstract class BasicConnector extends Connector {
 		o.knownFingerprints = this.trustedSSLCerts();
 
 		o.timeout = this.getTimeout();
+		o.maxConnections = this.getMaxHttpConnections(context, cs);
 
 		Log.d(TAG, "HTTP REQUEST: " + o.url);
 		HttpResponse response = Utils.getHttpClient(o);

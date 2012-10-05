@@ -224,6 +224,25 @@ public final class ConnectorCommand implements Cloneable {
 	}
 
 	/**
+	 * Create Command from {@link Intent}.
+	 * 
+	 * @param i
+	 *            Intent
+	 * @return {@link ConnectorCommand} or null if not found
+	 */
+	public static ConnectorCommand fromIntent(final Intent i) {
+		Bundle bundle = i.getExtras();
+		if (bundle != null) {
+			bundle = bundle.getBundle(EXTRAS_COMMAND);
+		}
+		if (bundle != null) {
+			return new ConnectorCommand(bundle);
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * Set this {@link ConnectorCommand} to an {@link Intent}. Creates new
 	 * Intent if needed.
 	 * 
@@ -285,6 +304,16 @@ public final class ConnectorCommand implements Cloneable {
 		} else {
 			return "";
 		}
+	}
+
+	/**
+	 * Set selected SubConnectorSpec.
+	 * 
+	 * @param selected
+	 *            SubConnectorSpec
+	 */
+	public void setSelectedSubConnector(final String sub) {
+		this.bundle.putString(SELECTEDSUBCONNECTOR, sub);
 	}
 
 	/**

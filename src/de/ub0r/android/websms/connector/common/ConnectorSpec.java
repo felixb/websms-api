@@ -35,7 +35,7 @@ import android.text.TextUtils;
  * 
  * @author flx
  */
-public final class ConnectorSpec implements Serializable {
+public final class ConnectorSpec implements Serializable, Cloneable {
 	/** Tag for output. */
 	public static final String TAG = "cs";
 	/** Serial version UID. */
@@ -130,12 +130,14 @@ public final class ConnectorSpec implements Serializable {
 		/** Serial version UID. */
 		private static final long serialVersionUID = -4074828738607134376L;
 
-		/** Connector: ID. */
+		/** SubConnector: ID. */
 		private static final String ID = "subconnector_id";
-		/** Connector: name. */
+		/** SubConnector: name. */
 		private static final String NAME = "subconnector_name";
-		/** Connector: features. */
+		/** SubConnector: features. */
 		private static final String FEATURES = "subconnector_features";
+		/** SubConnector: balance. */
+		private static final String BALANCE = "subconnector_balance";
 		/** Feature: none. */
 		public static final short FEATURE_NONE = 0;
 		/** Feature: multiple recipients. */
@@ -263,6 +265,30 @@ public final class ConnectorSpec implements Serializable {
 		public boolean hasFeatures(final short features) {
 			final short f = this.getFeatures();
 			return (f & features) == features;
+		}
+
+		/**
+		 * Get subconnector balance.
+		 * Only use if subconnectors have independent balances.
+		 * Otherwise use {@link ConnectorSpec#getBalance}.
+		 * 
+		 * @return balance
+		 */
+		public String getBalance() {
+			return this.bundle.getString(BALANCE);
+		}
+
+		/**
+		 * Set subconnector balance.
+		 * Only use if subconnectors have independent balances.
+		 * Otherwise use {@link ConnectorSpec#setBalance(String)}.
+		 * 
+		 * @param balance
+		 *            balance
+		 */
+		public void setBalance(final String balance) {
+			this.bundle.putString(BALANCE, balance);
+			ConnectorSpec.this.onSubconnectorBalanceChanged();
 		}
 	}
 
@@ -402,6 +428,51 @@ public final class ConnectorSpec implements Serializable {
 	public ConnectorSpec(final String name) {
 		this.bundle = new Bundle();
 		this.bundle.putString(NAME, name);
+	}
+
+	/**
+	 * Create {@link ConnectorSpec}.
+	 * 
+	 * @param bundle
+	 *            bundle
+	 */
+	private ConnectorSpec(final Bundle bundle) {
+		this.bundle = bundle;
+	}
+
+	/**
+	 * Create {@link ConnectorSpec} from {@link Intent}.
+	 * 
+	 * @param i
+	 *            {@link Intent}
+	 * @return {@link ConnectorSpec} or null if not found
+	 */
+	public static ConnectorSpec fromIntent(final Intent i) {
+		Bundle bundle = i.getExtras();
+		if (bundle != null) {
+			bundle = bundle.getBundle(EXTRAS_CONNECTOR);
+		}
+		if (bundle != null) {
+			return new ConnectorSpec(bundle);
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ConnectorSpec clone() {
+		try {
+			ConnectorSpec c = (ConnectorSpec) super.clone();
+			if (this.bundle != null) {
+				c.bundle = (Bundle) this.bundle.clone();
+			}
+			return c;
+		} catch (CloneNotSupportedException ex) {
+			throw new IllegalStateException();
+		}
 	}
 
 	/**
@@ -988,14 +1059,28 @@ public final class ConnectorSpec implements Serializable {
 	 *            error message
 	 */
 	public void setErrorMessage(final Context context, final Exception error) {
+		this.setErrorMessage(convertErrorMessage(context, error));
+	}
+
+	/**
+	 * Converts an error to a string message.
+	 * 
+	 * @param context
+	 *            {@link Context}
+	 * @param error
+	 *            exception
+	 * @return message
+	 */
+	public static String convertErrorMessage(final Context context,
+			final Throwable error) {
 		if (error == null) {
-			this.setErrorMessage((String) null);
+			return null;
 		} else if (error instanceof WebSMSException) {
-			this.setErrorMessage(error.getMessage());
+			return error.getMessage();
 		} else if (error instanceof IOException) {
-			this.setErrorMessage(context.getString(R.string.error_connection));
+			return context.getString(R.string.error_connection);
 		} else {
-			this.setErrorMessage(error.toString());
+			return error.toString();
 		}
 	}
 
@@ -1139,6 +1224,30 @@ public final class ConnectorSpec implements Serializable {
 	private void addSubConnector(final SubConnectorSpec subconnector) {
 		this.addSubConnector(subconnector.getID(), subconnector.getName(),
 				subconnector.getFeatures());
+	}
+
+	/**
+	 * Updates the connector balance from subconnector balances.
+	 */
+	private void onSubconnectorBalanceChanged() {
+		if (this.getSubConnectorCount() == 1) {
+			this.setBalance(this.getSubConnectors()[0].getBalance());
+		} else {
+			StringBuilder buf = new StringBuilder();
+			for (SubConnectorSpec sub : this.getSubConnectors()) {
+				final String b = sub.getBalance();
+				if (b == null || b.length() == 0) {
+					continue;
+				}
+				if (buf.length() > 0) {
+					buf.append(", ");
+				}
+				buf.append(sub.getName());
+				buf.append(": ");
+				buf.append(b);
+			}
+			this.setBalance(buf.toString());
+		}
 	}
 
 }

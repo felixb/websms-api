@@ -43,9 +43,14 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.conn.params.ConnManagerParams;
+import org.apache.http.conn.params.ConnPerRoute;
+import org.apache.http.conn.routing.HttpRoute;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.scheme.SocketFactory;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.HttpEntityWrapper;
 import org.apache.http.entity.StringEntity;
@@ -135,8 +140,10 @@ public final class Utils {
 		 * Only used if {@code trustAll == false}
 		 */
 		public String[] knownFingerprints = null;
-		/** Connection and socket timeout */
+		/** Connection and socket timeout. */
 		public int timeout = 0;
+		/** Max number of connections. */
+		public int maxConnections = 0;
 
 		/** Default Constructor. */
 		public HttpOptions() {
@@ -693,30 +700,38 @@ public final class Utils {
 			Log.d(TAG, "HTTPClient URL: " + o.url.replaceFirst("\\?.*", ""));
 		}
 
-		SchemeRegistry registry = null;
 		if (httpClient == null) {
-			if (o.trustAll || (// .
-					o.knownFingerprints != null && // .
-					o.knownFingerprints.length > 0)) {
-				registry = new SchemeRegistry();
-				registry.register(new Scheme("http", new PlainSocketFactory(),
-						PORT_HTTP));
-				final FakeSocketFactory httpsSocketFactory;
-				if (o.trustAll) {
-					httpsSocketFactory = new FakeSocketFactory();
-				} else {
-					httpsSocketFactory = new FakeSocketFactory(
-							o.knownFingerprints);
-				}
-				registry.register(new Scheme("https", httpsSocketFactory,
-						PORT_HTTPS));
-				HttpParams params = new BasicHttpParams();
-				httpClient = new DefaultHttpClient(
-						new ThreadSafeClientConnManager(params, registry),
-						params);
+			SchemeRegistry registry = new SchemeRegistry();
+			registry.register(new Scheme("http", new PlainSocketFactory(),
+					PORT_HTTP));
+			SocketFactory httpsSocketFactory;
+			if (o.trustAll) {
+				httpsSocketFactory = new FakeSocketFactory();
+			} else if (o.knownFingerprints != null
+					&& o.knownFingerprints.length > 0) {
+				httpsSocketFactory = new FakeSocketFactory(o.knownFingerprints);
 			} else {
-				httpClient = new DefaultHttpClient();
+				httpsSocketFactory = SSLSocketFactory.getSocketFactory();
 			}
+			registry.register(new Scheme("https", httpsSocketFactory,
+					PORT_HTTPS));
+			HttpParams params = new BasicHttpParams();
+
+			HttpConnectionParams.setConnectionTimeout(params, o.timeout);
+			HttpConnectionParams.setSoTimeout(params, o.timeout);
+
+			if (o.maxConnections > 0) {
+				ConnManagerParams.setMaxConnectionsPerRoute(params,
+						new ConnPerRoute() {
+							public int getMaxForRoute(final HttpRoute httproute) {
+								return o.maxConnections;
+							}
+						});
+			}
+
+			httpClient = new DefaultHttpClient(new ThreadSafeClientConnManager(
+					params, registry), params);
+
 			httpClient.addResponseInterceptor(new HttpResponseInterceptor() {
 				public void process(final HttpResponse response,
 						final HttpContext context) throws HttpException,
@@ -737,9 +752,6 @@ public final class Utils {
 				}
 			});
 		}
-		HttpConnectionParams.setConnectionTimeout(httpClient.getParams(),
-				o.timeout);
-		HttpConnectionParams.setSoTimeout(httpClient.getParams(), o.timeout);
 		if (o.cookies != null && o.cookies.size() > 0) {
 			final int l = o.cookies.size();
 			CookieStore cs = httpClient.getCookieStore();

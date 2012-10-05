@@ -101,7 +101,7 @@ public abstract class Connector extends BroadcastReceiver {
 	private static ConnectorSpec connector = null;
 
 	/** Sync access to connector. */
-	private static final Object SYNC_UPDATE = new Object();
+	protected static final Object SYNC_UPDATE = new Object();
 
 	/**
 	 * This instance is ran by {@link ConnectorService} via
@@ -261,8 +261,8 @@ public abstract class Connector extends BroadcastReceiver {
 				|| action.equals(pkg + Connector.ACTION_RUN_UPDATE)
 				|| action.equals(pkg + Connector.ACTION_RUN_SEND)) {
 			Log.d(tag, "got command");
-			final ConnectorCommand command = new ConnectorCommand(intent);
-			final ConnectorSpec origSpecs = new ConnectorSpec(intent);
+			final ConnectorCommand command = ConnectorCommand.fromIntent(intent);
+			final ConnectorSpec origSpecs = ConnectorSpec.fromIntent(intent);
 			boolean ordered = true;
 			if (action.equals(pkg + Connector.ACTION_RUN_UPDATE)) {
 				ordered = false;
@@ -294,11 +294,10 @@ public abstract class Connector extends BroadcastReceiver {
 				// set command to intent
 				command.setToIntent(i);
 				if (origSpecs != null) {
-					// set original sepcs to intent
+					// set original specs to intent (preserve the original
+					// specs and let ConnectorService make the decisions)
 					origSpecs.setToIntent(i);
 				}
-				// load updated specs to intent
-				specs.setToIntent(i);
 				Log.i(tag, "start service " + i.getAction());
 				if (null != context.startService(i) && ordered) {
 					// start service
@@ -401,4 +400,22 @@ public abstract class Connector extends BroadcastReceiver {
 			final String solvedCaptcha) {
 		// do nothing by default
 	}
+
+	/**
+	 * This method is called when a new request is received. Default
+	 * implementation does nothing. This is executed in a different thread! Do
+	 * not do any GUI stuff.
+	 * 
+	 * @param context
+	 *            {@link Context}
+	 * @param regSpec
+	 *            {@link ConnectorSpec} from the request intent
+	 * @param command
+	 *            {@link ConnectorCommand}
+	 */
+	protected void onNewRequest(final Context context,
+			final ConnectorSpec regSpec, final ConnectorCommand command) {
+		// do nothing by default
+	}
+
 }
