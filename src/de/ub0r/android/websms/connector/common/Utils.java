@@ -43,9 +43,14 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.conn.params.ConnManagerParams;
+import org.apache.http.conn.params.ConnPerRoute;
+import org.apache.http.conn.routing.HttpRoute;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.scheme.SocketFactory;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.HttpEntityWrapper;
 import org.apache.http.entity.StringEntity;
@@ -54,6 +59,7 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
@@ -65,6 +71,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -132,6 +140,10 @@ public final class Utils {
 		 * Only used if {@code trustAll == false}
 		 */
 		public String[] knownFingerprints = null;
+		/** Connection and socket timeout. */
+		public int timeout = 0;
+		/** Max number of connections. */
+		public int maxConnections = 0;
 
 		/** Default Constructor. */
 		public HttpOptions() {
@@ -688,30 +700,38 @@ public final class Utils {
 			Log.d(TAG, "HTTPClient URL: " + o.url.replaceFirst("\\?.*", ""));
 		}
 
-		SchemeRegistry registry = null;
 		if (httpClient == null) {
-			if (o.trustAll || (// .
-					o.knownFingerprints != null && // .
-					o.knownFingerprints.length > 0)) {
-				registry = new SchemeRegistry();
-				registry.register(new Scheme("http", new PlainSocketFactory(),
-						PORT_HTTP));
-				final FakeSocketFactory httpsSocketFactory;
-				if (o.trustAll) {
-					httpsSocketFactory = new FakeSocketFactory();
-				} else {
-					httpsSocketFactory = new FakeSocketFactory(
-							o.knownFingerprints);
-				}
-				registry.register(new Scheme("https", httpsSocketFactory,
-						PORT_HTTPS));
-				HttpParams params = new BasicHttpParams();
-				httpClient = new DefaultHttpClient(
-						new ThreadSafeClientConnManager(params, registry),
-						params);
+			SchemeRegistry registry = new SchemeRegistry();
+			registry.register(new Scheme("http", new PlainSocketFactory(),
+					PORT_HTTP));
+			SocketFactory httpsSocketFactory;
+			if (o.trustAll) {
+				httpsSocketFactory = new FakeSocketFactory();
+			} else if (o.knownFingerprints != null
+					&& o.knownFingerprints.length > 0) {
+				httpsSocketFactory = new FakeSocketFactory(o.knownFingerprints);
 			} else {
-				httpClient = new DefaultHttpClient();
+				httpsSocketFactory = SSLSocketFactory.getSocketFactory();
 			}
+			registry.register(new Scheme("https", httpsSocketFactory,
+					PORT_HTTPS));
+			HttpParams params = new BasicHttpParams();
+
+			HttpConnectionParams.setConnectionTimeout(params, o.timeout);
+			HttpConnectionParams.setSoTimeout(params, o.timeout);
+
+			if (o.maxConnections > 0) {
+				ConnManagerParams.setMaxConnectionsPerRoute(params,
+						new ConnPerRoute() {
+							public int getMaxForRoute(final HttpRoute httproute) {
+								return o.maxConnections;
+							}
+						});
+			}
+
+			httpClient = new DefaultHttpClient(new ThreadSafeClientConnManager(
+					params, registry), params);
+
 			httpClient.addResponseInterceptor(new HttpResponseInterceptor() {
 				public void process(final HttpResponse response,
 						final HttpContext context) throws HttpException,
@@ -1084,4 +1104,26 @@ public final class Utils {
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.notify(0, n);
 	}
+
+	/**
+	 * Checks if there is a data network available. Requires
+	 * ACCESS_NETWORK_STATE permission.
+	 * 
+	 * @param context
+	 *            {@link Context}
+	 * @return true if a data network is available
+	 */
+	public static boolean isNetworkAvailable(final Context context) {
+		try {
+			ConnectivityManager mgr = (ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo net = mgr.getActiveNetworkInfo();
+			return net != null && net.isConnected();
+		} catch (SecurityException ex) {
+			// for backwards compatibility, if the app has no
+			// ACCESS_NETWORK_STATE permission then carry on
+			return true;
+		}
+	}
+
 }
