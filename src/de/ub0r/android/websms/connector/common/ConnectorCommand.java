@@ -36,12 +36,16 @@ public final class ConnectorCommand implements Cloneable {
 
 	/** Command: type. */
 	private static final String TYPE = "command_type";
+	/** Command: type - none. */
+	public static final short TYPE_NONE = 0;
 	/** Command: type - bootstrap. */
 	public static final short TYPE_BOOTSTRAP = 1;
 	/** Command: type - update. */
 	public static final short TYPE_UPDATE = 2;
 	/** Command: type - send. */
 	public static final short TYPE_SEND = 4;
+	/** Command: message id. */
+	private static final String MSG_ID = "msg_id";
 	/** Command: default sender. */
 	private static final String DEFSENDER = "command_defsender";
 	/** Command: default prefix. */
@@ -61,6 +65,8 @@ public final class ConnectorCommand implements Cloneable {
 	/** Command: selected SubConnectorSpec for sending. */
 	private static final String SELECTEDSUBCONNECTOR = // .
 	"command_selectedsubconnector";
+	/** Command: count of resend attempts. */
+	private static final String RESEND_COUNT = "resend_count";
 
 	/** {@link Bundle} represents the ConnectorSpec. */
 	private final Bundle bundle;
@@ -104,6 +110,8 @@ public final class ConnectorCommand implements Cloneable {
 	/**
 	 * Create Command with type "send".
 	 * 
+	 * @param msgId
+	 *            unique message id
 	 * @param selectedSubConnector
 	 *            selected SubConnectorSpec
 	 * @param defPrefix
@@ -122,13 +130,13 @@ public final class ConnectorCommand implements Cloneable {
 	 *            custom sender
 	 * @return created command
 	 */
-	public static ConnectorCommand send(final String selectedSubConnector,
-			final String defPrefix, final String defSender,
-			final String[] recipients, final String text,
-			final boolean flashSMS, final long timestamp,
+	public static ConnectorCommand send(final long msgId,
+			final String selectedSubConnector, final String defPrefix,
+			final String defSender, final String[] recipients,
+			final String text, final boolean flashSMS, final long timestamp,
 			final String customSender) {
-		ConnectorCommand ret = send(selectedSubConnector, defPrefix, defSender,
-				recipients, text, flashSMS);
+		ConnectorCommand ret = send(msgId, selectedSubConnector, defPrefix,
+				defSender, recipients, text, flashSMS);
 		ret.setSendLater(timestamp);
 		ret.setCustomSender(customSender);
 		return ret;
@@ -137,6 +145,8 @@ public final class ConnectorCommand implements Cloneable {
 	/**
 	 * Create Command with type "send".
 	 * 
+	 * @param msgId
+	 *            unique message id
 	 * @param selectedSubConnector
 	 *            selected SubConnectorSpec
 	 * @param defPrefix
@@ -151,12 +161,14 @@ public final class ConnectorCommand implements Cloneable {
 	 *            flashsms
 	 * @return created command
 	 */
-	public static ConnectorCommand send(final String selectedSubConnector,
-			final String defPrefix, final String defSender,
-			final String[] recipients, final String text, // .
+	public static ConnectorCommand send(final long msgId,
+			final String selectedSubConnector, final String defPrefix,
+			final String defSender, final String[] recipients,
+			final String text, // .
 			final boolean flashSMS) {
 		final Bundle b = new Bundle();
 		b.putShort(TYPE, TYPE_SEND);
+		b.putLong(MSG_ID, msgId);
 		b.putString(SELECTEDSUBCONNECTOR, selectedSubConnector);
 		b.putString(DEFPREFIX, defPrefix);
 		b.putString(DEFSENDER, defSender);
@@ -212,6 +224,25 @@ public final class ConnectorCommand implements Cloneable {
 	}
 
 	/**
+	 * Create Command from {@link Intent}.
+	 * 
+	 * @param i
+	 *            Intent
+	 * @return {@link ConnectorCommand} or null if not found
+	 */
+	public static ConnectorCommand fromIntent(final Intent i) {
+		Bundle bundle = i.getExtras();
+		if (bundle != null) {
+			bundle = bundle.getBundle(EXTRAS_COMMAND);
+		}
+		if (bundle != null) {
+			return new ConnectorCommand(bundle);
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * Set this {@link ConnectorCommand} to an {@link Intent}. Creates new
 	 * Intent if needed.
 	 * 
@@ -258,7 +289,7 @@ public final class ConnectorCommand implements Cloneable {
 		if (this.bundle != null) {
 			return this.bundle.getShort(TYPE);
 		} else {
-			return 0;
+			return TYPE_NONE;
 		}
 	}
 
@@ -273,6 +304,16 @@ public final class ConnectorCommand implements Cloneable {
 		} else {
 			return "";
 		}
+	}
+
+	/**
+	 * Set selected SubConnectorSpec.
+	 * 
+	 * @param selected
+	 *            SubConnectorSpec
+	 */
+	public void setSelectedSubConnector(final String sub) {
+		this.bundle.putString(SELECTEDSUBCONNECTOR, sub);
 	}
 
 	/**
@@ -385,6 +426,34 @@ public final class ConnectorCommand implements Cloneable {
 	 */
 	public void setMsgUris(final String[] uris) {
 		this.bundle.putStringArray(MSG_URIS, uris);
+	}
+
+	/**
+	 * Get current count of resend attempts.
+	 * 
+	 * @return count of resend attempts
+	 */
+	public int getResendCount() {
+		return this.bundle.getInt(RESEND_COUNT, 0);
+	}
+
+	/**
+	 * Set current count of resend attempts.
+	 * 
+	 * @param resendCount
+	 *            count of resend attempts
+	 */
+	public void setResendCount(final int resendCount) {
+		this.bundle.putInt(RESEND_COUNT, resendCount);
+	}
+
+	/**
+	 * Get id of the linked message.
+	 * 
+	 * @return message id
+	 */
+	public long getMsgId() {
+		return this.bundle.getLong(MSG_ID);
 	}
 
 	/**

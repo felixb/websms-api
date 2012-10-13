@@ -265,12 +265,16 @@ public final class ConnectorService extends IntentService {
 			// this.register(intent);
 
 			try {
-				final ConnectorSpec connector = new ConnectorSpec(intent);
+				final ConnectorSpec reqSpec = ConnectorSpec.fromIntent(intent);
 				final ConnectorCommand command = new ConnectorCommand(intent);
 				final Connector receiver = Connector.getInstance();
 
-				this.doInBackground(intent, connector, command, receiver);
-				this.onPostExecute(connector, command, receiver);
+				receiver.onNewRequest(this, reqSpec, command);
+
+				ConnectorSpec respSpec = receiver.getSpec(this).clone();
+
+				this.doInBackground(intent, respSpec, command, receiver);
+				this.onPostExecute(respSpec, command, receiver);
 			} catch (WebSMSException e) {
 				Log.e(TAG, "error starting service", e);
 				// Toast.makeText(this, e.getMessage(),
@@ -285,7 +289,7 @@ public final class ConnectorService extends IntentService {
 	 * 
 	 * @param intent
 	 *            {@link Intent}
-	 * @param connector
+	 * @param respSpec
 	 *            {@link ConnectorSpec}
 	 * @param command
 	 *            {@link ConnectorCommand}
@@ -293,7 +297,7 @@ public final class ConnectorService extends IntentService {
 	 *            {@link Connector}
 	 */
 	private void doInBackground(final Intent intent,
-			final ConnectorSpec connector, final ConnectorCommand command,
+			final ConnectorSpec respSpec, final ConnectorCommand command,
 			final Connector receiver) {
 		try {
 			switch (command.getType()) {
@@ -319,36 +323,36 @@ public final class ConnectorService extends IntentService {
 			}
 		} catch (Exception e) {
 			if (e instanceof WebSMSException) {
-				Log.d(TAG, connector.getPackage() + ": error in AsyncTask", e);
+				Log.d(TAG, respSpec.getPackage() + ": error in AsyncTask", e);
 			} else {
-				Log.e(TAG, connector.getPackage() + ": error in AsyncTask", e);
+				Log.e(TAG, respSpec.getPackage() + ": error in AsyncTask", e);
 			}
 			// put error message to ConnectorSpec
-			connector.setErrorMessage(this, e);
+			respSpec.setErrorMessage(this, e);
 		}
 	}
 
 	/**
 	 * Do post processing.
 	 * 
-	 * @param connector
+	 * @param respSpec
 	 *            {@link ConnectorSpec}
 	 * @param command
 	 *            {@link ConnectorCommand}
 	 * @param receiver
 	 *            {@link Connector}
 	 */
-	private void onPostExecute(final ConnectorSpec connector,
+	private void onPostExecute(final ConnectorSpec respSpec,
 			final ConnectorCommand command, final Connector receiver) {
 		// final String e = connector.getErrorMessage();
 		// if (e != null) {
 		// Toast.makeText(this, e, Toast.LENGTH_LONG).show();
 		// }
-		connector.update(receiver.getSpec(this));
-		final Intent i = connector.setToIntent(null);
+		respSpec.update(receiver.getSpec(this));
+		final Intent i = respSpec.setToIntent(null);
 		command.setToIntent(i);
 		i.setFlags(i.getFlags() | Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-		Log.d(TAG, connector.getPackage() + ": send broadcast info");
+		Log.d(TAG, respSpec.getPackage() + ": send broadcast info");
 		this.sendBroadcast(i);
 		// this.unregister(i);
 	}
