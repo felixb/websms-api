@@ -1,4 +1,4 @@
-res/values/strings.xml:42
+res/values/strings.xml:43
 res/values-cs/strings.xml:39
 res/values-de/strings.xml:42
 res/values-fr/strings.xml:42
@@ -6,7 +6,7 @@ res/values-hu/strings.xml:35
 res/values-it/strings.xml:35
 res/values-ro/strings.xml:39
 res/values-ru/strings.xml:27
-res/values:42
+res/values:43
 res/values-cs:39
 res/values-de:42
 res/values-fr:42
