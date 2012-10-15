@@ -82,11 +82,13 @@ public final class ConnectorService extends IntentService {
 	 */
 	@Override
 	public void onStart(final Intent intent, final int startId) {
-		super.onStart(intent, startId);
 		Log.d(TAG, "onStart()");
 		if (intent != null) {
 			this.register(intent);
 		}
+		// note that super.onStart will start processing the intent on the
+		// background thread so we need to register etc before that
+		super.onStart(intent, startId);
 	}
 
 	/**
