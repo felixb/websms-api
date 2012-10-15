@@ -191,8 +191,9 @@ public final class ConnectorService extends IntentService {
 				Intent oi;
 				for (int i = 0; i < l; i++) {
 					oi = this.pendingIOOps.get(i);
-					if (ConnectorSpec.equals(intent, oi)
-							&& ConnectorCommand.equals(intent, oi)) {
+					// note that ConnectorSpec.equals will not work here because
+					// not all intent types have ConnectorSpec bundle in them
+					if (ConnectorCommand.equals(intent, oi)) {
 						this.pendingIOOps.remove(i);
 						break;
 					}
