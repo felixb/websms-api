@@ -82,11 +82,13 @@ public final class ConnectorService extends IntentService {
 	 */
 	@Override
 	public void onStart(final Intent intent, final int startId) {
-		super.onStart(intent, startId);
 		Log.d(TAG, "onStart()");
 		if (intent != null) {
 			this.register(intent);
 		}
+		// note that super.onStart will start processing the intent on the
+		// background thread so we need to register etc before that
+		super.onStart(intent, startId);
 	}
 
 	/**
@@ -191,8 +193,9 @@ public final class ConnectorService extends IntentService {
 				Intent oi;
 				for (int i = 0; i < l; i++) {
 					oi = this.pendingIOOps.get(i);
-					if (ConnectorSpec.equals(intent, oi)
-							&& ConnectorCommand.equals(intent, oi)) {
+					// note that ConnectorSpec.equals will not work here because
+					// not all intent types have ConnectorSpec bundle in them
+					if (ConnectorCommand.equals(intent, oi)) {
 						this.pendingIOOps.remove(i);
 						break;
 					}
