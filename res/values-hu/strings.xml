@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-       <!--
+<!--
                Copyright (C) 2009-2011 Felix Bechstein
        -->
-       <!--
+<!--
                This file is part of WebSMS API. This program is free software; you can
                redistribute it and/or modify it under the terms of the GNU General
                Public License as published by the Free Software Foundation; either
                version 3 of the License, or (at your option) any later version.
        -->
-       <!--
+<!--
                This program is distributed in the hope that it will be useful, but
                WITHOUT ANY WARRANTY; without even the implied warranty of
                MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
@@ -16,7 +16,7 @@
                copy of the GNU General Public License along with this program; If
                not, see <http://www.gnu.org/licenses/>.
        -->
-      <!--
+<!--
                This file is generated automatically by ub0rlib/php.
                Visit http://ub0r.de/translate/websms-api/hu/strings.xml to edit the file.
        -->
@@ -56,4 +56,12 @@
   <string name="sendlog_run" formatted="false">SendLog a programmal kapcsolatos log fileokat gyájti össze, majd elküldi azokat a fejlesztőnek.\nAz elküldés előtt meg lesz alkalmad a beküldendő adatok átolvasására, és szerkesztésére.</string>
   <string name="sendlog_install_" formatted="false">SendLog telepítése</string>
   <string name="sendlog_install" formatted="false">Telepítsd az ingyenes SendLog alkalmazást, a napló fájlok összegyűjtéséhez, és a fejlesztőnek való elküldéséhez.</string>
+  <string name="error_balance" formatted="false" username="Ferenc Takács &lt;orkester85@gmail.com&gt;" orig="Insufficant balance!">Elégtelen egyenleg!</string>
+  <string name="error_recipient" formatted="false" username="Ferenc Takács &lt;orkester85@gmail.com&gt;" orig="Invalid recipient!">Érvénytelen címzett!</string>
+  <string name="error_text" formatted="false" username="Ferenc Takács &lt;orkester85@gmail.com&gt;" orig="Invalid message!">Érvénytelen üzenet!</string>
+  <string name="ignore_ssl_error_" formatted="false" username="Ferenc Takács &lt;orkester85@gmail.com&gt;" orig="Ignore SSL handshake errors">SSL kommunikációs hibák figyelmen kívül hagyása</string>
+  <string name="ignore_ssl_error_hint" formatted="false" username="Ferenc Takács &lt;orkester85@gmail.com&gt;" orig="Ignore errors during SSL handshake. Some phones do not have the needed certificates installed. Using this leads to insecurity.">SSL kommunikációs hibák figyelmen kívül hagyása. Néhány telefonon nincsenek a szükséges tanúsítványok telepítve. Ezt használva nem lesz biztonságos.</string>
+  <string name="update_title" formatted="false" username="Ferenc Takács &lt;orkester85@gmail.com&gt;" orig="Connector update available">Connector modul frissítés elérhető</string>
+  <string name="update_message" formatted="false" username="Ferenc Takács &lt;orkester85@gmail.com&gt;" orig="The ownership of this Connector has changed.\nPlease click here, to get the new App installed.">A Connector modul tulajdonosa megváltozott.\nNyomjon ide, hogy telepítse az új Alkalmazást.</string>
+  <string name="no_network" formatted="false" username="Ferenc Takács &lt;orkester85@gmail.com&gt;" orig="No data network available. Check your network settings.">Nem érhető el adathálózat. Ellenőrizze a hálózati beállításokat.</string>
 </resources>
