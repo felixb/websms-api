@@ -4,6 +4,7 @@ res/values-de/strings.xml:42
 res/values-fr/strings.xml:43
 res/values-hu/strings.xml:43
 res/values-it/strings.xml:35
+res/values-pt/strings.xml:0
 res/values-ro/strings.xml:39
 res/values-ru/strings.xml:43
 res/values:43
@@ -12,5 +13,6 @@ res/values-de:42
 res/values-fr:43
 res/values-hu:43
 res/values-it:35
+res/values-pt:0
 res/values-ro:39
 res/values-ru:43
