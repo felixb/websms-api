@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!--
+<!--
 		Copyright (C) 2010 Felix Bechstein
 	-->
-	<!--
+<!--
 		This file is part of WebSMS. This program is free software; you can
 		redistribute it and/or modify it under the terms of the GNU General
 		Public License as published by the Free Software Foundation; either
 		version 3 of the License, or (at your option) any later version.
 	-->
-	<!--
+<!--
 		This program is distributed in the hope that it will be useful, but
 		WITHOUT ANY WARRANTY; without even the implied warranty of
 		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
@@ -17,4 +17,46 @@
 		not, see <http://www.gnu.org/licenses/>.
 	-->
 <resources>
+  <string name="info_text" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">Isto é um conector do WebSMS.\nA única forma de o utilizar é com o WebSMS.</string>
+  <string name="stat_notify_sms_pending" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="WebSMS: sending">WebSMS: envio...</string>
+  <string name="stat_notify_sending" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Sending:">Envio:</string>
+  <string name="error" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="ERROR">Erro</string>
+  <string name="error_connection" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Connection terminated/timed out. If your connection is working, it\'s most likely a downtime of the target service. Check the app\'s website issues and twitter for status.">A ligação foi fechada ou expirou. Se a ligação estiver a funcionar, é provável que exista um problema com o serviço. Saiba mais informações no twitter ou no sítio web da aplicação.</string>
+  <string name="error_http" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="FAILURE: HTTP">Falha: HTTP</string>
+  <string name="error_mail" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Wrong mail address or password given!">Endereço eletrónico ou senha inválido(a)!</string>
+  <string name="error_pw" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Wrong username or password given!">Nome de utilizador ou senha inválido(a)!</string>
+  <string name="error_sender" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Wrong sender! Set it in international form like +4917012345678.">Remetente inválido! Defina um prefixo internacional válido. (Ex.:+351123456789)</string>
+  <string name="error_sender_unregistered" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Sender must be registered and confirmed your provider.">O remetente deve estar registado e confirmado pelo serviço.</string>
+  <string name="error_server" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="FAILURE: Serverresponse:">Falha: Resposta do servidor:</string>
+  <string name="error_service" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Webservice is down! This is most likely not a problem of the connector. Please try again later. Check the app\'s website\'s issues and twitter for status.">O serviço web está desligado! Este erro não deve estar relacionado com o conector. Tente mais tarde. Saiba mais informações no twitter ou no sítio web da aplicação.</string>
+  <string name="error_wrongcaptcha" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Captcha was wrong. Please try again.">Captcha inválido. Tente mais tarde.</string>
+  <string name="error_input" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Error in user input!">Erro nos dados introduzidos!</string>
+  <string name="error_http_header_missing" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Header: Content-Length is missing!">Cabeçalho: Content-Length inexistente!</string>
+  <string name="error_sendlater_quater" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Only full 15minutes are supported by your connector!">Só pode utilizar este conector durante 15 minutos!</string>
+  <string name="error_balance" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Insufficant balance!">Saldo insuficiente!</string>
+  <string name="error_recipient" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Invalid recipient!">Destinatário inválido!</string>
+  <string name="error_text" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Invalid message!">Mensagem inválida!</string>
+  <string name="ignore_withsender_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector">Ocultar subconector "com remetente"</string>
+  <string name="ignore_withsender_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector from selection.">Ocultar subconector "com remetente" da seleção.</string>
+  <string name="ignore_nosender_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector">Ocultar subconector "sem remetente"</string>
+  <string name="ignore_nosender_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector from selection.">Ocultar subconector "sem remetente" da seleção.</string>
+  <string name="ignore_free_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector from selection.">Ocultar subconector "gratuito" da seleção.</string>
+  <string name="ignore_ssl_error_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Ignore SSL handshake errors">Ignorar erros SSL</string>
+  <string name="ignore_ssl_error_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Ignore errors during SSL handshake. Some phones do not have the needed certificates installed. Using this leads to insecurity.">Ignorar erros SSL. Alguns dispositivos não possuem os certificados necesssários instalados. Esta opção comporta riscos de segurança.</string>
+  <string name="username_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Username">Nome de utilizador</string>
+  <string name="password_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Password">Senha</string>
+  <string name="create_account_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Create account">Criar conta</string>
+  <string name="use_derfault_sender_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Use default sender">Utilizar remetente padrão</string>
+  <string name="use_derfault_sender_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Use default sender provided by WebSMS.">Utilizar remetente disponibilizado pelo WebSMS.</string>
+  <string name="custom_sender_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Custom sender">Remetente personalizado</string>
+  <string name="sender_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Int. phonenumber e.g. +4917912345678">Prefixo internacional - +351123456789</string>
+  <string name="send_logs_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Send logs">Enviar registos</string>
+  <string name="send_logs_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Send your device\'s logs to the developer.\nDo this only if you was asked to do so.">Enviar registos do dispositivo ao programador.\nNão o faça a menos que seja solicitado.</string>
+  <string name="sendlog_run_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Run SendLog">Executar SendLog</string>
+  <string name="sendlog_run" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="SendLog will collect the device log and send it to the developer.\nYou will have an opportunity to review and modify the data being sent.">O SendLog irá recolher e enviar os registos do dispositivo ao programador.\nPode rever e alterar os dados enviados.</string>
+  <string name="sendlog_install_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Install SendLog">Instalar SendLog</string>
+  <string name="sendlog_install" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Install the free SendLog application to collect the device log and send it to the developer.">Instale a aplicação SendLog para recolher e enviar os registos do dispositivo ao programador.</string>
+  <string name="update_title" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Connector update available">Atualização de conector disponível</string>
+  <string name="update_message" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="The ownership of this Connector has changed.\nPlease click here, to get the new App installed.">A titularidade deste conector foi alterada.\nClique aqui para obter a nova aplicação.</string>
+  <string name="no_network" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="No data network available. Check your network settings.">Sem rede de dados disponível. Verifique as definições de rede.</string>
 </resources>
