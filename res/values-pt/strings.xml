@@ -59,4 +59,5 @@
   <string name="update_title" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Connector update available">Atualização de conector disponível</string>
   <string name="update_message" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="The ownership of this Connector has changed.\nPlease click here, to get the new App installed.">A titularidade deste conector foi alterada.\nClique aqui para obter a nova aplicação.</string>
   <string name="no_network" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="No data network available. Check your network settings.">Sem rede de dados disponível. Verifique as definições de rede.</string>
+  <string name="ignore_free_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector">Ocultar subconector "gratuito"</string>
 </resources>
