@@ -63,4 +63,5 @@
   <string name="sendlog_install" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Install the free SendLog application to collect the device log and send it to the developer.">Installer l\'application gratuite SendLog qui permet de collecter les logs du téléphone et de les envoyer au développeur.</string>
   <string name="update_title" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="Connector update available">Mise à jour du connecteur disponible</string>
   <string name="update_message" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="The ownership of this Connector has changed.\nPlease click here, to get the new App installed.">Le propriétaire de ce connecteur a changé.\nVeuillez cliquer ici pour installer la nouvelle application.</string>
+  <string name="no_network" formatted="false" username="Christian Knecht &lt;g.chrisk@gmail.com&gt;" orig="No data network available. Check your network settings.">Aucune connexion réseau de données disponible. Vérifiez les paramètres réseau.</string>
 </resources>
