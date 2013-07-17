@@ -17,7 +17,7 @@
 		not, see <http://www.gnu.org/licenses/>.
 	-->
 <resources>
-  <string name="info_text" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">Isto é um conector do WebSMS.\nA única forma de o utilizar é com o WebSMS.</string>
+  <string name="info_text" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">Este é um conector WebSMS.\nA única forma de o utilizar é com o WebSMS.</string>
   <string name="stat_notify_sms_pending" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="WebSMS: sending">WebSMS: envio...</string>
   <string name="stat_notify_sending" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Sending:">Envio:</string>
   <string name="error" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="ERROR">Erro</string>
