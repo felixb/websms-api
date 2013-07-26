@@ -37,12 +37,12 @@
   <string name="error_input" formatted="false">Hiba a felhasználó által bevitt adatokban!</string>
   <string name="error_http_header_missing" formatted="false">Fejléc: Tartalom-hossz hiányzik!</string>
   <string name="error_sendlater_quater" formatted="false">Csak 15 percnyi használatot engedélyez a kiegészítőd!</string>
-  <string name="ignore_withsender_" formatted="false" username="Tamás Béres &lt;berestamas2@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector">Elrejtés "feladóval" alcsatoló</string>
-  <string name="ignore_withsender_hint" formatted="false" username="Tamás Béres &lt;berestamas2@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector from selection.">"Feladóval" alcsatoló elrejtése a listában</string>
-  <string name="ignore_nosender_" formatted="false" username="Tamás Béres &lt;berestamas2@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector">Elrejtés "feladó nélkül"</string>
+  <string name="ignore_withsender_" formatted="false" username="Tamás Béres &lt;berestamas2@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector">Elrejtés \"feladóval\" alcsatoló</string>
+  <string name="ignore_withsender_hint" formatted="false" username="Tamás Béres &lt;berestamas2@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector from selection.">\"Feladóval\" alcsatoló elrejtése a listában</string>
+  <string name="ignore_nosender_" formatted="false" username="Tamás Béres &lt;berestamas2@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector">Elrejtés \"feladó nélkül\"</string>
   <string name="ignore_nosender_hint" formatted="false" username="Tamás Béres &lt;berestamas2@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector from selection.">Feladó nélkül gomb elrejtése</string>
-  <string name="ignore_free_" formatted="false" username="Tamás Béres &lt;berestamas2@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector">Elrejtés "ingyenes" alcsatoló</string>
-  <string name="ignore_free_hint" formatted="false" username="Tamás Béres &lt;berestamas2@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector from selection.">"Ingyenes" alcsatoló elrejtése a listából</string>
+  <string name="ignore_free_" formatted="false" username="Tamás Béres &lt;berestamas2@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector">Elrejtés \"ingyenes\" alcsatoló</string>
+  <string name="ignore_free_hint" formatted="false" username="Tamás Béres &lt;berestamas2@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector from selection.">\"Ingyenes\" alcsatoló elrejtése a listából</string>
   <string name="username_" formatted="false">Felhasználónév</string>
   <string name="password_" formatted="false">Jelszó</string>
   <string name="create_account_" formatted="false">Fiók létrehozása</string>

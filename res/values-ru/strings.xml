@@ -25,16 +25,16 @@
   <string name="stat_notify_sending" formatted="false">Отправка:</string>
   <string name="error" formatted="false">ОШИБКА</string>
   <string name="error_http" formatted="false">ОШИБКА: HTTP</string>
-  <string name="error_mail" formatted="false">Неправильные e-mail адрес или пароль!</string>
-  <string name="error_pw" formatted="false">Неправильные имя пользователя или пароль!</string>
-  <string name="error_sender" formatted="false">Неверный номер отправителя! введите в международном формате напр. +79261234567.</string>
+  <string name="error_mail" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Wrong mail address or password given!">Неверный e-mail адрес или пароль!</string>
+  <string name="error_pw" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Wrong username or password given!">Неверное имя пользователя или пароль!</string>
+  <string name="error_sender" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Wrong sender! Set it in international form like +4917012345678.">Неверный номер отправителя! Введите в международном формате, напр. +79261234567.</string>
   <string name="error_sender_unregistered" formatted="false">Данные отправителя должны быть зарегистрированы у Вашего провайдера.</string>
-  <string name="error_server" formatted="false">ОШИБКА: Сервер не отвечает:</string>
+  <string name="error_server" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="FAILURE: Serverresponse:">ОШИБКА: Ответ сервера:</string>
   <string name="error_service" formatted="false">Сервис не доступен! Попробуйте позже.</string>
-  <string name="error_wrongcaptcha" formatted="false">Неправильные данные капчи. Попробуйте снова.</string>
+  <string name="error_wrongcaptcha" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Captcha was wrong. Please try again.">Неверная капча. Попробуйте снова.</string>
   <string name="error_input" formatted="false">Ошибка ввода!</string>
-  <string name="error_http_header_missing" formatted="false">Заголовок: неправильная длина!</string>
-  <string name="error_sendlater_quater" formatted="false">Превышен временной лимит отправки выбранного Connector\'а!</string>
+  <string name="error_http_header_missing" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Header: Content-Length is missing!">Заголовок: неверное содержание-длина!</string>
+  <string name="error_sendlater_quater" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Only full 15minutes are supported by your connector!">Ваш коннектор поддерживает только полные 15 минут!</string>
   <string name="username_" formatted="false">Имя пользователя</string>
   <string name="password_" formatted="false">Пароль</string>
   <string name="create_account_" formatted="false">Создать аккаунт</string>
@@ -53,15 +53,15 @@
   <string name="error_recipient" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Invalid recipient!">Неверный получатель!</string>
   <string name="error_text" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Invalid message!">Неверное сообщение!</string>
   <string name="update_title" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Connector update available">Доступно обновление Коннектора</string>
-  <string name="update_message" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="The ownership of this Connector has changed.\nPlease click here, to get the new App installed.">Изменился собственник этого Коннектора.\nПожалуйста, нажмите здесь, чтобы установить новое приложение.</string>
+  <string name="update_message" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="The ownership of this Connector has changed.\nPlease click here, to get the new App installed.">Изменился собственник этого Коннектора.\nПожалуйста, нажмите здесь для установки нового приложения.</string>
   <string name="no_network" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="No data network available. Check your network settings.">Сеть недоступна. Проверьте настройки сети.</string>
   <string name="info_text" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">Это WebSMS Коннектор.\nЕдинственный способ использовать его, это совместный запуск с WebSMS.</string>
   <string name="ignore_ssl_error_" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Ignore SSL handshake errors">Игнорировать ошибки подтверждения SSL</string>
   <string name="ignore_ssl_error_hint" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Ignore errors during SSL handshake. Some phones do not have the needed certificates installed. Using this leads to insecurity.">Игнорировать ошибки во время подтверждения SSL. Некоторые телефоны не имеют необходимых установленных сертификатов. Это приводит к незащищенности.</string>
-  <string name="ignore_withsender_" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector">Скрыть подчиненные коннекторы "с отправителем"</string>
-  <string name="ignore_withsender_hint" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector from selection.">Скрыть в выбранном подчиненные коннекторы "с отправителем".</string>
-  <string name="ignore_nosender_" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector">Скрыть подчиненные коннекторы "без отправителя"</string>
-  <string name="ignore_nosender_hint" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector from selection.">Скрыть в выбранном подчиненные коннекторы "без отправителя".</string>
-  <string name="ignore_free_" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector">Скрыть "бесплатные" подчиненные коннекторы</string>
-  <string name="ignore_free_hint" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector from selection.">Скрыть в выбранном "бесплатные" подчиненные коннекторы.</string>
+  <string name="ignore_withsender_" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector">Скрыть подчиненные коннекторы \"с отправителем\"</string>
+  <string name="ignore_withsender_hint" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector from selection.">Скрыть в выбранном подчиненные коннекторы \"с отправителем\".</string>
+  <string name="ignore_nosender_" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector">Скрыть подчиненные коннекторы \"без отправителя\"</string>
+  <string name="ignore_nosender_hint" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector from selection.">Скрыть в выбранном подчиненные коннекторы \"без отправителя\".</string>
+  <string name="ignore_free_" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector">Скрыть \"бесплатные\" подчиненные коннекторы</string>
+  <string name="ignore_free_hint" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector from selection.">Скрыть в выбранном \"бесплатные\" подчиненные коннекторы.</string>
 </resources>

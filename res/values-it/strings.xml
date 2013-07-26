@@ -38,12 +38,12 @@ L\'unico modo per usarlo è lanciarlo con WebSMS.</string>
   <string name="error_input" formatted="false" username="carloraudino@fedoraproject.org" orig="Error in user input!">Errore nell\'immissione utente!</string>
   <string name="error_http_header_missing" formatted="false" username="carloraudino@fedoraproject.org" orig="Header: Content-Length is missing!">Header: Content-Length mancante!</string>
   <string name="error_sendlater_quater" formatted="false" username="carloraudino@fedoraproject.org" orig="Only full 15minutes are supported by your connector!">Solo 15 minuti sono supportati dal connector!</string>
-  <string name="ignore_withsender_" formatted="false" username="carloraudino@fedoraproject.org" orig="Hide &quot;with sender&quot; SubConnector">Nascondi SubConnector "con mittente"</string>
-  <string name="ignore_withsender_hint" formatted="false" username="carloraudino@fedoraproject.org" orig="Hide &quot;with sender&quot; SubConnector from selection.">Nasconde il SubConnector "con mittente" dalla scelta.</string>
-  <string name="ignore_nosender_" formatted="false" username="carloraudino@fedoraproject.org" orig="Hide &quot;without sender&quot; SubConnector">Nascondi SubConnector "senza mittente"</string>
-  <string name="ignore_nosender_hint" formatted="false" username="carloraudino@fedoraproject.org" orig="Hide &quot;without sender&quot; SubConnector from selection.">Nasconde il SubConnector "senza mittente" dalla scelta.</string>
-  <string name="ignore_free_" formatted="false" username="carloraudino@fedoraproject.org" orig="Hide &quot;free&quot; SubConnector">Nascondi SubConnector "gratis"</string>
-  <string name="ignore_free_hint" formatted="false" username="carloraudino@fedoraproject.org" orig="Hide &quot;free&quot; SubConnector from selection.">Nasconde il SubConnector "gratis" dalla scelta.</string>
+  <string name="ignore_withsender_" formatted="false" username="carloraudino@fedoraproject.org" orig="Hide &quot;with sender&quot; SubConnector">Nascondi SubConnector \"con mittente\"</string>
+  <string name="ignore_withsender_hint" formatted="false" username="carloraudino@fedoraproject.org" orig="Hide &quot;with sender&quot; SubConnector from selection.">Nasconde il SubConnector \"con mittente\" dalla scelta.</string>
+  <string name="ignore_nosender_" formatted="false" username="carloraudino@fedoraproject.org" orig="Hide &quot;without sender&quot; SubConnector">Nascondi SubConnector \"senza mittente\"</string>
+  <string name="ignore_nosender_hint" formatted="false" username="carloraudino@fedoraproject.org" orig="Hide &quot;without sender&quot; SubConnector from selection.">Nasconde il SubConnector \"senza mittente\" dalla scelta.</string>
+  <string name="ignore_free_" formatted="false" username="carloraudino@fedoraproject.org" orig="Hide &quot;free&quot; SubConnector">Nascondi SubConnector \"gratis\"</string>
+  <string name="ignore_free_hint" formatted="false" username="carloraudino@fedoraproject.org" orig="Hide &quot;free&quot; SubConnector from selection.">Nasconde il SubConnector \"gratis\" dalla scelta.</string>
   <string name="username_" formatted="false" username="carloraudino@fedoraproject.org" orig="Username">Nome utente</string>
   <string name="password_" formatted="false" username="carloraudino@fedoraproject.org" orig="Password">Password</string>
   <string name="create_account_" formatted="false" username="carloraudino@fedoraproject.org" orig="Create account">Crea account</string>

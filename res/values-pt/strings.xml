@@ -36,11 +36,11 @@
   <string name="error_balance" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Insufficant balance!">Saldo insuficiente!</string>
   <string name="error_recipient" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Invalid recipient!">Destinatário inválido!</string>
   <string name="error_text" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Invalid message!">Mensagem inválida!</string>
-  <string name="ignore_withsender_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector">Ocultar subconector "com remetente"</string>
-  <string name="ignore_withsender_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector from selection.">Ocultar subconector "com remetente" da seleção.</string>
-  <string name="ignore_nosender_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector">Ocultar subconector "sem remetente"</string>
-  <string name="ignore_nosender_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector from selection.">Ocultar subconector "sem remetente" da seleção.</string>
-  <string name="ignore_free_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector from selection.">Ocultar subconector "gratuito" da seleção.</string>
+  <string name="ignore_withsender_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector">Ocultar subconector \"com remetente\"</string>
+  <string name="ignore_withsender_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;with sender&quot; SubConnector from selection.">Ocultar subconector \"com remetente\" da seleção.</string>
+  <string name="ignore_nosender_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector">Ocultar subconector \"sem remetente\"</string>
+  <string name="ignore_nosender_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;without sender&quot; SubConnector from selection.">Ocultar subconector \"sem remetente\" da seleção.</string>
+  <string name="ignore_free_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector from selection.">Ocultar subconector \"gratuito\" da seleção.</string>
   <string name="ignore_ssl_error_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Ignore SSL handshake errors">Ignorar erros SSL</string>
   <string name="ignore_ssl_error_hint" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Ignore errors during SSL handshake. Some phones do not have the needed certificates installed. Using this leads to insecurity.">Ignorar erros SSL. Alguns dispositivos não possuem os certificados necesssários instalados. Esta opção comporta riscos de segurança.</string>
   <string name="username_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Username">Nome de utilizador</string>
@@ -59,5 +59,5 @@
   <string name="update_title" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Connector update available">Atualização de conector disponível</string>
   <string name="update_message" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="The ownership of this Connector has changed.\nPlease click here, to get the new App installed.">A titularidade deste conector foi alterada.\nClique aqui para obter a nova aplicação.</string>
   <string name="no_network" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="No data network available. Check your network settings.">Sem rede de dados disponível. Verifique as definições de rede.</string>
-  <string name="ignore_free_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector">Ocultar subconector "gratuito"</string>
+  <string name="ignore_free_" formatted="false" username="Sérgio Marques &lt;smarquespt@gmail.com&gt;" orig="Hide &quot;free&quot; SubConnector">Ocultar subconector \"gratuito\"</string>
 </resources>
