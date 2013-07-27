@@ -37,12 +37,12 @@
   <string name="error_input" formatted="false">Chybě zadaný vstup!</string>
   <string name="error_http_header_missing" formatted="false" orig="Header: Content-Length is missing!">Hlavička: Chybí velikost obsahu!</string>
   <string name="error_sendlater_quater" formatted="false">Maximálně 15 minut je dostupných pro Váše rozhraní!</string>
-  <string name="ignore_withsender_" formatted="false">Skrýt podrozhraní "s odesílatelem"</string>
-  <string name="ignore_withsender_hint" formatted="false">Skrýt podrozhraní "s odesílatelem" z výběru</string>
-  <string name="ignore_nosender_" formatted="false">Skrýt podrozhraní "bez odesílatele"</string>
-  <string name="ignore_nosender_hint" formatted="false">Skrýt podrozhraní "bez odesílatele" z výběru</string>
-  <string name="ignore_free_" formatted="false">Skrýt podrozhraní "zdarma"</string>
-  <string name="ignore_free_hint" formatted="false">Skrýt podrozhraní "zdarma" z výběru.</string>
+  <string name="ignore_withsender_" formatted="false">Skrýt podrozhraní \"s odesílatelem\"</string>
+  <string name="ignore_withsender_hint" formatted="false">Skrýt podrozhraní \"s odesílatelem\" z výběru</string>
+  <string name="ignore_nosender_" formatted="false">Skrýt podrozhraní \"bez odesílatele\"</string>
+  <string name="ignore_nosender_hint" formatted="false">Skrýt podrozhraní \"bez odesílatele\" z výběru</string>
+  <string name="ignore_free_" formatted="false">Skrýt podrozhraní \"zdarma\"</string>
+  <string name="ignore_free_hint" formatted="false">Skrýt podrozhraní \"zdarma\" z výběru.</string>
   <string name="ignore_ssl_error_" formatted="false">Ignorovat chyby v ověření SSL</string>
   <string name="ignore_ssl_error_hint" formatted="false">Ignorovat chyby během ověření SSL. Některé telefony nemají instalovány potřebné certifikáty. Ignorování snižuje zabezpečení komunikace.</string>
   <string name="username_" formatted="false">Uživatelské jméno</string>
