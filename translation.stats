@@ -7,6 +7,7 @@ res/values-it/strings.xml:35
 res/values-pt/strings.xml:43
 res/values-ro/strings.xml:39
 res/values-ru/strings.xml:43
+res/values-tr/strings.xml:0
 res/values:43
 res/values-cs:39
 res/values-de:42
@@ -16,3 +17,4 @@ res/values-it:35
 res/values-pt:43
 res/values-ro:39
 res/values-ru:43
+res/values-tr:0
