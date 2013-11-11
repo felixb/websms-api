@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>de.ub0r.android.websms.connector.common</groupId>
+  <artifactId>WebSMSAPI</artifactId>
+  <version>1.0</version>
+  <versioning>
+    <versions>
+      <version>1.0</version>
+    </versions>
+    <lastUpdated>20131111033237</lastUpdated>
+  </versioning>
+</metadata>
