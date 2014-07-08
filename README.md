@@ -21,7 +21,7 @@ There is no need to check out/ clone the api manually.
 
     repositories {
         maven {
-            url 'https://github.com/felixb/websms-api/raw/mvn-repo/'
+            url 'https://raw.githubusercontent.com/felixb/websms-api/mvn-repo/'
         }
         mavenCentral()
     }
