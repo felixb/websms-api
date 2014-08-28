@@ -59,4 +59,8 @@ Da fare solo se richiesto.</string>
 Si avrà la possibilità di controllare e modificare i dati da inviare.</string>
   <string name="sendlog_install_" formatted="false" username="carloraudino@fedoraproject.org" orig="Install SendLog">Installa SendLog</string>
   <string name="sendlog_install" formatted="false" username="carloraudino@fedoraproject.org" orig="Install the free SendLog application to collect the device log and send it to the developer.">Installa l\'applicazione gratuita SendLog per raccogliere i log del dispositivo ed inviarli allo sviluppatore.</string>
+  <string name="error_text" formatted="false" username="ciopper90" orig="Invalid message!">Messaggio non valido!</string>
+  <string name="update_title" formatted="false" username="ciopper90" orig="Connector update available">Aggiurnamento connector disponibile</string>
+  <string name="no_network" formatted="false" username="ciopper90" orig="No data network available. Check your network settings.">Assenza rete dati. Controlla le impostazioni di rete.</string>
+  <string name="update_message" formatted="false" username="ciopper90" orig="The ownership of this Connector has changed.\nPlease click here, to get the new App installed.">Il proprietario del Connector è cambiato.\nClicca qui, per installare la nuova versione.</string>
 </resources>

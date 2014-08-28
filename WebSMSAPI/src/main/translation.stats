@@ -3,7 +3,7 @@ res/values-cs/strings.xml:39
 res/values-de/strings.xml:42
 res/values-fr/strings.xml:43
 res/values-hu/strings.xml:43
-res/values-it/strings.xml:35
+res/values-it/strings.xml:39
 res/values-pt/strings.xml:43
 res/values-ro/strings.xml:39
 res/values-ru/strings.xml:43
@@ -14,7 +14,7 @@ res/values-cs:39
 res/values-de:42
 res/values-fr:43
 res/values-hu:43
-res/values-it:35
+res/values-it:39
 res/values-pt:43
 res/values-ro:39
 res/values-ru:43
