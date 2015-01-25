@@ -27,7 +27,7 @@ There is no need to check out/ clone the api manually.
     }
 
     dependencies {
-        compile 'de.ub0r.android.websms.connector.common:WebSMSAPI:1.0'
+        compile 'de.ub0r.android.websms.connector.common:WebSMSAPI:1.1'
     }
 
 You can see it in full details in the [o2 connector's code base](https://github.com/lmb/websms-connector-o2/).
