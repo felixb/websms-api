@@ -18,7 +18,7 @@
        -->
 <!--
                This file is generated automatically by ub0rlib/php.
-               Visit http://ub0r.de/translate/websms-api/de/strings.xml to edit the file.
+               Visit http://ub0r.de/translate/websms-api/cs/strings.xml to edit the file.
        -->
 <resources>
   <string name="info_text" formatted="false" orig="This is a WebSMS Connector.\nThe only way to use it, is lauching it with WebSMS.">WebSMS Rozhraní je aplikace, kterou lze používat prostřednictvím aplikace WebSMS.</string>
@@ -60,4 +60,8 @@
   <string name="sendlog_install" formatted="false">Instalovat zdarma aplikaci SendLog, která shromažďuje data a odesílá je vývojářům.</string>
   <string name="update_title" formatted="false">Dostupný update pro rozhraní</string>
   <string name="update_message" formatted="false">Rozhraní bylo změněno.\nPro získání nové verze klikněte prosím zde.</string>
+  <string name="error_balance" formatted="false" username="ondrej.mejzr@gmail.com" orig="Insufficant balance!">Nedostatečná rovnováha!</string>
+  <string name="error_recipient" formatted="false" username="ondrej.mejzr@gmail.com" orig="Invalid recipient!">Neplatný příjemce!</string>
+  <string name="error_text" formatted="false" username="ondrej.mejzr@gmail.com" orig="Invalid message!">Neplatný formát zprávy!</string>
+  <string name="no_network" formatted="false" username="ondrej.mejzr@gmail.com" orig="No data network available. Check your network settings.">Datové připojení není k dispozici! Zkontolujte nastavení 3G/4G/WiFi!</string>
 </resources>
