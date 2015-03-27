@@ -32,7 +32,7 @@
   <string name="error_server" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="FAILURE: Serverresponse:">ОШИБКА: Ответ сервера:</string>
   <string name="error_service" formatted="false">Сервис не доступен! Попробуйте позже.</string>
   <string name="error_wrongcaptcha" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Captcha was wrong. Please try again.">Неверная капча. Попробуйте снова.</string>
-  <string name="error_input" formatted="false">Ошибка ввода!</string>
+  <string name="error_input" formatted="false" username="domisabel01@gmail.com" orig="Error in user input!">Ошибка ввода!</string>
   <string name="error_http_header_missing" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Header: Content-Length is missing!">Заголовок: неверное содержание-длина!</string>
   <string name="error_sendlater_quater" formatted="false" username="Dmitriy Rublev &lt;kaktebyavirubit@gmail.com&gt;" orig="Only full 15minutes are supported by your connector!">Ваш коннектор поддерживает только полные 15 минут!</string>
   <string name="username_" formatted="false">Имя пользователя</string>
