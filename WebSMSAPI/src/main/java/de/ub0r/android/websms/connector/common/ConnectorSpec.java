@@ -647,7 +647,7 @@ public final class ConnectorSpec implements Serializable, Cloneable {
 	 * @param p
 	 *            package
 	 */
-	void setPackage(final String p) {
+	public void setPackage(final String p) {
 		if (this.bundle == null) {
 			return;
 		}
