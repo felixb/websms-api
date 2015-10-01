@@ -57,7 +57,7 @@ Please have a look on the [DeveloperFAQ][2].
 [2]: https://github.com/felixb/websms-sms/blob/master/doc/DeveloperFAQ.md
 [3]: https://github.com/felixb/websms-api/blob/master/WebSMSAPI/src/main/java/de/ub0r/android/websms/connector/common/Connector.java
 [4]: https://github.com/felixb/websms-api/blob/master/WebSMSAPI/src/main/java/de/ub0r/android/websms/connector/common/BasicConnector.java
-[5]: https://github.com/felixb/websms-sms/blob/master/doc/sequence.png
+[5]: https://raw.githubusercontent.com/felixb/websms-api/master/doc/sequence.png
 [6]: http://developer.android.com/reference/android/content/BroadcastReceiver.html
 [7]: http://developer.android.com/reference/android/app/Service.html
 [8]: http://developer.android.com/reference/android/os/AsyncTask.html
