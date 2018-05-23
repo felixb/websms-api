@@ -1,3 +1,7 @@
+# Discontinued
+
+This app is discontinued and removed from all distribution channels.
+
 # General
 
 This is the API to build connectors for [websms][1].
